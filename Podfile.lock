@@ -1,0 +1,45 @@
+PODS:
+  - AFNetworking (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - iCarousel (1.7.6)
+  - ILGHttpConstants (1.0.0)
+  - Kiwi (2.3.0)
+  - VOKCoreDataManager (1.0.8):
+    - iCarousel (~> 1.7.3)
+  - VOKMockUrlProtocol (1.0.2):
+    - ILGHttpConstants (~> 1.0.0)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.4)
+  - Kiwi (~> 2.3)
+  - VOKCoreDataManager (~> 1.0)
+  - VOKMockUrlProtocol (~> 1.0)
+
+SPEC CHECKSUMS:
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  iCarousel: c35a4e26b3c657847e523012b593e70ddbd84992
+  ILGHttpConstants: 6e9661f7011c8b0dee57440e1e4c1a65ecfc0e6d
+  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
+  VOKCoreDataManager: 9d467542f655e68aa9e72f2d9655a0bad6e59fe5
+  VOKMockUrlProtocol: 0c87d7ac21bf56204269cf66877d56fbebf8fc09
+
+COCOAPODS: 0.34.1

@@ -1,0 +1,1 @@
+../../../VOKCoreDataManager/Internal/VOKCoreDataManagerInternalMacros.h

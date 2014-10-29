@@ -1,0 +1,5 @@
+#include "Pods-VOKCoreDataManager.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/VOKCoreDataManager" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/ILGHttpConstants" "${PODS_ROOT}/Headers/Public/Kiwi" "${PODS_ROOT}/Headers/Public/VOKCoreDataManager" "${PODS_ROOT}/Headers/Public/VOKMockUrlProtocol" "${PODS_ROOT}/Headers/Public/iCarousel"
+OTHER_LDFLAGS = ${PODS_VOKCOREDATAMANAGER_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}
