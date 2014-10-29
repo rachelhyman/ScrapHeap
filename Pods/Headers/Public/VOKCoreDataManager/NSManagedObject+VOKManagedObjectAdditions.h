@@ -1,0 +1,1 @@
+../../../VOKCoreDataManager/NSManagedObject+VOKManagedObjectAdditions.h
