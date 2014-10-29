@@ -16,6 +16,11 @@
 		CC5DCF471A014277000C813E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF461A014277000C813E /* Images.xcassets */; };
 		CC5DCF4A1A014277000C813E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF481A014277000C813E /* LaunchScreen.xib */; };
 		CC5DCF561A014277000C813E /* ScrapHeapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF551A014277000C813E /* ScrapHeapTests.m */; };
+		CC9F56B61A0167FF00C54F77 /* SCRDefaultMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56B51A0167FF00C54F77 /* SCRDefaultMapViewController.m */; };
+		CC9F56B91A01680D00C54F77 /* SCRHeatMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56B81A01680D00C54F77 /* SCRHeatMapViewController.m */; };
+		CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */; };
+		CC9F56C21A017CEB00C54F77 /* SCRContainerMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56C11A017CEB00C54F77 /* SCRContainerMapViewController.m */; };
+		CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56C51A01852800C54F77 /* SCRConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,17 @@
 		CC5DCF4F1A014277000C813E /* ScrapHeapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrapHeapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5DCF541A014277000C813E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC5DCF551A014277000C813E /* ScrapHeapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrapHeapTests.m; sourceTree = "<group>"; };
+		CC9F56B41A0167FF00C54F77 /* SCRDefaultMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDefaultMapViewController.h; sourceTree = "<group>"; };
+		CC9F56B51A0167FF00C54F77 /* SCRDefaultMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRDefaultMapViewController.m; sourceTree = "<group>"; };
+		CC9F56B71A01680D00C54F77 /* SCRHeatMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRHeatMapViewController.h; sourceTree = "<group>"; };
+		CC9F56B81A01680D00C54F77 /* SCRHeatMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRHeatMapViewController.m; sourceTree = "<group>"; };
+		CC9F56BA1A01688400C54F77 /* SCRRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRRootViewController.h; sourceTree = "<group>"; };
+		CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRRootViewController.m; sourceTree = "<group>"; };
+		CC9F56C01A017CEB00C54F77 /* SCRContainerMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRContainerMapViewController.h; sourceTree = "<group>"; };
+		CC9F56C11A017CEB00C54F77 /* SCRContainerMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRContainerMapViewController.m; sourceTree = "<group>"; };
+		CC9F56C41A01852800C54F77 /* SCRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRConstants.h; sourceTree = "<group>"; };
+		CC9F56C51A01852800C54F77 /* SCRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRConstants.m; sourceTree = "<group>"; };
+		CC9F56C71A01884000C54F77 /* ScrapHeap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ScrapHeap-Prefix.pch"; sourceTree = "<group>"; };
 		E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,12 +130,13 @@
 			children = (
 				CC5DCF3A1A014277000C813E /* SCRAppDelegate.h */,
 				CC5DCF3B1A014277000C813E /* SCRAppDelegate.m */,
+				CC5DCF431A014277000C813E /* Main.storyboard */,
+				CC9F56C31A01850800C54F77 /* Shared Utility */,
 				CC5DCF5F1A0153B9000C813E /* Categories */,
 				CC5DCF601A0153B9000C813E /* Models */,
 				CC5DCF611A0153B9000C813E /* Networking */,
 				CC5DCF621A0153B9000C813E /* ViewControllers */,
 				CC5DCF631A0153B9000C813E /* Views */,
-				CC5DCF431A014277000C813E /* Main.storyboard */,
 				CC5DCF461A014277000C813E /* Images.xcassets */,
 				CC5DCF481A014277000C813E /* LaunchScreen.xib */,
 				CC5DCF3D1A014277000C813E /* ScrapHeap.xcdatamodeld */,
@@ -133,6 +150,7 @@
 			children = (
 				CC5DCF371A014277000C813E /* Info.plist */,
 				CC5DCF381A014277000C813E /* main.m */,
+				CC9F56C71A01884000C54F77 /* ScrapHeap-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -178,6 +196,14 @@
 		CC5DCF621A0153B9000C813E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CC9F56BA1A01688400C54F77 /* SCRRootViewController.h */,
+				CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */,
+				CC9F56C01A017CEB00C54F77 /* SCRContainerMapViewController.h */,
+				CC9F56C11A017CEB00C54F77 /* SCRContainerMapViewController.m */,
+				CC9F56B41A0167FF00C54F77 /* SCRDefaultMapViewController.h */,
+				CC9F56B51A0167FF00C54F77 /* SCRDefaultMapViewController.m */,
+				CC9F56B71A01680D00C54F77 /* SCRHeatMapViewController.h */,
+				CC9F56B81A01680D00C54F77 /* SCRHeatMapViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -187,6 +213,15 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CC9F56C31A01850800C54F77 /* Shared Utility */ = {
+			isa = PBXGroup;
+			children = (
+				CC9F56C41A01852800C54F77 /* SCRConstants.h */,
+				CC9F56C51A01852800C54F77 /* SCRConstants.m */,
+			);
+			path = "Shared Utility";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,8 +407,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */,
+				CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
+				CC9F56B61A0167FF00C54F77 /* SCRDefaultMapViewController.m in Sources */,
 				CC5DCF3F1A014277000C813E /* ScrapHeap.xcdatamodeld in Sources */,
+				CC9F56C21A017CEB00C54F77 /* SCRContainerMapViewController.m in Sources */,
+				CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */,
+				CC9F56B91A01680D00C54F77 /* SCRHeatMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +536,8 @@
 			baseConfigurationReference = EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ScrapHeap/ScrapHeap-Prefix.pch";
 				INFOPLIST_FILE = ScrapHeap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -508,6 +550,8 @@
 			baseConfigurationReference = E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ScrapHeap/ScrapHeap-Prefix.pch";
 				INFOPLIST_FILE = ScrapHeap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
