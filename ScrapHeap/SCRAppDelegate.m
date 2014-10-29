@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Rachel Hyman. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "SCRAppDelegate.h"
 
-@interface AppDelegate ()
+@interface SCRAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation SCRAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

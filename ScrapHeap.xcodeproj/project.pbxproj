@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CC5DCF391A014277000C813E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF381A014277000C813E /* main.m */; };
-		CC5DCF3C1A014277000C813E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF3B1A014277000C813E /* AppDelegate.m */; };
+		CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF3B1A014277000C813E /* SCRAppDelegate.m */; };
 		CC5DCF3F1A014277000C813E /* ScrapHeap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF3D1A014277000C813E /* ScrapHeap.xcdatamodeld */; };
-		CC5DCF421A014277000C813E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF411A014277000C813E /* ViewController.m */; };
 		CC5DCF451A014277000C813E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF431A014277000C813E /* Main.storyboard */; };
 		CC5DCF471A014277000C813E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF461A014277000C813E /* Images.xcassets */; };
 		CC5DCF4A1A014277000C813E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF481A014277000C813E /* LaunchScreen.xib */; };
@@ -31,11 +30,9 @@
 		CC5DCF331A014277000C813E /* ScrapHeap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrapHeap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5DCF371A014277000C813E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC5DCF381A014277000C813E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CC5DCF3A1A014277000C813E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		CC5DCF3B1A014277000C813E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CC5DCF3A1A014277000C813E /* SCRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCRAppDelegate.h; sourceTree = "<group>"; };
+		CC5DCF3B1A014277000C813E /* SCRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCRAppDelegate.m; sourceTree = "<group>"; };
 		CC5DCF3E1A014277000C813E /* ScrapHeap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrapHeap.xcdatamodel; sourceTree = "<group>"; };
-		CC5DCF401A014277000C813E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CC5DCF411A014277000C813E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CC5DCF441A014277000C813E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CC5DCF461A014277000C813E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CC5DCF491A014277000C813E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -83,10 +80,13 @@
 		CC5DCF351A014277000C813E /* ScrapHeap */ = {
 			isa = PBXGroup;
 			children = (
-				CC5DCF3A1A014277000C813E /* AppDelegate.h */,
-				CC5DCF3B1A014277000C813E /* AppDelegate.m */,
-				CC5DCF401A014277000C813E /* ViewController.h */,
-				CC5DCF411A014277000C813E /* ViewController.m */,
+				CC5DCF3A1A014277000C813E /* SCRAppDelegate.h */,
+				CC5DCF3B1A014277000C813E /* SCRAppDelegate.m */,
+				CC5DCF5F1A0153B9000C813E /* Categories */,
+				CC5DCF601A0153B9000C813E /* Models */,
+				CC5DCF611A0153B9000C813E /* Networking */,
+				CC5DCF621A0153B9000C813E /* ViewControllers */,
+				CC5DCF631A0153B9000C813E /* Views */,
 				CC5DCF431A014277000C813E /* Main.storyboard */,
 				CC5DCF461A014277000C813E /* Images.xcassets */,
 				CC5DCF481A014277000C813E /* LaunchScreen.xib */,
@@ -120,6 +120,41 @@
 				CC5DCF541A014277000C813E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CC5DCF5F1A0153B9000C813E /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		CC5DCF601A0153B9000C813E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CC5DCF611A0153B9000C813E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		CC5DCF621A0153B9000C813E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CC5DCF631A0153B9000C813E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,9 +257,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC5DCF3C1A014277000C813E /* AppDelegate.m in Sources */,
+				CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
-				CC5DCF421A014277000C813E /* ViewController.m in Sources */,
 				CC5DCF3F1A014277000C813E /* ScrapHeap.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
