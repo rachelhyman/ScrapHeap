@@ -19,8 +19,8 @@
 		CC9F56B61A0167FF00C54F77 /* SCRDefaultMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56B51A0167FF00C54F77 /* SCRDefaultMapViewController.m */; };
 		CC9F56B91A01680D00C54F77 /* SCRHeatMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56B81A01680D00C54F77 /* SCRHeatMapViewController.m */; };
 		CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */; };
-		CC9F56C21A017CEB00C54F77 /* SCRContainerMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56C11A017CEB00C54F77 /* SCRContainerMapViewController.m */; };
 		CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56C51A01852800C54F77 /* SCRConstants.m */; };
+		CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,11 +56,11 @@
 		CC9F56B81A01680D00C54F77 /* SCRHeatMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRHeatMapViewController.m; sourceTree = "<group>"; };
 		CC9F56BA1A01688400C54F77 /* SCRRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRRootViewController.h; sourceTree = "<group>"; };
 		CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRRootViewController.m; sourceTree = "<group>"; };
-		CC9F56C01A017CEB00C54F77 /* SCRContainerMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRContainerMapViewController.h; sourceTree = "<group>"; };
-		CC9F56C11A017CEB00C54F77 /* SCRContainerMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRContainerMapViewController.m; sourceTree = "<group>"; };
 		CC9F56C41A01852800C54F77 /* SCRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRConstants.h; sourceTree = "<group>"; };
 		CC9F56C51A01852800C54F77 /* SCRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRConstants.m; sourceTree = "<group>"; };
 		CC9F56C71A01884000C54F77 /* ScrapHeap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ScrapHeap-Prefix.pch"; sourceTree = "<group>"; };
+		CCAEFDB31A03F265003E0143 /* SCRTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRTabBarController.h; sourceTree = "<group>"; };
+		CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRTabBarController.m; sourceTree = "<group>"; };
 		E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,8 +198,8 @@
 			children = (
 				CC9F56BA1A01688400C54F77 /* SCRRootViewController.h */,
 				CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */,
-				CC9F56C01A017CEB00C54F77 /* SCRContainerMapViewController.h */,
-				CC9F56C11A017CEB00C54F77 /* SCRContainerMapViewController.m */,
+				CCAEFDB31A03F265003E0143 /* SCRTabBarController.h */,
+				CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */,
 				CC9F56B41A0167FF00C54F77 /* SCRDefaultMapViewController.h */,
 				CC9F56B51A0167FF00C54F77 /* SCRDefaultMapViewController.m */,
 				CC9F56B71A01680D00C54F77 /* SCRHeatMapViewController.h */,
@@ -406,12 +406,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */,
 				CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */,
 				CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
 				CC9F56B61A0167FF00C54F77 /* SCRDefaultMapViewController.m in Sources */,
 				CC5DCF3F1A014277000C813E /* ScrapHeap.xcdatamodeld in Sources */,
-				CC9F56C21A017CEB00C54F77 /* SCRContainerMapViewController.m in Sources */,
 				CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */,
 				CC9F56B91A01680D00C54F77 /* SCRHeatMapViewController.m in Sources */,
 			);

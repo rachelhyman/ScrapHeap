@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SCRRootViewController : UINavigationController
+@interface SCRRootViewController : UINavigationController <UITabBarControllerDelegate>
 
 @end

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="089-gB-PoC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -14,98 +13,70 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="YV0-8Y-bc4" kind="relationship" relationship="rootViewController" id="AJf-Bg-ijo"/>
+                        <segue destination="1Wt-YS-ShU" kind="relationship" relationship="rootViewController" id="nil-Nh-SDf"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I4O-TH-qoF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205" y="-561"/>
+            <point key="canvasLocation" x="-677" y="-1103"/>
         </scene>
-        <!--Default Map View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Heat Map-->
+        <scene sceneID="2vR-mt-z08">
             <objects>
-                <viewController storyboardIdentifier="SCRDefaultMapViewController" id="vXZ-lx-hvc" customClass="SCRDefaultMapViewController" sceneMemberID="viewController">
+                <viewController id="10K-QV-Tj9" customClass="SCRHeatMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="rZM-5o-KT3"/>
+                        <viewControllerLayoutGuide type="bottom" id="suc-30-bAn"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="1" green="0.99173903529999996" blue="0.074646009469999997" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="sGh-W7-7rO">
-                        <nil key="title"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-195" y="163"/>
-        </scene>
-        <!--Container Map View Controller-->
-        <scene sceneID="5s4-rj-A1x">
-            <objects>
-                <viewController id="YV0-8Y-bc4" customClass="SCRContainerMapViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hOb-i2-iP0"/>
-                        <viewControllerLayoutGuide type="bottom" id="FV8-kO-uIP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="h6M-rV-8Lk">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbw-BF-okO">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="FV8-kO-uIP" firstAttribute="top" secondItem="Lbw-BF-okO" secondAttribute="bottom" id="F6M-9B-TY0"/>
-                            <constraint firstItem="Lbw-BF-okO" firstAttribute="top" secondItem="hOb-i2-iP0" secondAttribute="bottom" id="FgO-f7-Vjb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Lbw-BF-okO" secondAttribute="trailing" constant="-16" id="sJa-ks-w1J"/>
-                            <constraint firstItem="Lbw-BF-okO" firstAttribute="leading" secondItem="h6M-rV-8Lk" secondAttribute="leadingMargin" constant="-16" id="tbr-8v-YKr"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="TMj-h3-dgz">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="xep-my-RH7">
-                            <rect key="frame" x="180" y="7" width="240" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Default Map"/>
-                                <segment title="Heat Map"/>
-                            </segments>
-                            <connections>
-                                <action selector="didToggleMap:" destination="YV0-8Y-bc4" eventType="valueChanged" id="GVi-ZL-Mil"/>
-                            </connections>
-                        </segmentedControl>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="containerView" destination="Lbw-BF-okO" id="G0j-Ek-DDV"/>
-                        <outlet property="mapToggle" destination="xep-my-RH7" id="Gx2-9Z-Peb"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5MO-e1-BDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="545" y="-561"/>
-        </scene>
-        <!--Heat Map View Controller-->
-        <scene sceneID="Dfq-B5-OjA">
-            <objects>
-                <viewController storyboardIdentifier="SCRHeatMapViewController" id="5de-gb-m2s" customClass="SCRHeatMapViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jfM-Py-RKi"/>
-                        <viewControllerLayoutGuide type="bottom" id="L98-zS-L5m"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ky7-Nc-Ibt">
+                    <view key="view" contentMode="scaleToFill" id="jke-Cz-MiG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.51350170220000002" blue="0.060605541919999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Heat Map" id="tkP-T5-9HT"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JCJ-xV-wXR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g94-fh-ejL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="525" y="163"/>
+            <point key="canvasLocation" x="893" y="-771"/>
+        </scene>
+        <!--Default Map-->
+        <scene sceneID="iNt-GA-dMR">
+            <objects>
+                <viewController id="7RL-gV-UGb" customClass="SCRDefaultMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ckl-SQ-bz3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Eyh-VK-TpD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7GO-NZ-eYx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Default Map" id="0oc-2P-ehG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yvq-Qq-yNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893" y="-1433"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="oqz-mR-LmU">
+            <objects>
+                <tabBarController id="1Wt-YS-ShU" customClass="SCRTabBarController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="id7-tH-Ocg"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Gdv-OQ-sk0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="7RL-gV-UGb" kind="relationship" relationship="viewControllers" id="eC0-1z-00R"/>
+                        <segue destination="10K-QV-Tj9" kind="relationship" relationship="viewControllers" id="hTv-bC-0j9"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P4H-5i-fIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="73" y="-1103"/>
         </scene>
     </scenes>
 </document>
