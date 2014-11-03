@@ -16,12 +16,12 @@
 		CC5DCF471A014277000C813E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF461A014277000C813E /* Images.xcassets */; };
 		CC5DCF4A1A014277000C813E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF481A014277000C813E /* LaunchScreen.xib */; };
 		CC5DCF561A014277000C813E /* ScrapHeapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF551A014277000C813E /* ScrapHeapTests.m */; };
-		CC9F56B61A0167FF00C54F77 /* SCRDefaultMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56B51A0167FF00C54F77 /* SCRDefaultMapViewController.m */; };
-		CC9F56B91A01680D00C54F77 /* SCRHeatMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56B81A01680D00C54F77 /* SCRHeatMapViewController.m */; };
+		CC9F56B61A0167FF00C54F77 /* SCRMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56B51A0167FF00C54F77 /* SCRMapViewController.m */; };
 		CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */; };
 		CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56C51A01852800C54F77 /* SCRConstants.m */; };
 		CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */; };
 		CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */; };
+		CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,10 +51,8 @@
 		CC5DCF4F1A014277000C813E /* ScrapHeapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrapHeapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5DCF541A014277000C813E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC5DCF551A014277000C813E /* ScrapHeapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrapHeapTests.m; sourceTree = "<group>"; };
-		CC9F56B41A0167FF00C54F77 /* SCRDefaultMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDefaultMapViewController.h; sourceTree = "<group>"; };
-		CC9F56B51A0167FF00C54F77 /* SCRDefaultMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRDefaultMapViewController.m; sourceTree = "<group>"; };
-		CC9F56B71A01680D00C54F77 /* SCRHeatMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRHeatMapViewController.h; sourceTree = "<group>"; };
-		CC9F56B81A01680D00C54F77 /* SCRHeatMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRHeatMapViewController.m; sourceTree = "<group>"; };
+		CC9F56B41A0167FF00C54F77 /* SCRMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRMapViewController.h; sourceTree = "<group>"; };
+		CC9F56B51A0167FF00C54F77 /* SCRMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRMapViewController.m; sourceTree = "<group>"; };
 		CC9F56BA1A01688400C54F77 /* SCRRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRRootViewController.h; sourceTree = "<group>"; };
 		CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRRootViewController.m; sourceTree = "<group>"; };
 		CC9F56C41A01852800C54F77 /* SCRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRConstants.h; sourceTree = "<group>"; };
@@ -64,6 +62,8 @@
 		CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRTabBarController.m; sourceTree = "<group>"; };
 		CCAEFDB61A0426AD003E0143 /* SCRNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRNetworking.h; sourceTree = "<group>"; };
 		CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRNetworking.m; sourceTree = "<group>"; };
+		CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDetailViewController.h; sourceTree = "<group>"; };
+		CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRDetailViewController.m; sourceTree = "<group>"; };
 		E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,10 +205,10 @@
 				CC9F56BB1A01688400C54F77 /* SCRRootViewController.m */,
 				CCAEFDB31A03F265003E0143 /* SCRTabBarController.h */,
 				CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */,
-				CC9F56B41A0167FF00C54F77 /* SCRDefaultMapViewController.h */,
-				CC9F56B51A0167FF00C54F77 /* SCRDefaultMapViewController.m */,
-				CC9F56B71A01680D00C54F77 /* SCRHeatMapViewController.h */,
-				CC9F56B81A01680D00C54F77 /* SCRHeatMapViewController.m */,
+				CC9F56B41A0167FF00C54F77 /* SCRMapViewController.h */,
+				CC9F56B51A0167FF00C54F77 /* SCRMapViewController.m */,
+				CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */,
+				CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -415,11 +415,11 @@
 				CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */,
 				CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
-				CC9F56B61A0167FF00C54F77 /* SCRDefaultMapViewController.m in Sources */,
+				CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */,
+				CC9F56B61A0167FF00C54F77 /* SCRMapViewController.m in Sources */,
 				CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */,
 				CC5DCF3F1A014277000C813E /* ScrapHeap.xcdatamodeld in Sources */,
 				CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */,
-				CC9F56B91A01680D00C54F77 /* SCRHeatMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

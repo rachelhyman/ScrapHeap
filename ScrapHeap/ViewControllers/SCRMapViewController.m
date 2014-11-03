@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Rachel Hyman. All rights reserved.
 //
 
-#import "SCRDefaultMapViewController.h"
+#import "SCRMapViewController.h"
 
-@interface SCRDefaultMapViewController ()
+@interface SCRMapViewController ()
 
 @end
 
-@implementation SCRDefaultMapViewController
+@implementation SCRMapViewController
 
 @end

@@ -20,10 +20,10 @@
             </objects>
             <point key="canvasLocation" x="-677" y="-1103"/>
         </scene>
-        <!--Heat Map-->
+        <!--Detail View Controller-->
         <scene sceneID="2vR-mt-z08">
             <objects>
-                <viewController id="10K-QV-Tj9" customClass="SCRHeatMapViewController" sceneMemberID="viewController">
+                <viewController id="10K-QV-Tj9" userLabel="Detail View Controller" customClass="SCRDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rZM-5o-KT3"/>
                         <viewControllerLayoutGuide type="bottom" id="suc-30-bAn"/>
@@ -33,16 +33,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Heat Map" id="tkP-T5-9HT"/>
+                    <tabBarItem key="tabBarItem" title="Details" id="tkP-T5-9HT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g94-fh-ejL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="893" y="-771"/>
         </scene>
-        <!--Default Map-->
+        <!--Map View Controller-->
         <scene sceneID="iNt-GA-dMR">
             <objects>
-                <viewController id="7RL-gV-UGb" customClass="SCRDefaultMapViewController" sceneMemberID="viewController">
+                <viewController id="7RL-gV-UGb" userLabel="Map View Controller" customClass="SCRMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ckl-SQ-bz3"/>
                         <viewControllerLayoutGuide type="bottom" id="Eyh-VK-TpD"/>
@@ -52,7 +52,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Default Map" id="0oc-2P-ehG"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="0oc-2P-ehG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvq-Qq-yNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
