@@ -36,6 +36,10 @@
 		CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */; };
 		CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */; };
 		CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DCD1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld */; };
+		CCFE8DD91A07FCA90066C8C0 /* _SCRBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD21A07FCA90066C8C0 /* _SCRBuilding.m */; };
+		CCFE8DDA1A07FCA90066C8C0 /* _SCRViolation.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD41A07FCA90066C8C0 /* _SCRViolation.m */; };
+		CCFE8DDB1A07FCA90066C8C0 /* SCRBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD61A07FCA90066C8C0 /* SCRBuilding.m */; };
+		CCFE8DDC1A07FCA90066C8C0 /* SCRViolation.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD81A07FCA90066C8C0 /* SCRViolation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,14 @@
 		CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDetailViewController.h; sourceTree = "<group>"; };
 		CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRDetailViewController.m; sourceTree = "<group>"; };
 		CCFE8DCE1A07F6D00066C8C0 /* ScrapHeap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrapHeap.xcdatamodel; sourceTree = "<group>"; };
+		CCFE8DD11A07FCA90066C8C0 /* _SCRBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SCRBuilding.h; sourceTree = "<group>"; };
+		CCFE8DD21A07FCA90066C8C0 /* _SCRBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SCRBuilding.m; sourceTree = "<group>"; };
+		CCFE8DD31A07FCA90066C8C0 /* _SCRViolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SCRViolation.h; sourceTree = "<group>"; };
+		CCFE8DD41A07FCA90066C8C0 /* _SCRViolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SCRViolation.m; sourceTree = "<group>"; };
+		CCFE8DD51A07FCA90066C8C0 /* SCRBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRBuilding.h; sourceTree = "<group>"; };
+		CCFE8DD61A07FCA90066C8C0 /* SCRBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRBuilding.m; sourceTree = "<group>"; };
+		CCFE8DD71A07FCA90066C8C0 /* SCRViolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRViolation.h; sourceTree = "<group>"; };
+		CCFE8DD81A07FCA90066C8C0 /* SCRViolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRViolation.m; sourceTree = "<group>"; };
 		E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,6 +211,11 @@
 			isa = PBXGroup;
 			children = (
 				CCFE8DCD1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld */,
+				CCFE8DD51A07FCA90066C8C0 /* SCRBuilding.h */,
+				CCFE8DD61A07FCA90066C8C0 /* SCRBuilding.m */,
+				CCFE8DD71A07FCA90066C8C0 /* SCRViolation.h */,
+				CCFE8DD81A07FCA90066C8C0 /* SCRViolation.m */,
+				CCFE8DD01A07FCA90066C8C0 /* Machine Files */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,6 +258,17 @@
 				CC9F56C51A01852800C54F77 /* SCRConstants.m */,
 			);
 			path = "Shared Utility";
+			sourceTree = "<group>";
+		};
+		CCFE8DD01A07FCA90066C8C0 /* Machine Files */ = {
+			isa = PBXGroup;
+			children = (
+				CCFE8DD11A07FCA90066C8C0 /* _SCRBuilding.h */,
+				CCFE8DD21A07FCA90066C8C0 /* _SCRBuilding.m */,
+				CCFE8DD31A07FCA90066C8C0 /* _SCRViolation.h */,
+				CCFE8DD41A07FCA90066C8C0 /* _SCRViolation.m */,
+			);
+			path = "Machine Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,13 +472,17 @@
 			files = (
 				CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */,
 				CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */,
+				CCFE8DDB1A07FCA90066C8C0 /* SCRBuilding.m in Sources */,
 				CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
 				CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */,
 				CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */,
+				CCFE8DDC1A07FCA90066C8C0 /* SCRViolation.m in Sources */,
+				CCFE8DD91A07FCA90066C8C0 /* _SCRBuilding.m in Sources */,
 				CC9F56B61A0167FF00C54F77 /* SCRMapViewController.m in Sources */,
 				CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */,
 				CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */,
+				CCFE8DDA1A07FCA90066C8C0 /* _SCRViolation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
