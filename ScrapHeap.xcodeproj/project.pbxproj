@@ -6,12 +6,25 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		CCFE8DC81A07F4580066C8C0 /* Mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = CCFE8DC91A07F4580066C8C0 /* Build configuration list for PBXAggregateTarget "Mogenerator" */;
+			buildPhases = (
+				CCFE8DCC1A07F4670066C8C0 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Mogenerator;
+			productName = Mogenerator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		5D0892A482C9CB7ACADDD2FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D0105DD10EC9E0A3787615 /* libPods.a */; };
 		B32D7DDEC6FA79C20C15F612 /* libPods-ScrapHeapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC3D7707DC0087E87121E /* libPods-ScrapHeapTests.a */; };
 		CC5DCF391A014277000C813E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF381A014277000C813E /* main.m */; };
 		CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF3B1A014277000C813E /* SCRAppDelegate.m */; };
-		CC5DCF3F1A014277000C813E /* ScrapHeap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF3D1A014277000C813E /* ScrapHeap.xcdatamodeld */; };
 		CC5DCF451A014277000C813E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF431A014277000C813E /* Main.storyboard */; };
 		CC5DCF471A014277000C813E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF461A014277000C813E /* Images.xcassets */; };
 		CC5DCF4A1A014277000C813E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF481A014277000C813E /* LaunchScreen.xib */; };
@@ -22,7 +35,7 @@
 		CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */; };
 		CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */; };
 		CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */; };
-		CCFE8DC71A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC51A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld */; };
+		CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DCD1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +58,6 @@
 		CC5DCF381A014277000C813E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CC5DCF3A1A014277000C813E /* SCRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCRAppDelegate.h; sourceTree = "<group>"; };
 		CC5DCF3B1A014277000C813E /* SCRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCRAppDelegate.m; sourceTree = "<group>"; };
-		CC5DCF3E1A014277000C813E /* ScrapHeap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrapHeap.xcdatamodel; sourceTree = "<group>"; };
 		CC5DCF441A014277000C813E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CC5DCF461A014277000C813E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CC5DCF491A014277000C813E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -65,7 +77,7 @@
 		CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRNetworking.m; sourceTree = "<group>"; };
 		CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDetailViewController.h; sourceTree = "<group>"; };
 		CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRDetailViewController.m; sourceTree = "<group>"; };
-		CCFE8DC61A07EEC40066C8C0 /* ScrapHeap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrapHeap.xcdatamodel; sourceTree = "<group>"; };
+		CCFE8DCE1A07F6D00066C8C0 /* ScrapHeap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrapHeap.xcdatamodel; sourceTree = "<group>"; };
 		E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,7 +156,6 @@
 				CC5DCF631A0153B9000C813E /* Views */,
 				CC5DCF461A014277000C813E /* Images.xcassets */,
 				CC5DCF481A014277000C813E /* LaunchScreen.xib */,
-				CC5DCF3D1A014277000C813E /* ScrapHeap.xcdatamodeld */,
 				CC5DCF361A014277000C813E /* Supporting Files */,
 			);
 			path = ScrapHeap;
@@ -187,7 +198,7 @@
 		CC5DCF601A0153B9000C813E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CCFE8DC51A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld */,
+				CCFE8DCD1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -291,6 +302,9 @@
 						CreatedOnToolsVersion = 6.1;
 						TestTargetID = CC5DCF321A014277000C813E;
 					};
+					CCFE8DC81A07F4580066C8C0 = {
+						CreatedOnToolsVersion = 6.1;
+					};
 				};
 			};
 			buildConfigurationList = CC5DCF2E1A014276000C813E /* Build configuration list for PBXProject "ScrapHeap" */;
@@ -308,6 +322,7 @@
 			targets = (
 				CC5DCF321A014277000C813E /* ScrapHeap */,
 				CC5DCF4E1A014277000C813E /* ScrapHeapTests */,
+				CCFE8DC81A07F4580066C8C0 /* Mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -407,6 +422,19 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then\n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\"\nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\"\nfi\nfi";
 		};
+		CCFE8DCC1A07F4670066C8C0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=${PATH}:/usr/local/bin\ncd $SRCROOT/ScrapHeap/Models/\nmogenerator \\\n--v2 \\\n--model ScrapHeap.xcdatamodeld/ScrapHeap.xcdatamodel \\\n--machine-dir \"Machine Files\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -415,14 +443,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */,
-				CCFE8DC71A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld in Sources */,
 				CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */,
 				CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
 				CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */,
+				CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */,
 				CC9F56B61A0167FF00C54F77 /* SCRMapViewController.m in Sources */,
 				CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */,
-				CC5DCF3F1A014277000C813E /* ScrapHeap.xcdatamodeld in Sources */,
 				CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,6 +632,20 @@
 			};
 			name = Release;
 		};
+		CCFE8DCA1A07F4580066C8C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CCFE8DCB1A07F4580066C8C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -635,27 +676,25 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		CCFE8DC91A07F4580066C8C0 /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCFE8DCA1A07F4580066C8C0 /* Debug */,
+				CCFE8DCB1A07F4580066C8C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		CC5DCF3D1A014277000C813E /* ScrapHeap.xcdatamodeld */ = {
+		CCFE8DCD1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				CC5DCF3E1A014277000C813E /* ScrapHeap.xcdatamodel */,
+				CCFE8DCE1A07F6D00066C8C0 /* ScrapHeap.xcdatamodel */,
 			);
-			currentVersion = CC5DCF3E1A014277000C813E /* ScrapHeap.xcdatamodel */;
+			currentVersion = CCFE8DCE1A07F6D00066C8C0 /* ScrapHeap.xcdatamodel */;
 			path = ScrapHeap.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		CCFE8DC51A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CCFE8DC61A07EEC40066C8C0 /* ScrapHeap.xcdatamodel */,
-			);
-			currentVersion = CCFE8DC61A07EEC40066C8C0 /* ScrapHeap.xcdatamodel */;
-			name = ScrapHeap.xcdatamodeld;
-			path = ../../../../ScrapHeap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
