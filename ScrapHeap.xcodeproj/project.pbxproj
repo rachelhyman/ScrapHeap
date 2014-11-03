@@ -22,6 +22,7 @@
 		CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */; };
 		CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */; };
 		CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */; };
+		CCFE8DC71A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC51A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRNetworking.m; sourceTree = "<group>"; };
 		CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDetailViewController.h; sourceTree = "<group>"; };
 		CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRDetailViewController.m; sourceTree = "<group>"; };
+		CCFE8DC61A07EEC40066C8C0 /* ScrapHeap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrapHeap.xcdatamodel; sourceTree = "<group>"; };
 		E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,6 +187,7 @@
 		CC5DCF601A0153B9000C813E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CCFE8DC51A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */,
+				CCFE8DC71A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld in Sources */,
 				CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */,
 				CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
@@ -641,6 +645,17 @@
 			);
 			currentVersion = CC5DCF3E1A014277000C813E /* ScrapHeap.xcdatamodel */;
 			path = ScrapHeap.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		CCFE8DC51A07EEC40066C8C0 /* ScrapHeap.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CCFE8DC61A07EEC40066C8C0 /* ScrapHeap.xcdatamodel */,
+			);
+			currentVersion = CCFE8DC61A07EEC40066C8C0 /* ScrapHeap.xcdatamodel */;
+			name = ScrapHeap.xcdatamodeld;
+			path = ../../../../ScrapHeap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
