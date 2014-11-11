@@ -8,14 +8,18 @@
 
 #import "SCRTabBarController.h"
 
-#import "SCRRootViewController.h"
 #import "SCRCoreDataUtility.h"
+
+@interface SCRTabBarController ()  <UITabBarControllerDelegate>
+
+@end
 
 @implementation SCRTabBarController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.delegate = self;
     [SCRCoreDataUtility getTestViolations]; 
 }
 
