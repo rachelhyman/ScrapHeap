@@ -84,18 +84,20 @@
         NSArray *buildingsArray = [[VOKCoreDataManager sharedInstance] arrayForClass:[SCRBuilding class]
                                                                        withPredicate:predicate
                                                                           forContext:violation.managedObjectContext];
-        //manually linking buildings here instead of using a mapper to ensure that duplicate buildings are not created. we check if a building with the address for the  violation being created exists. if it does exist, we link it to the violation. if not, we create it and link it to the violation.
+        //manually linking buildings here instead of using a mapper to ensure that duplicate buildings are not created.
+        //we check if a building with the address for the  violation being created exists.
+        //if it does exist, we link it to the violation. if not, we create it and link it to the violation.
         if (!buildingsArray.firstObject) {
             SCRBuilding *building = [SCRBuilding vok_newInstanceWithContext:violation.managedObjectContext];
-            building.address = [inputDict objectForKey:@"address"];
-            building.latitude = [[self sharedNumberFormatter] numberFromString:[inputDict objectForKey:@"latitude"]];
-            building.longitude = [[self sharedNumberFormatter] numberFromString:[inputDict objectForKey:@"longitude"]];
+            building.address = inputDict[@"address"];
+            building.latitude = [[self sharedNumberFormatter] numberFromString:inputDict[@"latitude"]];
+            building.longitude = [[self sharedNumberFormatter] numberFromString:inputDict[@"longitude"]];
             violation.building = building;
         } else {
             SCRBuilding *building = (SCRBuilding *)[buildingsArray firstObject];
             violation.building = building;
         }
-         };
+    };
     
     [[VOKCoreDataManager sharedInstance] setObjectMapper:mapper forClass:[SCRViolation class]];
 }

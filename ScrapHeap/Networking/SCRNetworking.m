@@ -37,7 +37,7 @@ static NSString *const AppToken = @"GthgnkwqVlsElC4cdPqELnrjJ";
 
 + (void)getViolations
 {
-    [[SCRNetworking sessionManager] GET:Endpoint
+    [[SCRNetworking sessionManager] GET:@""
                              parameters:nil
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
                                     [SCRCoreDataUtility loadDataFromArray:responseObject];
