@@ -10,11 +10,16 @@
 
 @interface SCRCoreDataUtility : NSObject
 
-+ (void)resetCoreData; 
+///clears out core data and sets it up again
++ (void)resetCoreData;
+
+///sets up core data with our sqlite database and model
 + (void)setUpCoreData;
+
+///creates instances of the SCRViolation class using data from the given array
 + (void)loadDataFromArray:(NSArray *)array;
 
-///loads test data
+///loads test data from json
 + (void)getTestViolations;
 
 @end
