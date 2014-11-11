@@ -9,14 +9,14 @@
 #import "SCRTabBarController.h"
 
 #import "SCRRootViewController.h"
-#import "SCRNetworking.h"
+#import "SCRCoreDataUtility.h"
 
 @implementation SCRTabBarController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [SCRNetworking getViolations];
+    [SCRCoreDataUtility getTestViolations]; 
 }
 
 @end

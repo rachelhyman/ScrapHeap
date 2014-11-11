@@ -12,6 +12,9 @@
 
 + (void)resetCoreData; 
 + (void)setUpCoreData;
-+ (void)loadDataFromArray:(NSArray *)array; 
++ (void)loadDataFromArray:(NSArray *)array;
+
+///loads test data
++ (void)getTestViolations;
 
 @end

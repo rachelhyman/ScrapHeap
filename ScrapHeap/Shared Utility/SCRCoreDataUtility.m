@@ -105,4 +105,18 @@
     [[VOKCoreDataManager sharedInstance] saveMainContext];
 }
 
++ (void)getTestViolations
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSString *path = [bundle pathForResource:@"TestData" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    NSError *error;
+    NSArray *testViolationsArray = [NSJSONSerialization JSONObjectWithData:data
+                                                                   options:NSJSONReadingMutableContainers
+                                                                     error:&error];
+    
+    [self loadDataFromArray:testViolationsArray];
+}
+
 @end

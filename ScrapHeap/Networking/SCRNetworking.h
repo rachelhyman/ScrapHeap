@@ -12,6 +12,7 @@
 
 @interface SCRNetworking : NSObject
 
+///Gets data live from server
 + (void)getViolations;
 
 @end
