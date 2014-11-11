@@ -4,13 +4,13 @@
 #import "_SCRViolation.h"
 
 const struct SCRViolationAttributes SCRViolationAttributes = {
-	.sDescription = @"sDescription",
-	.sID = @"sID",
-	.sInspectorComments = @"sInspectorComments",
-	.sLastModifiedDate = @"sLastModifiedDate",
-	.sOrdinance = @"sOrdinance",
-	.sStatus = @"sStatus",
-	.sViolationDate = @"sViolationDate",
+	.inspectorComments = @"inspectorComments",
+	.lastModifiedDate = @"lastModifiedDate",
+	.ordinance = @"ordinance",
+	.status = @"status",
+	.violationDate = @"violationDate",
+	.violationDescription = @"violationDescription",
+	.violationID = @"violationID",
 };
 
 const struct SCRViolationRelationships SCRViolationRelationships = {
@@ -46,19 +46,19 @@ const struct SCRViolationRelationships SCRViolationRelationships = {
 	return keyPaths;
 }
 
-@dynamic sDescription;
+@dynamic inspectorComments;
 
-@dynamic sID;
+@dynamic lastModifiedDate;
 
-@dynamic sInspectorComments;
+@dynamic ordinance;
 
-@dynamic sLastModifiedDate;
+@dynamic status;
 
-@dynamic sOrdinance;
+@dynamic violationDate;
 
-@dynamic sStatus;
+@dynamic violationDescription;
 
-@dynamic sViolationDate;
+@dynamic violationID;
 
 @dynamic building;
 

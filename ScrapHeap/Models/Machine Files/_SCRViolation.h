@@ -4,13 +4,13 @@
 @import CoreData;
 
 extern const struct SCRViolationAttributes {
-	__unsafe_unretained NSString *sDescription;
-	__unsafe_unretained NSString *sID;
-	__unsafe_unretained NSString *sInspectorComments;
-	__unsafe_unretained NSString *sLastModifiedDate;
-	__unsafe_unretained NSString *sOrdinance;
-	__unsafe_unretained NSString *sStatus;
-	__unsafe_unretained NSString *sViolationDate;
+	__unsafe_unretained NSString *inspectorComments;
+	__unsafe_unretained NSString *lastModifiedDate;
+	__unsafe_unretained NSString *ordinance;
+	__unsafe_unretained NSString *status;
+	__unsafe_unretained NSString *violationDate;
+	__unsafe_unretained NSString *violationDescription;
+	__unsafe_unretained NSString *violationID;
 } SCRViolationAttributes;
 
 extern const struct SCRViolationRelationships {
@@ -28,33 +28,33 @@ extern const struct SCRViolationRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) SCRViolationID* objectID;
 
-@property (nonatomic, strong) NSString* sDescription;
+@property (nonatomic, strong) NSString* inspectorComments;
 
-//- (BOOL)validateSDescription:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateInspectorComments:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* sID;
+@property (nonatomic, strong) NSDate* lastModifiedDate;
 
-//- (BOOL)validateSID:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateLastModifiedDate:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* sInspectorComments;
+@property (nonatomic, strong) NSString* ordinance;
 
-//- (BOOL)validateSInspectorComments:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateOrdinance:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSDate* sLastModifiedDate;
+@property (nonatomic, strong) NSString* status;
 
-//- (BOOL)validateSLastModifiedDate:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateStatus:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* sOrdinance;
+@property (nonatomic, strong) NSDate* violationDate;
 
-//- (BOOL)validateSOrdinance:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateViolationDate:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* sStatus;
+@property (nonatomic, strong) NSString* violationDescription;
 
-//- (BOOL)validateSStatus:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateViolationDescription:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSDate* sViolationDate;
+@property (nonatomic, strong) NSString* violationID;
 
-//- (BOOL)validateSViolationDate:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateViolationID:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) SCRBuilding *building;
 
@@ -64,26 +64,26 @@ extern const struct SCRViolationRelationships {
 
 @interface _SCRViolation (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString*)primitiveSDescription;
-- (void)setPrimitiveSDescription:(NSString*)value;
+- (NSString*)primitiveInspectorComments;
+- (void)setPrimitiveInspectorComments:(NSString*)value;
 
-- (NSString*)primitiveSID;
-- (void)setPrimitiveSID:(NSString*)value;
+- (NSDate*)primitiveLastModifiedDate;
+- (void)setPrimitiveLastModifiedDate:(NSDate*)value;
 
-- (NSString*)primitiveSInspectorComments;
-- (void)setPrimitiveSInspectorComments:(NSString*)value;
+- (NSString*)primitiveOrdinance;
+- (void)setPrimitiveOrdinance:(NSString*)value;
 
-- (NSDate*)primitiveSLastModifiedDate;
-- (void)setPrimitiveSLastModifiedDate:(NSDate*)value;
+- (NSString*)primitiveStatus;
+- (void)setPrimitiveStatus:(NSString*)value;
 
-- (NSString*)primitiveSOrdinance;
-- (void)setPrimitiveSOrdinance:(NSString*)value;
+- (NSDate*)primitiveViolationDate;
+- (void)setPrimitiveViolationDate:(NSDate*)value;
 
-- (NSString*)primitiveSStatus;
-- (void)setPrimitiveSStatus:(NSString*)value;
+- (NSString*)primitiveViolationDescription;
+- (void)setPrimitiveViolationDescription:(NSString*)value;
 
-- (NSDate*)primitiveSViolationDate;
-- (void)setPrimitiveSViolationDate:(NSDate*)value;
+- (NSString*)primitiveViolationID;
+- (void)setPrimitiveViolationID:(NSString*)value;
 
 - (SCRBuilding*)primitiveBuilding;
 - (void)setPrimitiveBuilding:(SCRBuilding*)value;

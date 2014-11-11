@@ -2,12 +2,8 @@
 
 @interface SCRViolation ()
 
-// Private interface goes here.
-
 @end
 
 @implementation SCRViolation
-
-// Custom logic goes here.
 
 @end

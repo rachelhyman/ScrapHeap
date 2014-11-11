@@ -4,10 +4,10 @@
 @import CoreData;
 
 extern const struct SCRBuildingAttributes {
-	__unsafe_unretained NSString *sAddress;
-	__unsafe_unretained NSString *sCommunityArea;
-	__unsafe_unretained NSString *sLatitude;
-	__unsafe_unretained NSString *sLongitude;
+	__unsafe_unretained NSString *address;
+	__unsafe_unretained NSString *communityArea;
+	__unsafe_unretained NSString *latitude;
+	__unsafe_unretained NSString *longitude;
 } SCRBuildingAttributes;
 
 extern const struct SCRBuildingRelationships {
@@ -25,29 +25,29 @@ extern const struct SCRBuildingRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) SCRBuildingID* objectID;
 
-@property (nonatomic, strong) NSString* sAddress;
+@property (nonatomic, strong) NSString* address;
 
-//- (BOOL)validateSAddress:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateAddress:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* sCommunityArea;
+@property (nonatomic, strong) NSString* communityArea;
 
-//- (BOOL)validateSCommunityArea:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateCommunityArea:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSNumber* sLatitude;
+@property (nonatomic, strong) NSNumber* latitude;
 
-@property (atomic) double sLatitudeValue;
-- (double)sLatitudeValue;
-- (void)setSLatitudeValue:(double)value_;
+@property (atomic) double latitudeValue;
+- (double)latitudeValue;
+- (void)setLatitudeValue:(double)value_;
 
-//- (BOOL)validateSLatitude:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateLatitude:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSNumber* sLongitude;
+@property (nonatomic, strong) NSNumber* longitude;
 
-@property (atomic) double sLongitudeValue;
-- (double)sLongitudeValue;
-- (void)setSLongitudeValue:(double)value_;
+@property (atomic) double longitudeValue;
+- (double)longitudeValue;
+- (void)setLongitudeValue:(double)value_;
 
-//- (BOOL)validateSLongitude:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateLongitude:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSSet *violations;
 
@@ -65,23 +65,23 @@ extern const struct SCRBuildingRelationships {
 
 @interface _SCRBuilding (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString*)primitiveSAddress;
-- (void)setPrimitiveSAddress:(NSString*)value;
+- (NSString*)primitiveAddress;
+- (void)setPrimitiveAddress:(NSString*)value;
 
-- (NSString*)primitiveSCommunityArea;
-- (void)setPrimitiveSCommunityArea:(NSString*)value;
+- (NSString*)primitiveCommunityArea;
+- (void)setPrimitiveCommunityArea:(NSString*)value;
 
-- (NSNumber*)primitiveSLatitude;
-- (void)setPrimitiveSLatitude:(NSNumber*)value;
+- (NSNumber*)primitiveLatitude;
+- (void)setPrimitiveLatitude:(NSNumber*)value;
 
-- (double)primitiveSLatitudeValue;
-- (void)setPrimitiveSLatitudeValue:(double)value_;
+- (double)primitiveLatitudeValue;
+- (void)setPrimitiveLatitudeValue:(double)value_;
 
-- (NSNumber*)primitiveSLongitude;
-- (void)setPrimitiveSLongitude:(NSNumber*)value;
+- (NSNumber*)primitiveLongitude;
+- (void)setPrimitiveLongitude:(NSNumber*)value;
 
-- (double)primitiveSLongitudeValue;
-- (void)setPrimitiveSLongitudeValue:(double)value_;
+- (double)primitiveLongitudeValue;
+- (void)setPrimitiveLongitudeValue:(double)value_;
 
 - (NSMutableSet*)primitiveViolations;
 - (void)setPrimitiveViolations:(NSMutableSet*)value;

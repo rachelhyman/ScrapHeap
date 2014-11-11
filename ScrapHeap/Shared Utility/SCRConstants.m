@@ -17,3 +17,8 @@ const struct SCRStoryboardIdentifiers SCRStoryboardIdentifier = {
     .DefaultMapViewController = @"SCRDefaultMapViewController",
     .HeatMapViewController = @"SCRHeatMapViewController",
 };
+
+const struct SCRCoreDataNames SCRCoreData = {
+    .SqliteDatabaseName = @"ScrapHeap.sqlite",
+    .ModelName = @"ScrapHeap",
+};

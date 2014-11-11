@@ -40,6 +40,7 @@
 		CCFE8DDA1A07FCA90066C8C0 /* _SCRViolation.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD41A07FCA90066C8C0 /* _SCRViolation.m */; };
 		CCFE8DDB1A07FCA90066C8C0 /* SCRBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD61A07FCA90066C8C0 /* SCRBuilding.m */; };
 		CCFE8DDC1A07FCA90066C8C0 /* SCRViolation.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD81A07FCA90066C8C0 /* SCRViolation.m */; };
+		CCFE8DE11A0813900066C8C0 /* SCRCoreDataUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DE01A0813900066C8C0 /* SCRCoreDataUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,8 @@
 		CCFE8DD61A07FCA90066C8C0 /* SCRBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRBuilding.m; sourceTree = "<group>"; };
 		CCFE8DD71A07FCA90066C8C0 /* SCRViolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRViolation.h; sourceTree = "<group>"; };
 		CCFE8DD81A07FCA90066C8C0 /* SCRViolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRViolation.m; sourceTree = "<group>"; };
+		CCFE8DDF1A0813900066C8C0 /* SCRCoreDataUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRCoreDataUtility.h; sourceTree = "<group>"; };
+		CCFE8DE01A0813900066C8C0 /* SCRCoreDataUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRCoreDataUtility.m; sourceTree = "<group>"; };
 		E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -256,6 +259,8 @@
 			children = (
 				CC9F56C41A01852800C54F77 /* SCRConstants.h */,
 				CC9F56C51A01852800C54F77 /* SCRConstants.m */,
+				CCFE8DDF1A0813900066C8C0 /* SCRCoreDataUtility.h */,
+				CCFE8DE01A0813900066C8C0 /* SCRCoreDataUtility.m */,
 			);
 			path = "Shared Utility";
 			sourceTree = "<group>";
@@ -448,7 +453,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then\n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\"\nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\"\nfi\nfi";
+			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then\n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\"?!\"Models/Machine Files\"\nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\"\nfi\nfi";
 		};
 		CCFE8DCC1A07F4670066C8C0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -476,6 +481,7 @@
 				CC9F56BC1A01688400C54F77 /* SCRRootViewController.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
 				CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */,
+				CCFE8DE11A0813900066C8C0 /* SCRCoreDataUtility.m in Sources */,
 				CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */,
 				CCFE8DDC1A07FCA90066C8C0 /* SCRViolation.m in Sources */,
 				CCFE8DD91A07FCA90066C8C0 /* _SCRBuilding.m in Sources */,

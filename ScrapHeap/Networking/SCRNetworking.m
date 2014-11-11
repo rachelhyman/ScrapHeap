@@ -9,8 +9,10 @@
 #import "SCRNetworking.h"
 
 #import <AFNetworking.h>
+#import "SCRCoreDataUtility.h"
 
 static NSString *const Endpoint = @"http://data.cityofchicago.org/resource/22u3-xenr/";
+static NSString *const AppToken = @"GthgnkwqVlsElC4cdPqELnrjJ";
 
 @implementation SCRNetworking
 
@@ -20,7 +22,8 @@ static NSString *const Endpoint = @"http://data.cityofchicago.org/resource/22u3-
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[self baseURL]];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        [manager.requestSerializer setValue:AppToken forHTTPHeaderField:@"X-App-Token"];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         
     });
@@ -35,9 +38,9 @@ static NSString *const Endpoint = @"http://data.cityofchicago.org/resource/22u3-
 + (void)getViolations
 {
     [[SCRNetworking sessionManager] GET:Endpoint
-                            parameters:nil
+                             parameters:nil
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
-                                    NSLog(@"%@", responseObject);
+                                    [SCRCoreDataUtility loadDataFromArray:responseObject];
                                         }
                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
                                     NSLog(@"Failure");

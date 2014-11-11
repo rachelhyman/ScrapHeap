@@ -4,10 +4,10 @@
 #import "_SCRBuilding.h"
 
 const struct SCRBuildingAttributes SCRBuildingAttributes = {
-	.sAddress = @"sAddress",
-	.sCommunityArea = @"sCommunityArea",
-	.sLatitude = @"sLatitude",
-	.sLongitude = @"sLongitude",
+	.address = @"address",
+	.communityArea = @"communityArea",
+	.latitude = @"latitude",
+	.longitude = @"longitude",
 };
 
 const struct SCRBuildingRelationships SCRBuildingRelationships = {
@@ -40,13 +40,13 @@ const struct SCRBuildingRelationships SCRBuildingRelationships = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	if ([key isEqualToString:@"sLatitudeValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"sLatitude"];
+	if ([key isEqualToString:@"latitudeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"latitude"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
-	if ([key isEqualToString:@"sLongitudeValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"sLongitude"];
+	if ([key isEqualToString:@"longitudeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"longitude"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -54,48 +54,48 @@ const struct SCRBuildingRelationships SCRBuildingRelationships = {
 	return keyPaths;
 }
 
-@dynamic sAddress;
+@dynamic address;
 
-@dynamic sCommunityArea;
+@dynamic communityArea;
 
-@dynamic sLatitude;
+@dynamic latitude;
 
-- (double)sLatitudeValue {
-	NSNumber *result = [self sLatitude];
+- (double)latitudeValue {
+	NSNumber *result = [self latitude];
 	return [result doubleValue];
 }
 
-- (void)setSLatitudeValue:(double)value_ {
-	[self setSLatitude:@(value_)];
+- (void)setLatitudeValue:(double)value_ {
+	[self setLatitude:@(value_)];
 }
 
-- (double)primitiveSLatitudeValue {
-	NSNumber *result = [self primitiveSLatitude];
+- (double)primitiveLatitudeValue {
+	NSNumber *result = [self primitiveLatitude];
 	return [result doubleValue];
 }
 
-- (void)setPrimitiveSLatitudeValue:(double)value_ {
-	[self setPrimitiveSLatitude:@(value_)];
+- (void)setPrimitiveLatitudeValue:(double)value_ {
+	[self setPrimitiveLatitude:@(value_)];
 }
 
-@dynamic sLongitude;
+@dynamic longitude;
 
-- (double)sLongitudeValue {
-	NSNumber *result = [self sLongitude];
+- (double)longitudeValue {
+	NSNumber *result = [self longitude];
 	return [result doubleValue];
 }
 
-- (void)setSLongitudeValue:(double)value_ {
-	[self setSLongitude:@(value_)];
+- (void)setLongitudeValue:(double)value_ {
+	[self setLongitude:@(value_)];
 }
 
-- (double)primitiveSLongitudeValue {
-	NSNumber *result = [self primitiveSLongitude];
+- (double)primitiveLongitudeValue {
+	NSNumber *result = [self primitiveLongitude];
 	return [result doubleValue];
 }
 
-- (void)setPrimitiveSLongitudeValue:(double)value_ {
-	[self setPrimitiveSLongitude:@(value_)];
+- (void)setPrimitiveLongitudeValue:(double)value_ {
+	[self setPrimitiveLongitude:@(value_)];
 }
 
 @dynamic violations;

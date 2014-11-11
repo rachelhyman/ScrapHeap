@@ -19,3 +19,9 @@ FOUNDATION_EXPORT const struct SCRStoryboardIdentifiers {
     __unsafe_unretained NSString *DefaultMapViewController;
     __unsafe_unretained NSString *HeatMapViewController; 
 } SCRStoryboardIdentifier;
+
+///Core data constants
+FOUNDATION_EXPORT const struct SCRCoreDataNames {
+    __unsafe_unretained NSString *SqliteDatabaseName;
+    __unsafe_unretained NSString *ModelName; 
+} SCRCoreData;
