@@ -20,26 +20,29 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - GeoJSONSerialization (0.0.4)
   - iCarousel (1.7.6)
   - ILGHttpConstants (1.0.0)
-  - Kiwi (2.3.0)
-  - VOKCoreDataManager (1.0.8):
+  - Kiwi (2.3.1)
+  - VOKCoreDataManager (1.0.9):
     - iCarousel (~> 1.7.3)
   - VOKMockUrlProtocol (1.0.2):
     - ILGHttpConstants (~> 1.0.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.4)
+  - GeoJSONSerialization (~> 0.0)
   - Kiwi (~> 2.3)
   - VOKCoreDataManager (~> 1.0)
   - VOKMockUrlProtocol (~> 1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  GeoJSONSerialization: 87d7a81f770d111506e690980ef192fba3966d01
   iCarousel: c35a4e26b3c657847e523012b593e70ddbd84992
   ILGHttpConstants: 6e9661f7011c8b0dee57440e1e4c1a65ecfc0e6d
-  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
-  VOKCoreDataManager: 9d467542f655e68aa9e72f2d9655a0bad6e59fe5
+  Kiwi: 73e1400209055ee9c8ba78c6012b6b642d0fb9f7
+  VOKCoreDataManager: b8088e5921225a5a8a199bdf4a0711d2dd0b3790
   VOKMockUrlProtocol: 0c87d7ac21bf56204269cf66877d56fbebf8fc09
 
 COCOAPODS: 0.34.1

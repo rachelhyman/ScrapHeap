@@ -8,10 +8,6 @@
 
 #import "SCRDetailViewController.h"
 
-@interface SCRDetailViewController ()
-
-@end
-
 @implementation SCRDetailViewController
 
 #pragma mark - Table view data source
