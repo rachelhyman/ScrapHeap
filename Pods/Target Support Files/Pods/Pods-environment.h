@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 4
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 1
 
+// GeoJSONSerialization
+#define COCOAPODS_POD_AVAILABLE_GeoJSONSerialization
+#define COCOAPODS_VERSION_MAJOR_GeoJSONSerialization 0
+#define COCOAPODS_VERSION_MINOR_GeoJSONSerialization 0
+#define COCOAPODS_VERSION_PATCH_GeoJSONSerialization 4
+
 // VOKCoreDataManager
 #define COCOAPODS_POD_AVAILABLE_VOKCoreDataManager
 #define COCOAPODS_VERSION_MAJOR_VOKCoreDataManager 1
