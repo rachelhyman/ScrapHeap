@@ -8,15 +8,15 @@
         <scene sceneID="2vR-mt-z08">
             <objects>
                 <viewController id="10K-QV-Tj9" userLabel="Detail View Controller" customClass="SCRDetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rZM-5o-KT3"/>
-                        <viewControllerLayoutGuide type="bottom" id="suc-30-bAn"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jke-Cz-MiG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Add-EC-v3a">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                        <connections>
+                            <outlet property="dataSource" destination="10K-QV-Tj9" id="wWP-I4-M4G"/>
+                            <outlet property="delegate" destination="10K-QV-Tj9" id="fXv-xa-TiK"/>
+                        </connections>
+                    </tableView>
                     <tabBarItem key="tabBarItem" title="Details" id="tkP-T5-9HT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g94-fh-ejL" userLabel="First Responder" sceneMemberID="firstResponder"/>
