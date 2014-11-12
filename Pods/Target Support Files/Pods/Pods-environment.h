@@ -58,7 +58,7 @@
 #define COCOAPODS_POD_AVAILABLE_VOKCoreDataManager
 #define COCOAPODS_VERSION_MAJOR_VOKCoreDataManager 1
 #define COCOAPODS_VERSION_MINOR_VOKCoreDataManager 0
-#define COCOAPODS_VERSION_PATCH_VOKCoreDataManager 8
+#define COCOAPODS_VERSION_PATCH_VOKCoreDataManager 9
 
 // iCarousel
 #define COCOAPODS_POD_AVAILABLE_iCarousel
