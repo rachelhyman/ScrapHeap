@@ -54,11 +54,11 @@
 #define COCOAPODS_VERSION_MINOR_GeoJSONSerialization 0
 #define COCOAPODS_VERSION_PATCH_GeoJSONSerialization 4
 
-// VOKCoreDataManager
-#define COCOAPODS_POD_AVAILABLE_VOKCoreDataManager
-#define COCOAPODS_VERSION_MAJOR_VOKCoreDataManager 1
-#define COCOAPODS_VERSION_MINOR_VOKCoreDataManager 0
-#define COCOAPODS_VERSION_PATCH_VOKCoreDataManager 10
+// Vokoder
+#define COCOAPODS_POD_AVAILABLE_Vokoder
+#define COCOAPODS_VERSION_MAJOR_Vokoder 1
+#define COCOAPODS_VERSION_MINOR_Vokoder 0
+#define COCOAPODS_VERSION_PATCH_Vokoder 11
 
 // iCarousel
 #define COCOAPODS_POD_AVAILABLE_iCarousel

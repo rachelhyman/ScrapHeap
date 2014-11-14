@@ -1,1 +1,0 @@
-../../../VOKCoreDataManager/VOKCoreDataManager.h
