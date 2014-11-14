@@ -24,7 +24,7 @@ PODS:
   - iCarousel (1.7.6)
   - ILGHttpConstants (1.0.0)
   - Kiwi (2.3.1)
-  - VOKCoreDataManager (1.0.9):
+  - VOKCoreDataManager (1.0.10):
     - iCarousel (~> 1.7.3)
   - VOKMockUrlProtocol (1.0.2):
     - ILGHttpConstants (~> 1.0.0)
@@ -42,7 +42,7 @@ SPEC CHECKSUMS:
   iCarousel: c35a4e26b3c657847e523012b593e70ddbd84992
   ILGHttpConstants: 6e9661f7011c8b0dee57440e1e4c1a65ecfc0e6d
   Kiwi: 73e1400209055ee9c8ba78c6012b6b642d0fb9f7
-  VOKCoreDataManager: b8088e5921225a5a8a199bdf4a0711d2dd0b3790
+  VOKCoreDataManager: 3714cd2f029c644177d13c9f5ae30c76a01600f0
   VOKMockUrlProtocol: 0c87d7ac21bf56204269cf66877d56fbebf8fc09
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.34.4
