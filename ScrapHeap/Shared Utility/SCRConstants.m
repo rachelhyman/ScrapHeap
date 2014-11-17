@@ -23,3 +23,9 @@ const struct SCRCoreDataNames SCRCoreData = {
     .ModelName = @"ScrapHeap",
 };
 
+const struct SCRAnnotationTypes SCRAnnotationType = {
+    .FewAnnotation = @"few annotations",
+    .SomeAnnotation = @"some annotations",
+    .ManyAnnotation = @"many annotations",
+};
+
