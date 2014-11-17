@@ -34,9 +34,24 @@
                     <view key="view" contentMode="scaleToFill" id="7GO-NZ-eYx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Sax-t2-Dgm">
+                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Eyh-VK-TpD" firstAttribute="top" secondItem="Sax-t2-Dgm" secondAttribute="bottom" id="F3t-sf-RyJ"/>
+                            <constraint firstItem="Sax-t2-Dgm" firstAttribute="top" secondItem="ckl-SQ-bz3" secondAttribute="bottom" id="VLh-Ox-hYy"/>
+                            <constraint firstAttribute="trailing" secondItem="Sax-t2-Dgm" secondAttribute="trailing" id="btZ-2V-mgb"/>
+                            <constraint firstAttribute="centerX" secondItem="Sax-t2-Dgm" secondAttribute="centerX" id="doc-cl-Uwz"/>
+                            <constraint firstItem="Sax-t2-Dgm" firstAttribute="leading" secondItem="7GO-NZ-eYx" secondAttribute="leading" id="rK7-jL-H4a"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="0oc-2P-ehG"/>
+                    <connections>
+                        <outlet property="mapView" destination="Sax-t2-Dgm" id="cx0-r6-XbM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvq-Qq-yNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

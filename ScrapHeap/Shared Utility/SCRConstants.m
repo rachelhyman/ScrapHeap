@@ -22,3 +22,4 @@ const struct SCRCoreDataNames SCRCoreData = {
     .SqliteDatabaseName = @"ScrapHeap.sqlite",
     .ModelName = @"ScrapHeap",
 };
+
