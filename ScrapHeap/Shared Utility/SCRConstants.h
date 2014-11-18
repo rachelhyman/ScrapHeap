@@ -27,7 +27,7 @@ FOUNDATION_EXPORT const struct SCRCoreDataNames {
 } SCRCoreData;
 
 ///Buckets for relative # of violations for map annotations
-typedef NS_ENUM(NSUInteger, SCRAnnotationType) {
+typedef NS_ENUM(NSInteger, SCRAnnotationType) {
     SCRFewAnnotation,
     SCRSomeAnnotation,
     SCRManyAnnotation,

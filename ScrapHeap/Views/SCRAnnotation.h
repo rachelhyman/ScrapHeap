@@ -17,7 +17,7 @@
 
 ///creates an annotation adhering to <MKAnnotation> protocol.
 ///set the type to an SCRAnnotationType to ensure annotation is of correct color.
-- (id)initWithLocation:(CLLocationCoordinate2D)coord title:(NSString *)annTitle subtitle:(NSString *)annSubtitle type:(SCRAnnotationType)type;
+- (instancetype)initWithLocation:(CLLocationCoordinate2D)coord title:(NSString *)annTitle subtitle:(NSString *)annSubtitle type:(SCRAnnotationType)type;
 
 ///returns an MKPinAnnotationView corresponding to the type (SCRAnnotationType) passed in
 + (MKPinAnnotationView *)annotationViewForMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation type:(SCRAnnotationType)type;

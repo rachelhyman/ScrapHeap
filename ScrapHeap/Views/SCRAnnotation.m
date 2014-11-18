@@ -14,9 +14,8 @@
 @synthesize coordinate = _coordinate;
 @synthesize title = _title;
 @synthesize subtitle = _subtitle;
-@synthesize type = _type;
 
-- (id)initWithLocation:(CLLocationCoordinate2D)coord title:(NSString *)annTitle subtitle:(NSString *)annSubtitle type:(SCRAnnotationType)type
+- (instancetype)initWithLocation:(CLLocationCoordinate2D)coord title:(NSString *)annTitle subtitle:(NSString *)annSubtitle type:(SCRAnnotationType)type
 {
     self = [super init];
     if (self) {
@@ -52,9 +51,11 @@
 //helper method for creating annotation view 
 + (MKPinAnnotationView *)pinAnnotationViewforMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation
 {
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"annotationview"];
+    static NSString *const annotationViewIdentifier = @"annotationview";
+    
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
     if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotationview"];
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewIdentifier];
         annotationView.canShowCallout = YES;
     } else {
         annotationView.annotation = annotation;
