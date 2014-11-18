@@ -9,12 +9,19 @@
 #import "SCRAnnotationDetailDataSource.h"
 #import "SCRViolation.h"
 #import "SCRBuilding.h"
+#import "SCRAnnotationDetailCell.h"
 
 @implementation SCRAnnotationDetailDataSource
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    SCRViolation *violation = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SCRAnnotationDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:SCRStoryboardIdentifier.AnnotationDetailTableViewCellIdentifier forIndexPath:indexPath];
+    
+    SCRViolation *violation = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [cell configureCellWithViolation:violation];
+    
+    return cell;
+}
 
 @end

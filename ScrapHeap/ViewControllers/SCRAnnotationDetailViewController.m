@@ -12,6 +12,8 @@
 #import "SCRViolation.h"
 #import "SCRBuilding.h"
 
+@class SCRAnnotationDetailCell;
+
 @interface SCRAnnotationDetailViewController () <VOKFetchedResultsDataSourceDelegate>
 
 @property (nonatomic, strong) SCRAnnotationDetailDataSource *dataSource;
@@ -50,6 +52,9 @@
                                                             managedObjectClass:[SCRViolation class]];
     
     self.dataSource.delegate = self;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:SCRStoryboardIdentifier.AnnotationDetailCell bundle:nil]
+         forCellReuseIdentifier:SCRStoryboardIdentifier.AnnotationDetailTableViewCellIdentifier];
 }
 
 @end
