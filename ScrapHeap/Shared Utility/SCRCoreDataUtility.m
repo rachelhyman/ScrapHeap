@@ -122,4 +122,9 @@
     [self loadDataFromArray:testViolationsArray];
 }
 
++ (NSArray *)fetchAllBuildings
+{
+    return [[VOKCoreDataManager sharedInstance] arrayForClass:[SCRBuilding class] forContext:nil];
+}
+
 @end

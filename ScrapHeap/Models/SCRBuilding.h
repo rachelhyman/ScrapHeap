@@ -1,5 +1,9 @@
 #import "_SCRBuilding.h"
 
+@import CoreLocation; 
+
 @interface SCRBuilding : _SCRBuilding {}
-// Custom logic goes here.
+
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+
 @end

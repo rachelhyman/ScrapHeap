@@ -22,4 +22,6 @@
 ///loads test data from json
 + (void)getTestViolations;
 
++ (NSArray *)fetchAllBuildings; 
+
 @end

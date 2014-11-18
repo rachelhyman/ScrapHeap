@@ -25,3 +25,10 @@ FOUNDATION_EXPORT const struct SCRCoreDataNames {
     __unsafe_unretained NSString *SqliteDatabaseName;
     __unsafe_unretained NSString *ModelName; 
 } SCRCoreData;
+
+///Buckets for relative # of violations for map annotations
+typedef NS_ENUM(NSInteger, SCRAnnotationType) {
+    SCRFewAnnotation,
+    SCRSomeAnnotation,
+    SCRManyAnnotation,
+};
