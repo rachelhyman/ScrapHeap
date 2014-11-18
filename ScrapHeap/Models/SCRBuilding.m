@@ -11,4 +11,9 @@
     return CLLocationCoordinate2DMake([self.latitude doubleValue], [self.longitude doubleValue]);
 }
 
++ (NSPredicate *)predicateForAddressMatchingString:(NSString *)string
+{
+    return  [NSPredicate predicateWithFormat:@"%K = %@", SCRBuildingAttributes.address, string];
+}
+
 @end

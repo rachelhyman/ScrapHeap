@@ -14,8 +14,11 @@ const struct SCRNotificationNames SCRNotification = {
 };
 
 const struct SCRStoryboardIdentifiers SCRStoryboardIdentifier = {
+    .StoryboardName = @"Main", 
     .DefaultMapViewController = @"SCRDefaultMapViewController",
     .HeatMapViewController = @"SCRHeatMapViewController",
+    .AnnotationDetailViewController = @"SCRAnnotationDetailViewController",
+    .AnnotationDetailTableViewCellIdentifier = @"violationCell", 
 };
 
 const struct SCRCoreDataNames SCRCoreData = {

@@ -76,6 +76,7 @@
     
     VOKManagedObjectMapper *mapper = [VOKManagedObjectMapper mapperWithUniqueKey:VOK_CDSELECTOR(violationID) andMaps:maps];
     mapper.ignoreNullValueOverwrites = YES;
+    mapper.ignoreOptionalNullValues = YES;
     
     mapper.importCompletionBlock = ^(NSDictionary *inputDict, NSManagedObject *outputObject) {
         SCRViolation *violation = (SCRViolation *)outputObject;

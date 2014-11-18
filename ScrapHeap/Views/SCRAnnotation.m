@@ -57,6 +57,7 @@
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewIdentifier];
         annotationView.canShowCallout = YES;
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     } else {
         annotationView.annotation = annotation;
     }

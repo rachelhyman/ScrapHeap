@@ -1,5 +1,10 @@
 #import "_SCRViolation.h"
 
+@class SCRBuilding;
+
 @interface SCRViolation : _SCRViolation {}
-// Custom logic goes here.
+
++ (NSArray *)defaultSortDescriptors;
++ (NSPredicate *)violationsForBuilding:(SCRBuilding *)building; 
+
 @end
