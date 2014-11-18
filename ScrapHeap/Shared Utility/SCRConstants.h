@@ -26,9 +26,9 @@ FOUNDATION_EXPORT const struct SCRCoreDataNames {
     __unsafe_unretained NSString *ModelName; 
 } SCRCoreData;
 
-///Annotation type constants
-FOUNDATION_EXPORT const struct SCRAnnotationTypes {
-    __unsafe_unretained NSString *FewAnnotation;
-    __unsafe_unretained NSString *SomeAnnotation;
-    __unsafe_unretained NSString *ManyAnnotation;
-} SCRAnnotationType;
+///Buckets for relative # of violations for map annotations
+typedef NS_ENUM(NSUInteger, SCRAnnotationType) {
+    SCRFewAnnotation,
+    SCRSomeAnnotation,
+    SCRManyAnnotation,
+};

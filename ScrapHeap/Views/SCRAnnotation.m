@@ -14,8 +14,9 @@
 @synthesize coordinate = _coordinate;
 @synthesize title = _title;
 @synthesize subtitle = _subtitle;
+@synthesize type = _type;
 
-- (id)initWithLocation:(CLLocationCoordinate2D)coord title:(NSString *)annTitle subtitle:(NSString *)annSubtitle type:(NSString *)type
+- (id)initWithLocation:(CLLocationCoordinate2D)coord title:(NSString *)annTitle subtitle:(NSString *)annSubtitle type:(SCRAnnotationType)type
 {
     self = [super init];
     if (self) {
@@ -24,34 +25,36 @@
         _subtitle = annSubtitle;
         _type = type;
     }
-    return self; 
+    return self;
 }
 
-+ (MKPinAnnotationView *)annotationViewForMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation type:(NSString *)type
++ (MKPinAnnotationView *)annotationViewForMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation type:(SCRAnnotationType)type
 {
-    MKPinAnnotationView *pinAnnotationView;
-    if (type == SCRAnnotationType.FewAnnotation) {
-        pinAnnotationView = [self pinAnnotationViewWithIdentifier:SCRAnnotationType.FewAnnotation forMapView:mapView annotation:annotation];
-        pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
-    } else if (type == SCRAnnotationType.SomeAnnotation) {
-        pinAnnotationView = [self pinAnnotationViewWithIdentifier:SCRAnnotationType.SomeAnnotation forMapView:mapView annotation:annotation];
-        pinAnnotationView.pinColor = MKPinAnnotationColorPurple;
-    } else if (type ==SCRAnnotationType.ManyAnnotation) {
-        pinAnnotationView = [self pinAnnotationViewWithIdentifier:SCRAnnotationType.ManyAnnotation forMapView:mapView annotation:annotation];
-        pinAnnotationView.pinColor = MKPinAnnotationColorRed;
-    } else {
-        //fallback case returns generic MKPinAnnotationView in case unexpected type is passed in
-        pinAnnotationView = [[MKPinAnnotationView alloc] init];
+    MKPinAnnotationView *pinAnnotationView = [self pinAnnotationViewforMapView:mapView annotation:annotation];
+    
+    switch (type) {
+        case SCRFewAnnotation:
+            pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
+            break;
+        case SCRSomeAnnotation:
+            pinAnnotationView.pinColor = MKPinAnnotationColorPurple;
+            break;
+        case SCRManyAnnotation:
+            pinAnnotationView.pinColor = MKPinAnnotationColorRed;
+            break;
+        default:
+            pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
+            break;
     }
     return pinAnnotationView;
 }
 
-//helper method for creating annotation view with identifier passed in
-+ (MKPinAnnotationView *)pinAnnotationViewWithIdentifier:(NSString *)identifier forMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation
+//helper method for creating annotation view 
++ (MKPinAnnotationView *)pinAnnotationViewforMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation
 {
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"annotationview"];
     if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotationview"];
         annotationView.canShowCallout = YES;
     } else {
         annotationView.annotation = annotation;

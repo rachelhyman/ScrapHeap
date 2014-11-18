@@ -22,10 +22,3 @@ const struct SCRCoreDataNames SCRCoreData = {
     .SqliteDatabaseName = @"ScrapHeap.sqlite",
     .ModelName = @"ScrapHeap",
 };
-
-const struct SCRAnnotationTypes SCRAnnotationType = {
-    .FewAnnotation = @"few annotations",
-    .SomeAnnotation = @"some annotations",
-    .ManyAnnotation = @"many annotations",
-};
-
