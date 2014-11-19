@@ -23,10 +23,21 @@
 
 @implementation SCRAnnotationDetailCell
 
++ (NSDateFormatter *)sharedDateFormatter
+{
+    static NSDateFormatter *dateFormatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    });
+    return dateFormatter;
+}
+
 - (void)configureCellWithViolation:(SCRViolation *)violation
 {
-    self.violationDateLabel.text = [NSString stringWithFormat:@"%@", violation.violationDate];
-    self.lastModifiedDateLabel.text = [NSString stringWithFormat:@"%@", violation.lastModifiedDate];
+    self.violationDateLabel.text = [[[self class] sharedDateFormatter] stringFromDate:violation.violationDate];
+    self.lastModifiedDateLabel.text = [[[self class] sharedDateFormatter] stringFromDate:violation.lastModifiedDate];
     self.descriptionLabel.text = violation.violationDescription;
     self.inspectorCommentsLabel.text = violation.inspectorComments;
     self.ordinanceLabel.text = violation.ordinance;
