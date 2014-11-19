@@ -16,8 +16,12 @@ FOUNDATION_EXPORT const struct SCRNotificationNames {
 
 ///Storyboard name constants
 FOUNDATION_EXPORT const struct SCRStoryboardIdentifiers {
+    __unsafe_unretained NSString *StoryboardName;
     __unsafe_unretained NSString *DefaultMapViewController;
-    __unsafe_unretained NSString *HeatMapViewController; 
+    __unsafe_unretained NSString *HeatMapViewController;
+    __unsafe_unretained NSString *AnnotationDetailViewController;
+    __unsafe_unretained NSString *AnnotationDetailTableViewCellIdentifier;
+    __unsafe_unretained NSString *AnnotationDetailCell; 
 } SCRStoryboardIdentifier;
 
 ///Core data constants

@@ -34,6 +34,10 @@
 		CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */; };
 		CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */; };
 		CCC75BE81A1A703F00A1EDD2 /* SCRAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC75BE71A1A703F00A1EDD2 /* SCRAnnotation.m */; };
+		CCC75BEB1A1BAAB300A1EDD2 /* SCRAnnotationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC75BEA1A1BAAB300A1EDD2 /* SCRAnnotationDetailViewController.m */; };
+		CCC75BF41A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC75BF31A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.m */; };
+		CCC75BF81A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC75BF61A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.m */; };
+		CCC75BF91A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCC75BF71A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib */; };
 		CCD563511A129C8100C807D6 /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = CCD563501A129C8100C807D6 /* TestData.json */; };
 		CCD563531A13BDC000C807D6 /* CommunityAreas.geojson in Resources */ = {isa = PBXBuildFile; fileRef = CCD563521A13BDC000C807D6 /* CommunityAreas.geojson */; };
 		CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */; };
@@ -82,6 +86,13 @@
 		CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRNetworking.m; sourceTree = "<group>"; };
 		CCC75BE61A1A703F00A1EDD2 /* SCRAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRAnnotation.h; sourceTree = "<group>"; };
 		CCC75BE71A1A703F00A1EDD2 /* SCRAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRAnnotation.m; sourceTree = "<group>"; };
+		CCC75BE91A1BAAB300A1EDD2 /* SCRAnnotationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRAnnotationDetailViewController.h; sourceTree = "<group>"; };
+		CCC75BEA1A1BAAB300A1EDD2 /* SCRAnnotationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRAnnotationDetailViewController.m; sourceTree = "<group>"; };
+		CCC75BF21A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRAnnotationDetailDataSource.h; sourceTree = "<group>"; };
+		CCC75BF31A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRAnnotationDetailDataSource.m; sourceTree = "<group>"; };
+		CCC75BF51A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRAnnotationDetailCell.h; sourceTree = "<group>"; };
+		CCC75BF61A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRAnnotationDetailCell.m; sourceTree = "<group>"; };
+		CCC75BF71A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SCRAnnotationDetailCell.xib; sourceTree = "<group>"; };
 		CCD563501A129C8100C807D6 /* TestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestData.json; sourceTree = "<group>"; };
 		CCD563521A13BDC000C807D6 /* CommunityAreas.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommunityAreas.geojson; sourceTree = "<group>"; };
 		CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDetailViewController.h; sourceTree = "<group>"; };
@@ -245,6 +256,10 @@
 				CCAEFDB41A03F265003E0143 /* SCRTabBarController.m */,
 				CC9F56B41A0167FF00C54F77 /* SCRMapViewController.h */,
 				CC9F56B51A0167FF00C54F77 /* SCRMapViewController.m */,
+				CCC75BE91A1BAAB300A1EDD2 /* SCRAnnotationDetailViewController.h */,
+				CCC75BEA1A1BAAB300A1EDD2 /* SCRAnnotationDetailViewController.m */,
+				CCC75BF21A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.h */,
+				CCC75BF31A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.m */,
 				CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */,
 				CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */,
 			);
@@ -256,6 +271,9 @@
 			children = (
 				CCC75BE61A1A703F00A1EDD2 /* SCRAnnotation.h */,
 				CCC75BE71A1A703F00A1EDD2 /* SCRAnnotation.m */,
+				CCC75BF51A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.h */,
+				CCC75BF61A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.m */,
+				CCC75BF71A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -375,6 +393,7 @@
 				CC5DCF4A1A014277000C813E /* LaunchScreen.xib in Resources */,
 				CCD563531A13BDC000C807D6 /* CommunityAreas.geojson in Resources */,
 				CC5DCF471A014277000C813E /* Images.xcassets in Resources */,
+				CCC75BF91A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib in Resources */,
 				CCD563511A129C8100C807D6 /* TestData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,16 +502,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCC75BEB1A1BAAB300A1EDD2 /* SCRAnnotationDetailViewController.m in Sources */,
 				CCAEFDB51A03F265003E0143 /* SCRTabBarController.m in Sources */,
 				CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */,
 				CCC75BE81A1A703F00A1EDD2 /* SCRAnnotation.m in Sources */,
 				CCFE8DDB1A07FCA90066C8C0 /* SCRBuilding.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
 				CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */,
+				CCC75BF81A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.m in Sources */,
 				CCFE8DE11A0813900066C8C0 /* SCRCoreDataUtility.m in Sources */,
 				CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */,
 				CCFE8DDC1A07FCA90066C8C0 /* SCRViolation.m in Sources */,
 				CCFE8DD91A07FCA90066C8C0 /* _SCRBuilding.m in Sources */,
+				CCC75BF41A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.m in Sources */,
 				CC9F56B61A0167FF00C54F77 /* SCRMapViewController.m in Sources */,
 				CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */,
 				CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */,

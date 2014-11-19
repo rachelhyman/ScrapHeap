@@ -6,4 +6,6 @@
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
++ (NSPredicate *)predicateForAddressMatchingString:(NSString *)string;
+
 @end
