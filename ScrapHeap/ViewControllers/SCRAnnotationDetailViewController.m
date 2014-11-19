@@ -25,15 +25,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden = NO;
     self.tableView.delegate = self;
+    self.title = self.building.address;
+    self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self setUpDataSource];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationController.navigationItem.title = self.building.address;
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

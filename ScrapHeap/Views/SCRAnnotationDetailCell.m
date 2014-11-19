@@ -27,7 +27,7 @@
 {
     self.violationDateLabel.text = [NSString stringWithFormat:@"%@", violation.violationDate];
     self.lastModifiedDateLabel.text = [NSString stringWithFormat:@"%@", violation.lastModifiedDate];
-    self.descriptionLabel.text = violation.description;
+    self.descriptionLabel.text = violation.violationDescription;
     self.inspectorCommentsLabel.text = violation.inspectorComments;
     self.ordinanceLabel.text = violation.ordinance;
     self.statusLabel.text = violation.status;

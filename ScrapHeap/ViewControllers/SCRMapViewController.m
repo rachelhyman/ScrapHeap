@@ -96,6 +96,7 @@ static int const SomeAnnotationsThreshold = 14;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:SCRStoryboardIdentifier.StoryboardName bundle:nil];
     SCRAnnotationDetailViewController *annotationDetailVC = [storyboard instantiateViewControllerWithIdentifier:SCRStoryboardIdentifier.AnnotationDetailViewController];
+    annotationDetailVC.hidesBottomBarWhenPushed = YES; 
     annotationDetailVC.building = building;
     [self.navigationController pushViewController:annotationDetailVC animated:YES];
 }
