@@ -35,8 +35,13 @@ static int const SomeAnnotationsThreshold = 14;
     [super viewDidLoad];
     self.mapView.delegate = self;
     [self.mapView setRegion:MKCoordinateRegionMake(ChicagoCenter, InitialSpan)];
-    self.navigationController.navigationBarHidden = YES;
     [self fetchAndMapBuildings];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)dealloc
@@ -91,14 +96,17 @@ static int const SomeAnnotationsThreshold = 14;
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
+    
     SCRAnnotation *annotation = (SCRAnnotation *)view.annotation;
     SCRBuilding *building = [self buildingForAnnotation:annotation];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:SCRStoryboardIdentifier.StoryboardName bundle:nil];
-    SCRAnnotationDetailViewController *annotationDetailVC = [storyboard instantiateViewControllerWithIdentifier:SCRStoryboardIdentifier.AnnotationDetailViewController];
-    annotationDetailVC.hidesBottomBarWhenPushed = YES; 
-    annotationDetailVC.building = building;
-    [self.navigationController pushViewController:annotationDetailVC animated:YES];
+    if ([annotation isKindOfClass:[SCRAnnotation class]]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:SCRStoryboardIdentifier.StoryboardName bundle:nil];
+        SCRAnnotationDetailViewController *annotationDetailVC = [storyboard instantiateViewControllerWithIdentifier:SCRStoryboardIdentifier.AnnotationDetailViewController];
+        annotationDetailVC.hidesBottomBarWhenPushed = YES;
+        annotationDetailVC.building = building;
+        [self.navigationController pushViewController:annotationDetailVC animated:YES];
+    }
 }
 
 @end

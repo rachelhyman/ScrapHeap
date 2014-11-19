@@ -26,7 +26,6 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
-    self.tableView.delegate = self;
     self.title = self.building.address;
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -39,15 +38,9 @@
     [self.tableView reloadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = YES; 
-}
-
 - (void)setUpDataSource
 {
-    self.dataSource = [[SCRAnnotationDetailDataSource alloc] initWithPredicate:[SCRViolation violationsForBuilding:self.building]
+    self.dataSource = [[SCRAnnotationDetailDataSource alloc] initWithPredicate:[SCRViolation predicateForViolationsForBuilding:self.building]
                                                                      cacheName:nil
                                                                      tableView:self.tableView
                                                             sectionNameKeyPath:nil

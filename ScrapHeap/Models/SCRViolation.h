@@ -5,6 +5,6 @@
 @interface SCRViolation : _SCRViolation {}
 
 + (NSArray *)defaultSortDescriptors;
-+ (NSPredicate *)violationsForBuilding:(SCRBuilding *)building; 
++ (NSPredicate *)predicateForViolationsForBuilding:(SCRBuilding *)building; 
 
 @end

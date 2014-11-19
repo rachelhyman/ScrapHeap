@@ -13,7 +13,7 @@
     return @[[NSSortDescriptor sortDescriptorWithKey:SCRViolationAttributes.violationDate ascending:NO]];
 }
 
-+ (NSPredicate *)violationsForBuilding:(SCRBuilding *)building
++ (NSPredicate *)predicateForViolationsForBuilding:(SCRBuilding *)building
 {
     return [NSPredicate predicateWithFormat:@"self IN %@", building.violations]; 
 }
