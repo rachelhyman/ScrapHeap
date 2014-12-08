@@ -20,10 +20,23 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FMDB (2.3):
+    - FMDB/standard
+  - FMDB/common (2.3)
+  - FMDB/standard (2.3):
+    - FMDB/common
   - GeoJSONSerialization (0.0.4)
+  - GRMustache (6.8.3):
+    - JRSwizzle (~> 1.0)
   - iCarousel (1.7.6)
   - ILGHttpConstants (1.0.0)
+  - JRSwizzle (1.0)
   - Kiwi (2.3.1)
+  - Mapbox-iOS-SDK (1.4.1):
+    - FMDB (= 2.3)
+    - GRMustache (= 6.8.3)
+    - SMCalloutView (= 2.0)
+  - SMCalloutView (2.0)
   - VOKMockUrlProtocol (1.0.2):
     - ILGHttpConstants (~> 1.0.0)
   - Vokoder (1.0.11):
@@ -33,15 +46,21 @@ DEPENDENCIES:
   - AFNetworking (~> 2.4)
   - GeoJSONSerialization (~> 0.0)
   - Kiwi (~> 2.3)
+  - Mapbox-iOS-SDK (~> 1.4)
   - VOKMockUrlProtocol (~> 1.0)
   - Vokoder (~> 1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
   GeoJSONSerialization: 87d7a81f770d111506e690980ef192fba3966d01
+  GRMustache: ab96109b7ba4b9568425bea40d6cd2cdc7582b6c
   iCarousel: c35a4e26b3c657847e523012b593e70ddbd84992
   ILGHttpConstants: 6e9661f7011c8b0dee57440e1e4c1a65ecfc0e6d
+  JRSwizzle: 30da7a2c539a4ebf954b16d15f6dd8221c9f6fa5
   Kiwi: 73e1400209055ee9c8ba78c6012b6b642d0fb9f7
+  Mapbox-iOS-SDK: f3c46afe1af0d8ea7863b33ba9e96d94606d4784
+  SMCalloutView: c1906604d47c058400ade5c9d52ab98aa77b7e76
   VOKMockUrlProtocol: 0c87d7ac21bf56204269cf66877d56fbebf8fc09
   Vokoder: ae63672fac08f34b3d28d0cc0b3b071c70f51e41
 
