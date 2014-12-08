@@ -8,23 +8,21 @@
 
 #import "SCRMapViewController.h"
 
-@import MapKit;
-
 #import "VOKCoreDataManager.h"
+#import "Mapbox.h"
 #import "SCRCoreDataUtility.h"
 #import "SCRBuilding.h"
 #import "SCRAnnotation.h"
 #import "SCRAnnotationDetailViewController.h"
 
+static NSString *const mapboxID = @"rhyman.keaoeg0b";
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
-static MKCoordinateSpan const InitialSpan = {.latitudeDelta = 0.4, .longitudeDelta = 0.25};
-
 static int const FewAnnotationsThreshold = 5;
 static int const SomeAnnotationsThreshold = 14;
 
-@interface SCRMapViewController () <MKMapViewDelegate>
+@interface SCRMapViewController () <RMMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) RMMapView *mapView;
 
 @end
 
@@ -33,8 +31,7 @@ static int const SomeAnnotationsThreshold = 14;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mapView.delegate = self;
-    [self.mapView setRegion:MKCoordinateRegionMake(ChicagoCenter, InitialSpan)];
+    [self setUpMap];
     [self fetchAndMapBuildings];
 }
 
@@ -49,6 +46,18 @@ static int const SomeAnnotationsThreshold = 14;
     self.mapView.delegate = nil;
 }
 
+- (void)setUpMap
+{
+    RMMapboxSource *tileSource = [[RMMapboxSource alloc] initWithMapID:mapboxID];
+    RMMapView *mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:tileSource];
+    self.mapView = mapView;
+    mapView.delegate = self;
+    
+    [mapView setZoom:11 atCoordinate:ChicagoCenter animated:NO];
+    
+    [self.view addSubview:mapView];
+}
+
 - (void)fetchAndMapBuildings
 {
     NSArray *buildings = [SCRCoreDataUtility fetchAllBuildings];
@@ -58,20 +67,23 @@ static int const SomeAnnotationsThreshold = 14;
     for (SCRBuilding *building in buildings) {
         NSString *subtitle = [NSString stringWithFormat:@"Violations: %@", [NSNumber numberWithInteger:building.violations.count]];
         if (building.violations.count < FewAnnotationsThreshold) {
-            annotation = [[SCRAnnotation alloc] initWithLocation:building.coordinate
-                                                           title:building.address
-                                                        subtitle:subtitle
-                                                            type:SCRFewAnnotation];
+            annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
+                                                     coordinate:building.coordinate
+                                                          title:building.address
+                                                       subtitle:subtitle
+                                                           type:SCRFewAnnotation];
         } else if (building.violations.count < SomeAnnotationsThreshold) {
-            annotation = [[SCRAnnotation alloc] initWithLocation:building.coordinate
-                                                           title:building.address
-                                                        subtitle:subtitle
-                                                            type:SCRSomeAnnotation];
+            annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
+                                                     coordinate:building.coordinate
+                                                          title:building.address
+                                                       subtitle:subtitle
+                                                           type:SCRSomeAnnotation];
         } else {
-            annotation = [[SCRAnnotation alloc] initWithLocation:building.coordinate
-                                                           title:building.address
-                                                        subtitle:subtitle
-                                                            type:SCRManyAnnotation];
+            annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
+                                                     coordinate:building.coordinate
+                                                          title:building.address
+                                                       subtitle:subtitle
+                                                           type:SCRManyAnnotation];
         }
         [annotations addObject:annotation];
     }
@@ -86,19 +98,17 @@ static int const SomeAnnotationsThreshold = 14;
     return buildingArray.firstObject;
 }
 
-#pragma mark - MKMapViewDelegate methods
+# pragma mark - RKMapViewDelegate methods
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
 {
-    SCRAnnotation *ann = (SCRAnnotation *)annotation;
-    return [SCRAnnotation annotationViewForMapView:mapView annotation:annotation type:ann.type];
+    return [SCRAnnotation markerViewForMapView:mapView annotation:annotation];
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+- (void)tapOnCalloutAccessoryControl:(UIControl *)control forAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
 {
-    
-    SCRAnnotation *annotation = (SCRAnnotation *)view.annotation;
-    SCRBuilding *building = [self buildingForAnnotation:annotation];
+    SCRAnnotation *ann = (SCRAnnotation *)annotation;
+    SCRBuilding *building = [self buildingForAnnotation:ann];
     
     if ([annotation isKindOfClass:[SCRAnnotation class]]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:SCRStoryboardIdentifier.StoryboardName bundle:nil];
@@ -107,6 +117,7 @@ static int const SomeAnnotationsThreshold = 14;
         annotationDetailVC.building = building;
         [self.navigationController pushViewController:annotationDetailVC animated:YES];
     }
+    
 }
 
 @end
