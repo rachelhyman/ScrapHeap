@@ -8,6 +8,8 @@
 
 #import "SCRAnnotation.h"
 
+static NSString *const buildingMarkerImage = @"commercial";
+
 @implementation SCRAnnotation
 
 - (instancetype)initWithMapView:(RMMapView *)mapView coordinate:(CLLocationCoordinate2D)aCoordinate title:(NSString *)aTitle subtitle:(NSString *)aSubtitle type:(SCRAnnotationType)aType
@@ -27,11 +29,11 @@
     RMMarker *marker;
     
     if ([annotation.userInfo isEqual:@(SCRFewAnnotation)]) {
-        marker = [[RMMarker alloc] initWithMapboxMarkerImage:@"commercial" tintColor:[UIColor yellowColor]];
+        marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor yellowColor]];
     } else if ([annotation.userInfo isEqual:@(SCRSomeAnnotation)]) {
-        marker = [[RMMarker alloc] initWithMapboxMarkerImage:@"commercial" tintColor:[UIColor orangeColor]];
+        marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor orangeColor]];
     } else {
-        marker = [[RMMarker alloc] initWithMapboxMarkerImage:@"commercial" tintColor:[UIColor redColor]];
+        marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor redColor]];
     }
     
     marker.canShowCallout = YES;
