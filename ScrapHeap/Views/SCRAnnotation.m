@@ -12,7 +12,7 @@ static NSString *const buildingMarkerImage = @"commercial";
 
 @implementation SCRAnnotation
 
-- (instancetype)initWithMapView:(RMMapView *)mapView coordinate:(CLLocationCoordinate2D)aCoordinate title:(NSString *)aTitle subtitle:(NSString *)aSubtitle type:(SCRAnnotationType)aType
+- (instancetype)initWithMapView:(RMMapView *)mapView coordinate:(CLLocationCoordinate2D)aCoordinate title:(NSString *)aTitle subtitle:(NSString *)aSubtitle type:(SCRAnnotationType)aType violationsCount:(NSUInteger)theCount
 {
     self = [super initWithMapView:mapView
                        coordinate:aCoordinate
@@ -20,6 +20,7 @@ static NSString *const buildingMarkerImage = @"commercial";
     if (self) {
         self.subtitle = aSubtitle;
         self.userInfo = @(aType);
+        self.violationsCount = theCount;
     }
     return self;
 }

@@ -14,10 +14,12 @@
 
 ///should be a SCRAnnotationType corresponding to relative # of violations for building
 @property (nonatomic) SCRAnnotationType type;
+///Count of violations for the building annotation
+@property (nonatomic) NSUInteger violationsCount;
 
 ///Creates an annotation.
 ///Set the type to an SCRAnnotationType to ensure annotation is of correct color.
-- (instancetype)initWithMapView:(RMMapView *)mapView coordinate:(CLLocationCoordinate2D)aCoordinate title:(NSString *)aTitle subtitle:(NSString *)aSubtitle type:(SCRAnnotationType)aType;
+- (instancetype)initWithMapView:(RMMapView *)mapView coordinate:(CLLocationCoordinate2D)aCoordinate title:(NSString *)aTitle subtitle:(NSString *)aSubtitle type:(SCRAnnotationType)aType violationsCount:(NSUInteger)count;
 
 //Returns an annotation layer that will color markers according to the SCRAnnotationType associated with the annotation.
 + (RMMarker *)markerViewForMapView:(RMMapView *)mapView annotation:(RMAnnotation *)annotation;
