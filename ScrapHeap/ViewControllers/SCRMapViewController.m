@@ -17,14 +17,11 @@
 
 static NSString *const mapboxID = @"rhyman.keaoeg0b";
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
-static int const FewAnnotationsThreshold = 5;
-static int const SomeAnnotationsThreshold = 14;
-static int const FewAnnotationsClusterThreshold = 20;
-static int const SomeAnnotationsClusterThreshold = 100;
 
 @interface SCRMapViewController () <RMMapViewDelegate>
 
 @property (weak, nonatomic) RMMapView *mapView;
+@property (strong, nonatomic) NSMutableArray *violationCountsArray;
 
 @end
 
@@ -33,6 +30,7 @@ static int const SomeAnnotationsClusterThreshold = 100;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.violationCountsArray = [NSMutableArray array];
     [self setUpMap];
     [self fetchAndMapBuildings];
 }
@@ -67,16 +65,25 @@ static int const SomeAnnotationsClusterThreshold = 100;
     NSMutableArray *annotations = [NSMutableArray array];
     SCRAnnotation *annotation;
     
+    NSMutableArray *violationCountsArray = [NSMutableArray array];
+    for (SCRBuilding *building in buildings) {
+        [violationCountsArray addObject:@(building.violations.count)];
+    }
+    
+    NSNumber *oneThirdPercentile = [self calculatePercentile:33 fromArrayOfNumbers:violationCountsArray];
+    NSNumber *twoThirdsPercentile = [self calculatePercentile:66 fromArrayOfNumbers:violationCountsArray];
+    
     for (SCRBuilding *building in buildings) {
         NSString *subtitle = [NSString stringWithFormat:@"Violations: %@", [NSNumber numberWithInteger:building.violations.count]];
-        if (building.violations.count < FewAnnotationsThreshold) {
+        
+        if (building.violations.count <= [oneThirdPercentile floatValue]) {
             annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
                                                      coordinate:building.coordinate
                                                           title:building.address
                                                        subtitle:subtitle
                                                            type:SCRFewAnnotation
                                                 violationsCount:building.violations.count];
-        } else if (building.violations.count < SomeAnnotationsThreshold) {
+        } else if (building.violations.count <= [twoThirdsPercentile floatValue]) {
             annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
                                                      coordinate:building.coordinate
                                                           title:building.address
@@ -104,30 +111,22 @@ static int const SomeAnnotationsClusterThreshold = 100;
     return buildingArray.firstObject;
 }
 
-# pragma mark - RKMapViewDelegate methods
+#pragma mark - RKMapViewDelegate methods
 
 - (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
 {
     RMMapLayer *layer;
     
     if (annotation.isClusterAnnotation) {
+        NSNumber *totalViolationsCount = [annotation.clusteredAnnotations valueForKeyPath:@"@sum.violationsCount"];
         
-        int totalViolationsCount = 0;
-        for (SCRAnnotation *ann in annotation.clusteredAnnotations) {
-            totalViolationsCount += ann.violationsCount;
-        }
-        
-        if (totalViolationsCount < FewAnnotationsClusterThreshold) {
-            layer = [[RMMarker alloc] initWithUIImage:[self createCircleWithColor:[UIColor yellowColor]]];
-        } else if (totalViolationsCount < SomeAnnotationsClusterThreshold) {
-            layer = [[RMMarker alloc] initWithUIImage:[self createCircleWithColor:[UIColor orangeColor]]];
-        } else {
-            layer = [[RMMarker alloc] initWithUIImage:[self createCircleWithColor:[UIColor redColor]]];
-        }
+        layer = [[RMMarker alloc] initWithUIImage:nil];
+        layer.cornerRadius = 75/2;
         layer.opacity = 0.60;
         layer.bounds = CGRectMake(0, 0, 75, 75);
-        [(RMMarker *)layer setTextForegroundColor:[UIColor whiteColor]];
-        [(RMMarker *)layer changeLabelUsingText:[NSString stringWithFormat:@"%i", totalViolationsCount]];
+        [(RMMarker *)layer setTextForegroundColor:[UIColor blackColor]];
+        [(RMMarker *)layer changeLabelUsingText:[NSString stringWithFormat:@"%@", totalViolationsCount]];
+        
     } else {
         layer = [SCRAnnotation markerViewForMapView:mapView annotation:annotation];
     }
@@ -149,33 +148,54 @@ static int const SomeAnnotationsClusterThreshold = 100;
     
 }
 
-#pragma mark - Clustering
-
-- (UIImage *)createCircleWithColor:(UIColor *)color
+- (void)mapViewRegionDidChange:(RMMapView *)mapView
 {
-    UIImage *circle;
-    
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(20.0f, 20.0f), NO, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    
-    CGRect rect = CGRectMake(0, 0, 20, 20);
-    CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextFillEllipseInRect(context, rect);
-    
-    CGContextRestoreGState(context);
-    circle = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return circle;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateClusterColors) object:nil];
+    [self performSelector:@selector(updateClusterColors) withObject:nil afterDelay:0.1];
 }
 
-- (void)calculateAverageClusterCount
+#pragma mark - Clustering
+
+- (NSNumber *)calculatePercentile:(NSInteger)percentile fromArrayOfNumbers:(NSArray *)numberArray
 {
-    NSArray *annotations = self.mapView.annotations;
-    NSMutableArray *clusterAnnotations = [[NSMutableArray alloc] init];
-    for (RMAnnotation *ann in annotations) {
-        if (ann.isClusterAnnotation) {
-            [clusterAnnotations addObject:ann];
+    NSArray *sortDescriptorArray = @[[NSSortDescriptor sortDescriptorWithKey:nil ascending:YES]];
+    NSArray *sortedArray = [numberArray sortedArrayUsingDescriptors:sortDescriptorArray];
+    
+    float percentileFloat = (CGFloat)percentile;
+    float index = sortedArray.count * (percentileFloat/100);
+    NSInteger roundedIndex = ceil(index);
+    return sortedArray[(roundedIndex - 1)];
+}
+
+- (void)updateClusterColors
+{
+    [self.violationCountsArray removeAllObjects];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"isClusterAnnotation", @YES];
+    NSArray *clusterArray = [self.mapView.visibleAnnotations filteredArrayUsingPredicate:predicate];
+    
+    for (RMAnnotation *cluster in clusterArray) {
+        int totalViolationsCount = 0;
+        for (SCRAnnotation *building in cluster.clusteredAnnotations) {
+            totalViolationsCount += building.violationsCount;
+        }
+        cluster.title = [NSString stringWithFormat:@"%d", totalViolationsCount];
+        [self.violationCountsArray addObject:@(totalViolationsCount)];
+    }
+    
+    NSNumber *oneThirdPercentile;
+    NSNumber *twoThirdsPercentile;
+    if (self.violationCountsArray.count > 1) {
+        oneThirdPercentile = [self calculatePercentile:33 fromArrayOfNumbers:self.violationCountsArray];
+        twoThirdsPercentile = [self calculatePercentile:66 fromArrayOfNumbers:self.violationCountsArray];
+    }
+    
+    for (RMAnnotation *cluster in clusterArray) {
+        if ([cluster.title integerValue] < [oneThirdPercentile floatValue]) {
+            cluster.layer.backgroundColor = [UIColor yellowColor].CGColor;
+        } else if ([cluster.title integerValue] <= [twoThirdsPercentile floatValue]) {
+            cluster.layer.backgroundColor = [UIColor orangeColor].CGColor;
+        } else {
+            cluster.layer.backgroundColor = [UIColor redColor].CGColor;
         }
     }
     
