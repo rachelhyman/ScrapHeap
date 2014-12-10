@@ -40,6 +40,7 @@
 		CCC75BF91A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCC75BF71A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib */; };
 		CCD563511A129C8100C807D6 /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = CCD563501A129C8100C807D6 /* TestData.json */; };
 		CCD563531A13BDC000C807D6 /* CommunityAreas.geojson in Resources */ = {isa = PBXBuildFile; fileRef = CCD563521A13BDC000C807D6 /* CommunityAreas.geojson */; };
+		CCFA6D811A38B4D20034AA94 /* RMTileCache.db in Resources */ = {isa = PBXBuildFile; fileRef = CCFA6D801A38B4D20034AA94 /* RMTileCache.db */; };
 		CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */; };
 		CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DCD1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld */; };
 		CCFE8DD91A07FCA90066C8C0 /* _SCRBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD21A07FCA90066C8C0 /* _SCRBuilding.m */; };
@@ -95,6 +96,7 @@
 		CCC75BF71A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SCRAnnotationDetailCell.xib; sourceTree = "<group>"; };
 		CCD563501A129C8100C807D6 /* TestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestData.json; sourceTree = "<group>"; };
 		CCD563521A13BDC000C807D6 /* CommunityAreas.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommunityAreas.geojson; sourceTree = "<group>"; };
+		CCFA6D801A38B4D20034AA94 /* RMTileCache.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = RMTileCache.db; sourceTree = "<group>"; };
 		CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDetailViewController.h; sourceTree = "<group>"; };
 		CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRDetailViewController.m; sourceTree = "<group>"; };
 		CCFE8DCE1A07F6D00066C8C0 /* ScrapHeap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrapHeap.xcdatamodel; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				CC5DCF481A014277000C813E /* LaunchScreen.xib */,
 				CCD563501A129C8100C807D6 /* TestData.json */,
 				CCD563521A13BDC000C807D6 /* CommunityAreas.geojson */,
+				CCFA6D801A38B4D20034AA94 /* RMTileCache.db */,
 				CC5DCF361A014277000C813E /* Supporting Files */,
 			);
 			path = ScrapHeap;
@@ -391,6 +394,7 @@
 			files = (
 				CC5DCF451A014277000C813E /* Main.storyboard in Resources */,
 				CC5DCF4A1A014277000C813E /* LaunchScreen.xib in Resources */,
+				CCFA6D811A38B4D20034AA94 /* RMTileCache.db in Resources */,
 				CCD563531A13BDC000C807D6 /* CommunityAreas.geojson in Resources */,
 				CC5DCF471A014277000C813E /* Images.xcassets in Resources */,
 				CCC75BF91A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib in Resources */,

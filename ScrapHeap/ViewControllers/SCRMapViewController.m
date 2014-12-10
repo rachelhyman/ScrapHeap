@@ -16,9 +16,10 @@
 #import "SCRAnnotationDetailViewController.h"
 
 static NSString *const mapboxID = @"rhyman.keaoeg0b";
+static NSString *const databasePathUserDefaultsKey = @"tileDatabaseCachePath";
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
 
-@interface SCRMapViewController () <RMMapViewDelegate>
+@interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate>
 
 @property (weak, nonatomic) RMMapView *mapView;
 @property (strong, nonatomic) NSMutableArray *violationCountsArray;
@@ -55,6 +56,23 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     mapView.clusteringEnabled = YES;
     
     [mapView setZoom:11 atCoordinate:ChicagoCenter animated:NO];
+    
+    RMDatabaseCache *databaseCache;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *databasePath = [defaults objectForKey:databasePathUserDefaultsKey];
+    
+    if (!databasePath) {
+        mapView.tileCache.backgroundCacheDelegate = self;
+        databaseCache = [[RMDatabaseCache alloc] initUsingCacheDir:NO];
+        //arbitrary expiry period of 10 years
+        [databaseCache setExpiryPeriod:(60*60*24*7*52*10)];
+        [databaseCache setCapacity:2000];
+        [mapView.tileCache insertCache:databaseCache atIndex:0];
+        [mapView.tileCache beginBackgroundCacheForTileSource:tileSource southWest:CLLocationCoordinate2DMake(41.601163, -87.803764) northEast:CLLocationCoordinate2DMake(42.079050, -87.460098) minZoom:10 maxZoom:17];
+    } else {
+        databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
+        [mapView.tileCache insertCache:databaseCache atIndex:0];
+    }
     
     [self.view addSubview:mapView];
 }
@@ -199,6 +217,17 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         }
     }
     
+}
+
+- (void)tileCacheDidFinishBackgroundCache:(RMTileCache *)tileCache
+{
+    if ([tileCache isKindOfClass:[RMDatabaseCache class]]) {
+        RMDatabaseCache *databaseCache = (RMDatabaseCache *)tileCache;
+        NSString *databaseCachePath = databaseCache.databasePath;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:databaseCachePath forKey:databasePathUserDefaultsKey];
+        [defaults synchronize];
+    }
 }
 
 @end
