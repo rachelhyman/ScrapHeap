@@ -39,7 +39,6 @@
     progressSpinner.backgroundColor = [UIColor lightGrayColor];
     progressSpinner.center = self.view.center;
     [self.view addSubview:progressSpinner];
-    [progressSpinner bringSubviewToFront:self.view];
 }
 
 @end

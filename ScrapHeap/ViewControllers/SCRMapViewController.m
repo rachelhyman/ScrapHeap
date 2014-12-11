@@ -149,7 +149,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         layer.opacity = 0.60;
         layer.bounds = CGRectMake(0, 0, 75, 75);
         [(RMMarker *)layer setTextForegroundColor:[UIColor blackColor]];
-        [(RMMarker *)layer changeLabelUsingText:[NSString stringWithFormat:@"%@", totalViolationsCount]];
+        [(RMMarker *)layer changeLabelUsingText:annotation.title];
         
     } else {
         layer = [SCRAnnotation markerViewForMapView:mapView annotation:annotation];
