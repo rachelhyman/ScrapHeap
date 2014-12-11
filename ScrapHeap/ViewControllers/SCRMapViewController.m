@@ -15,8 +15,8 @@
 #import "SCRAnnotation.h"
 #import "SCRAnnotationDetailViewController.h"
 
-static NSString *const mapboxID = @"rhyman.keaoeg0b";
-static NSString *const databasePathUserDefaultsKey = @"tileDatabaseCachePath";
+static NSString *const MapboxID = @"rhyman.keaoeg0b";
+static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
 
 @interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate>
@@ -49,7 +49,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 
 - (void)setUpMap
 {
-    RMMapboxSource *tileSource = [[RMMapboxSource alloc] initWithMapID:mapboxID];
+    RMMapboxSource *tileSource = [[RMMapboxSource alloc] initWithMapID:MapboxID];
     RMMapView *mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:tileSource];
     self.mapView = mapView;
     mapView.delegate = self;
@@ -117,7 +117,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     //Putting this code in a method for future use.
     RMDatabaseCache *databaseCache;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *databasePath = [defaults objectForKey:databasePathUserDefaultsKey];
+    NSString *databasePath = [defaults objectForKey:DatabasePathUserDefaultsKey];
     
     if (!databasePath) {
         mapView.tileCache.backgroundCacheDelegate = self;
@@ -191,7 +191,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         RMDatabaseCache *databaseCache = (RMDatabaseCache *)tileCache;
         NSString *databaseCachePath = databaseCache.databasePath;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:databaseCachePath forKey:databasePathUserDefaultsKey];
+        [defaults setObject:databaseCachePath forKey:DatabasePathUserDefaultsKey];
         [defaults synchronize];
     }
 }
