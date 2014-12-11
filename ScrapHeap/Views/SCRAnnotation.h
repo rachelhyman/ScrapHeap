@@ -6,20 +6,20 @@
 //  Copyright (c) 2014 Rachel Hyman. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@import MapKit;
+#import "Mapbox.h"
 
-@interface SCRAnnotation : NSObject <MKAnnotation>
+@interface SCRAnnotation : RMAnnotation
 
-///should be a SCRAnnotationType corresponding to relative # of violations for building
-@property (nonatomic) SCRAnnotationType type;
+///Count of violations for the building annotation
+@property (nonatomic) NSUInteger violationsCount;
 
-///creates an annotation adhering to <MKAnnotation> protocol.
-///set the type to an SCRAnnotationType to ensure annotation is of correct color.
-- (instancetype)initWithLocation:(CLLocationCoordinate2D)coord title:(NSString *)annTitle subtitle:(NSString *)annSubtitle type:(SCRAnnotationType)type;
+///Creates an annotation.
+///Set the type to an SCRAnnotationType to ensure annotation is of correct color.
+- (instancetype)initWithMapView:(RMMapView *)mapView coordinate:(CLLocationCoordinate2D)aCoordinate title:(NSString *)aTitle subtitle:(NSString *)aSubtitle type:(SCRAnnotationType)aType violationsCount:(NSUInteger)count;
 
-///returns an MKPinAnnotationView corresponding to the type (SCRAnnotationType) passed in
-+ (MKPinAnnotationView *)annotationViewForMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation type:(SCRAnnotationType)type;
+//Returns an annotation layer that will color markers according to the SCRAnnotationType associated with the annotation.
++ (RMMarker *)markerViewForMapView:(RMMapView *)mapView annotation:(RMAnnotation *)annotation;
 
 @end

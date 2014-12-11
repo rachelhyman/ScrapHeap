@@ -8,23 +8,22 @@
 
 #import "SCRMapViewController.h"
 
-@import MapKit;
-
 #import "VOKCoreDataManager.h"
+#import "Mapbox.h"
 #import "SCRCoreDataUtility.h"
 #import "SCRBuilding.h"
 #import "SCRAnnotation.h"
 #import "SCRAnnotationDetailViewController.h"
 
+static NSString *const MapboxID = @"rhyman.keaoeg0b";
+static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
+static NSTimeInterval const TileExpiryPeriod = (60*60*24*7*52*10); //arbitrary expiry period of 10 years for tile cache
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
-static MKCoordinateSpan const InitialSpan = {.latitudeDelta = 0.4, .longitudeDelta = 0.25};
 
-static int const FewAnnotationsThreshold = 5;
-static int const SomeAnnotationsThreshold = 14;
+@interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate>
 
-@interface SCRMapViewController () <MKMapViewDelegate>
-
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) RMMapView *mapView;
+@property (strong, nonatomic) NSMutableArray *violationCountsArray;
 
 @end
 
@@ -33,8 +32,8 @@ static int const SomeAnnotationsThreshold = 14;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mapView.delegate = self;
-    [self.mapView setRegion:MKCoordinateRegionMake(ChicagoCenter, InitialSpan)];
+    self.violationCountsArray = [NSMutableArray array];
+    [self setUpMap];
     [self fetchAndMapBuildings];
 }
 
@@ -49,33 +48,83 @@ static int const SomeAnnotationsThreshold = 14;
     self.mapView.delegate = nil;
 }
 
+- (void)setUpMap
+{
+    RMMapboxSource *tileSource = [[RMMapboxSource alloc] initWithMapID:MapboxID];
+    RMMapView *mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:tileSource];
+    self.mapView = mapView;
+    mapView.delegate = self;
+    mapView.clusteringEnabled = YES;
+    
+    [mapView setZoom:11 atCoordinate:ChicagoCenter animated:NO];
+    
+    //Mapbox will check this database cache of previously downloaded tiles before ever hitting the network
+    NSString *databasePath = [[NSBundle mainBundle] pathForResource:@"RMTileCache" ofType:@"db"];
+    RMDatabaseCache *databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
+    [databaseCache setExpiryPeriod:TileExpiryPeriod];
+    [mapView.tileCache insertCache:databaseCache atIndex:0];
+    
+    [self.view addSubview:mapView];
+}
+
 - (void)fetchAndMapBuildings
 {
     NSArray *buildings = [SCRCoreDataUtility fetchAllBuildings];
     NSMutableArray *annotations = [NSMutableArray array];
     SCRAnnotation *annotation;
     
+    NSMutableArray *violationCountsArray = [NSMutableArray arrayWithCapacity:buildings.count];
     for (SCRBuilding *building in buildings) {
-        NSString *subtitle = [NSString stringWithFormat:@"Violations: %@", [NSNumber numberWithInteger:building.violations.count]];
-        if (building.violations.count < FewAnnotationsThreshold) {
-            annotation = [[SCRAnnotation alloc] initWithLocation:building.coordinate
-                                                           title:building.address
-                                                        subtitle:subtitle
-                                                            type:SCRFewAnnotation];
-        } else if (building.violations.count < SomeAnnotationsThreshold) {
-            annotation = [[SCRAnnotation alloc] initWithLocation:building.coordinate
-                                                           title:building.address
-                                                        subtitle:subtitle
-                                                            type:SCRSomeAnnotation];
+        [violationCountsArray addObject:@(building.violations.count)];
+    }
+    
+    NSArray *sortedViolationCountsArray = [self sortArrayOfNumbers:violationCountsArray];
+    
+    NSNumber *oneThirdPercentile = [self calculatePercentile:33 fromSortedArrayOfNumbers:sortedViolationCountsArray];
+    NSNumber *twoThirdsPercentile = [self calculatePercentile:66 fromSortedArrayOfNumbers:sortedViolationCountsArray];
+    
+    for (SCRBuilding *building in buildings) {
+        NSString *subtitle = [NSString stringWithFormat:@"Violations: %@", @(building.violations.count)];
+        SCRAnnotationType type;
+        
+        if (building.violations.count <= [oneThirdPercentile integerValue]) {
+            type = SCRFewAnnotation;
+        } else if (building.violations.count <= [twoThirdsPercentile integerValue]) {
+            type = SCRSomeAnnotation;
         } else {
-            annotation = [[SCRAnnotation alloc] initWithLocation:building.coordinate
-                                                           title:building.address
-                                                        subtitle:subtitle
-                                                            type:SCRManyAnnotation];
+            type = SCRManyAnnotation;
         }
+        
+        annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
+                                                 coordinate:building.coordinate
+                                                      title:building.address
+                                                   subtitle:subtitle
+                                                       type:type
+                                            violationsCount:building.violations.count];
+        
         [annotations addObject:annotation];
     }
     [self.mapView addAnnotations:annotations];
+}
+
+- (void)setUpDatabaseForBackgroundCachingWithMapView:(RMMapView *)mapView andtileSource:(RMMapboxSource *)tileSource
+{
+    //There's a memory leak somewhere in the Mapbox library with background tile caching & I hit my free plan limit anyway.
+    //Putting this code in a method for future use.
+    RMDatabaseCache *databaseCache;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *databasePath = [defaults objectForKey:DatabasePathUserDefaultsKey];
+    
+    if (!databasePath) {
+        mapView.tileCache.backgroundCacheDelegate = self;
+        databaseCache = [[RMDatabaseCache alloc] initUsingCacheDir:NO];
+        [databaseCache setExpiryPeriod:TileExpiryPeriod];
+        [mapView.tileCache insertCache:databaseCache atIndex:0];
+        [mapView.tileCache beginBackgroundCacheForTileSource:tileSource southWest:CLLocationCoordinate2DMake(41.601163, -87.803764) northEast:CLLocationCoordinate2DMake(42.079050, -87.460098) minZoom:10 maxZoom:17];
+    } else {
+        databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
+        [mapView.tileCache insertCache:databaseCache atIndex:0];
+    }
 }
 
 - (SCRBuilding *)buildingForAnnotation:(SCRAnnotation *)annotation
@@ -86,19 +135,32 @@ static int const SomeAnnotationsThreshold = 14;
     return buildingArray.firstObject;
 }
 
-#pragma mark - MKMapViewDelegate methods
+#pragma mark - RKMapViewDelegate methods
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
 {
-    SCRAnnotation *ann = (SCRAnnotation *)annotation;
-    return [SCRAnnotation annotationViewForMapView:mapView annotation:annotation type:ann.type];
+    RMMapLayer *layer;
+    
+    if (annotation.isClusterAnnotation) {
+        NSNumber *totalViolationsCount = [annotation.clusteredAnnotations valueForKeyPath:@"@sum.violationsCount"];
+        annotation.title = [NSString stringWithFormat:@"%@", totalViolationsCount];
+        layer = [[RMMarker alloc] initWithUIImage:nil];
+        layer.cornerRadius = 75.0/2.0;
+        layer.opacity = 0.60;
+        layer.bounds = CGRectMake(0, 0, 75, 75);
+        [(RMMarker *)layer setTextForegroundColor:[UIColor blackColor]];
+        [(RMMarker *)layer changeLabelUsingText:annotation.title];
+        
+    } else {
+        layer = [SCRAnnotation markerViewForMapView:mapView annotation:annotation];
+    }
+    return layer;
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+- (void)tapOnCalloutAccessoryControl:(UIControl *)control forAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
 {
-    
-    SCRAnnotation *annotation = (SCRAnnotation *)view.annotation;
-    SCRBuilding *building = [self buildingForAnnotation:annotation];
+    SCRAnnotation *ann = (SCRAnnotation *)annotation;
+    SCRBuilding *building = [self buildingForAnnotation:ann];
     
     if ([annotation isKindOfClass:[SCRAnnotation class]]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:SCRStoryboardIdentifier.StoryboardName bundle:nil];
@@ -107,6 +169,73 @@ static int const SomeAnnotationsThreshold = 14;
         annotationDetailVC.building = building;
         [self.navigationController pushViewController:annotationDetailVC animated:YES];
     }
+    
+}
+
+- (void)mapViewRegionDidChange:(RMMapView *)mapView
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateClusterColors) object:nil];
+    [self performSelector:@selector(updateClusterColors) withObject:nil afterDelay:0.1];
+}
+
+#pragma mark - RMTileCacheBackgroundDelegate methods
+
+- (void)tileCacheDidFinishBackgroundCache:(RMTileCache *)tileCache
+{
+    if ([tileCache isKindOfClass:[RMDatabaseCache class]]) {
+        RMDatabaseCache *databaseCache = (RMDatabaseCache *)tileCache;
+        NSString *databaseCachePath = databaseCache.databasePath;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:databaseCachePath forKey:DatabasePathUserDefaultsKey];
+        [defaults synchronize];
+    }
+}
+
+#pragma mark - Clustering
+
+- (NSArray *)sortArrayOfNumbers:(NSArray *)numberArray
+{
+    return [numberArray sortedArrayUsingSelector:@selector(compare:)];
+}
+
+- (NSNumber *)calculatePercentile:(NSInteger)percentile fromSortedArrayOfNumbers:(NSArray *)sortedNumberArray
+{
+    float percentileFloat = (CGFloat)percentile;
+    float index = sortedNumberArray.count * (percentileFloat/100);
+    NSInteger roundedIndex = ceil(index);
+    roundedIndex = MAX(roundedIndex - 1, 0);
+    return sortedNumberArray[roundedIndex];
+}
+
+- (void)updateClusterColors
+{
+    [self.violationCountsArray removeAllObjects];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"isClusterAnnotation", @YES];
+    NSArray *clusterArray = [self.mapView.visibleAnnotations filteredArrayUsingPredicate:predicate];
+    
+    for (RMAnnotation *cluster in clusterArray) {
+        NSInteger totalViolationsCount = [cluster.title integerValue];
+        [self.violationCountsArray addObject:@(totalViolationsCount)];
+    }
+    
+    NSArray *sortedViolationCountsArray = [self sortArrayOfNumbers:self.violationCountsArray];
+    NSNumber *oneThirdPercentile;
+    NSNumber *twoThirdsPercentile;
+    if (self.violationCountsArray.count > 1) {
+        oneThirdPercentile = [self calculatePercentile:33 fromSortedArrayOfNumbers:sortedViolationCountsArray];
+        twoThirdsPercentile = [self calculatePercentile:66 fromSortedArrayOfNumbers:sortedViolationCountsArray];
+    }
+    
+    for (RMAnnotation *cluster in clusterArray) {
+        if ([cluster.title integerValue] < [oneThirdPercentile integerValue]) {
+            cluster.layer.backgroundColor = [UIColor yellowColor].CGColor;
+        } else if ([cluster.title integerValue] <= [twoThirdsPercentile integerValue]) {
+            cluster.layer.backgroundColor = [UIColor orangeColor].CGColor;
+        } else {
+            cluster.layer.backgroundColor = [UIColor redColor].CGColor;
+        }
+    }
+    
 }
 
 @end

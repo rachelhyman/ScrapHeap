@@ -8,60 +8,39 @@
 
 #import "SCRAnnotation.h"
 
+static NSString *const buildingMarkerImage = @"commercial";
+
 @implementation SCRAnnotation
 
-//<MKAnnotation> protocol properties are not automatically synthesized, so we do it here
-@synthesize coordinate = _coordinate;
-@synthesize title = _title;
-@synthesize subtitle = _subtitle;
-
-- (instancetype)initWithLocation:(CLLocationCoordinate2D)coord title:(NSString *)annTitle subtitle:(NSString *)annSubtitle type:(SCRAnnotationType)type
+- (instancetype)initWithMapView:(RMMapView *)mapView coordinate:(CLLocationCoordinate2D)aCoordinate title:(NSString *)aTitle subtitle:(NSString *)aSubtitle type:(SCRAnnotationType)aType violationsCount:(NSUInteger)theCount
 {
-    self = [super init];
+    self = [super initWithMapView:mapView
+                       coordinate:aCoordinate
+                         andTitle:aTitle];
     if (self) {
-        _coordinate = coord;
-        _title = annTitle;
-        _subtitle = annSubtitle;
-        _type = type;
+        self.subtitle = aSubtitle;
+        self.userInfo = @(aType);
+        _violationsCount = theCount;
     }
     return self;
 }
 
-+ (MKPinAnnotationView *)annotationViewForMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation type:(SCRAnnotationType)type
++ (RMMarker *)markerViewForMapView:(RMMapView *)mapView annotation:(RMAnnotation *)annotation
 {
-    MKPinAnnotationView *pinAnnotationView = [self pinAnnotationViewforMapView:mapView annotation:annotation];
+    RMMarker *marker;
     
-    switch (type) {
-        case SCRFewAnnotation:
-            pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
-            break;
-        case SCRSomeAnnotation:
-            pinAnnotationView.pinColor = MKPinAnnotationColorPurple;
-            break;
-        case SCRManyAnnotation:
-            pinAnnotationView.pinColor = MKPinAnnotationColorRed;
-            break;
-        default:
-            pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
-            break;
-    }
-    return pinAnnotationView;
-}
-
-//helper method for creating annotation view 
-+ (MKPinAnnotationView *)pinAnnotationViewforMapView:(MKMapView *)mapView annotation:(id <MKAnnotation>)annotation
-{
-    static NSString *const annotationViewIdentifier = @"annotationview";
-    
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
-    if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewIdentifier];
-        annotationView.canShowCallout = YES;
-        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    if ([annotation.userInfo isEqual:@(SCRFewAnnotation)]) {
+        marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor yellowColor]];
+    } else if ([annotation.userInfo isEqual:@(SCRSomeAnnotation)]) {
+        marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor orangeColor]];
     } else {
-        annotationView.annotation = annotation;
+        marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor redColor]];
     }
-    return annotationView;
+    
+    marker.canShowCallout = YES;
+    marker.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    
+    return marker;
 }
 
 @end

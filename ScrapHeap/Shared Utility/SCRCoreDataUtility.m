@@ -103,13 +103,17 @@
     [[VOKCoreDataManager sharedInstance] setObjectMapper:mapper forClass:[SCRViolation class]];
 }
 
-+ (void)loadDataFromArray:(NSArray *)array
++ (void)loadDataFromArray:(NSArray *)array completion:(SCRBasicCompletionHandler)handler
 {
-    [[VOKCoreDataManager sharedInstance] importArray:array forClass:[SCRViolation class] withContext:nil];
-    [[VOKCoreDataManager sharedInstance] saveMainContext];
+    [VOKCoreDataManager writeToTemporaryContext:^(NSManagedObjectContext *tempContext) {
+        [[VOKCoreDataManager sharedInstance] importArray:array
+                                                forClass:[SCRViolation class]
+                                             withContext:tempContext];
+    }
+                                     completion:handler];
 }
 
-+ (void)getTestViolations
++ (void)getTestViolationsWithCompletion:(SCRBasicCompletionHandler)handler
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *path = [bundle pathForResource:@"TestData" ofType:@"json"];
@@ -120,7 +124,7 @@
                                                                    options:NSJSONReadingMutableContainers
                                                                      error:&error];
     
-    [self loadDataFromArray:testViolationsArray];
+    [self loadDataFromArray:testViolationsArray completion:handler];
 }
 
 + (NSArray *)fetchAllBuildings

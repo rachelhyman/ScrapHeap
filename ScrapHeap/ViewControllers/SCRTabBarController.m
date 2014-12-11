@@ -12,6 +12,8 @@
 
 @interface SCRTabBarController ()  <UITabBarControllerDelegate>
 
+@property (nonatomic, weak) UIActivityIndicatorView *progressSpinner;
+
 @end
 
 @implementation SCRTabBarController
@@ -20,7 +22,23 @@
 {
     [super viewDidLoad];
     self.delegate = self;
-    [SCRCoreDataUtility getTestViolations]; 
+    [self addProgressSpinner];
+    [self.progressSpinner startAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [SCRCoreDataUtility getTestViolationsWithCompletion:^{
+            [self.progressSpinner stopAnimating];
+        }];
+    });
+}
+
+- (void)addProgressSpinner
+{
+    UIActivityIndicatorView *progressSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.progressSpinner = progressSpinner;
+    progressSpinner.frame = CGRectMake(0, 0, 70.0, 70.0);
+    progressSpinner.backgroundColor = [UIColor lightGrayColor];
+    progressSpinner.center = self.view.center;
+    [self.view addSubview:progressSpinner];
 }
 
 @end

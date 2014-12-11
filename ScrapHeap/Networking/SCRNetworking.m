@@ -40,7 +40,7 @@ static NSString *const AppToken = @"GthgnkwqVlsElC4cdPqELnrjJ";
     [[SCRNetworking sessionManager] GET:@""
                              parameters:nil
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
-                                    [SCRCoreDataUtility loadDataFromArray:responseObject];
+                                    [SCRCoreDataUtility loadDataFromArray:responseObject completion:nil];
                                         }
                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
                                     NSLog(@"Failure");
