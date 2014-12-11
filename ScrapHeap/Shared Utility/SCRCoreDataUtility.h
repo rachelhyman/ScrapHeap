@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^SHQBasicCompletionHandler)(void);
+typedef void (^SCRBasicCompletionHandler)(void);
 
 @interface SCRCoreDataUtility : NSObject
 
@@ -19,10 +19,10 @@ typedef void (^SHQBasicCompletionHandler)(void);
 + (void)setUpCoreData;
 
 ///creates instances of the SCRViolation class using data from the given array
-+ (void)loadDataFromArray:(NSArray *)array completion:(SHQBasicCompletionHandler)handler;
++ (void)loadDataFromArray:(NSArray *)array completion:(SCRBasicCompletionHandler)handler;
 
 ///loads test data from json
-+ (void)getTestViolationsWithCompletion:(SHQBasicCompletionHandler)handler;
++ (void)getTestViolationsWithCompletion:(SCRBasicCompletionHandler)handler;
 
 + (NSArray *)fetchAllBuildings; 
 

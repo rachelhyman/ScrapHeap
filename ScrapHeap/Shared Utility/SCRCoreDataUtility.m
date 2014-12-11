@@ -103,7 +103,7 @@
     [[VOKCoreDataManager sharedInstance] setObjectMapper:mapper forClass:[SCRViolation class]];
 }
 
-+ (void)loadDataFromArray:(NSArray *)array completion:(SHQBasicCompletionHandler)handler
++ (void)loadDataFromArray:(NSArray *)array completion:(SCRBasicCompletionHandler)handler
 {
     [VOKCoreDataManager writeToTemporaryContext:^(NSManagedObjectContext *tempContext) {
         [[VOKCoreDataManager sharedInstance] importArray:array
@@ -113,7 +113,7 @@
                                      completion:handler];
 }
 
-+ (void)getTestViolationsWithCompletion:(SHQBasicCompletionHandler)handler
++ (void)getTestViolationsWithCompletion:(SCRBasicCompletionHandler)handler
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *path = [bundle pathForResource:@"TestData" ofType:@"json"];

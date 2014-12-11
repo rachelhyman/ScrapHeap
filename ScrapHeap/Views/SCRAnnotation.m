@@ -20,7 +20,7 @@ static NSString *const buildingMarkerImage = @"commercial";
     if (self) {
         self.subtitle = aSubtitle;
         self.userInfo = @(aType);
-        self.violationsCount = theCount;
+        _violationsCount = theCount;
     }
     return self;
 }

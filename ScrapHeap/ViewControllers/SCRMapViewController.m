@@ -17,6 +17,7 @@
 
 static NSString *const MapboxID = @"rhyman.keaoeg0b";
 static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
+static NSTimeInterval const TileExpiryPeriod = (60*60*24*7*52*10); //arbitrary expiry period of 10 years for tile cache
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
 
 @interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate>
@@ -60,8 +61,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     //Mapbox will check this database cache of previously downloaded tiles before ever hitting the network
     NSString *databasePath = [[NSBundle mainBundle] pathForResource:@"RMTileCache" ofType:@"db"];
     RMDatabaseCache *databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
-    //arbitrary expiry period of 10 years
-    [databaseCache setExpiryPeriod:(60*60*24*7*52*10)];
+    [databaseCache setExpiryPeriod:TileExpiryPeriod];
     [mapView.tileCache insertCache:databaseCache atIndex:0];
     
     [self.view addSubview:mapView];
@@ -73,39 +73,35 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     NSMutableArray *annotations = [NSMutableArray array];
     SCRAnnotation *annotation;
     
-    NSMutableArray *violationCountsArray = [NSMutableArray array];
+    NSMutableArray *violationCountsArray = [NSMutableArray arrayWithCapacity:buildings.count];
     for (SCRBuilding *building in buildings) {
         [violationCountsArray addObject:@(building.violations.count)];
     }
     
-    NSNumber *oneThirdPercentile = [self calculatePercentile:33 fromArrayOfNumbers:violationCountsArray];
-    NSNumber *twoThirdsPercentile = [self calculatePercentile:66 fromArrayOfNumbers:violationCountsArray];
+    NSArray *sortedViolationCountsArray = [self sortArrayOfNumbers:violationCountsArray];
+    
+    NSNumber *oneThirdPercentile = [self calculatePercentile:33 fromSortedArrayOfNumbers:sortedViolationCountsArray];
+    NSNumber *twoThirdsPercentile = [self calculatePercentile:66 fromSortedArrayOfNumbers:sortedViolationCountsArray];
     
     for (SCRBuilding *building in buildings) {
-        NSString *subtitle = [NSString stringWithFormat:@"Violations: %@", [NSNumber numberWithInteger:building.violations.count]];
+        NSString *subtitle = [NSString stringWithFormat:@"Violations: %@", @(building.violations.count)];
+        SCRAnnotationType type;
         
-        if (building.violations.count <= [oneThirdPercentile floatValue]) {
-            annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
-                                                     coordinate:building.coordinate
-                                                          title:building.address
-                                                       subtitle:subtitle
-                                                           type:SCRFewAnnotation
-                                                violationsCount:building.violations.count];
-        } else if (building.violations.count <= [twoThirdsPercentile floatValue]) {
-            annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
-                                                     coordinate:building.coordinate
-                                                          title:building.address
-                                                       subtitle:subtitle
-                                                           type:SCRSomeAnnotation
-                                                violationsCount:building.violations.count];
+        if (building.violations.count <= [oneThirdPercentile integerValue]) {
+            type = SCRFewAnnotation;
+        } else if (building.violations.count <= [twoThirdsPercentile integerValue]) {
+            type = SCRSomeAnnotation;
         } else {
-            annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
-                                                     coordinate:building.coordinate
-                                                          title:building.address
-                                                       subtitle:subtitle
-                                                           type:SCRManyAnnotation
-                                                violationsCount:building.violations.count];
+            type = SCRManyAnnotation;
         }
+        
+        annotation = [[SCRAnnotation alloc] initWithMapView:self.mapView
+                                                 coordinate:building.coordinate
+                                                      title:building.address
+                                                   subtitle:subtitle
+                                                       type:type
+                                            violationsCount:building.violations.count];
+        
         [annotations addObject:annotation];
     }
     [self.mapView addAnnotations:annotations];
@@ -122,8 +118,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     if (!databasePath) {
         mapView.tileCache.backgroundCacheDelegate = self;
         databaseCache = [[RMDatabaseCache alloc] initUsingCacheDir:NO];
-        [databaseCache setExpiryPeriod:(60*60*24*7*52*10)];
-        [databaseCache setCapacity:2000];
+        [databaseCache setExpiryPeriod:TileExpiryPeriod];
         [mapView.tileCache insertCache:databaseCache atIndex:0];
         [mapView.tileCache beginBackgroundCacheForTileSource:tileSource southWest:CLLocationCoordinate2DMake(41.601163, -87.803764) northEast:CLLocationCoordinate2DMake(42.079050, -87.460098) minZoom:10 maxZoom:17];
     } else {
@@ -148,9 +143,9 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     
     if (annotation.isClusterAnnotation) {
         NSNumber *totalViolationsCount = [annotation.clusteredAnnotations valueForKeyPath:@"@sum.violationsCount"];
-        
+        annotation.title = [NSString stringWithFormat:@"%@", totalViolationsCount];
         layer = [[RMMarker alloc] initWithUIImage:nil];
-        layer.cornerRadius = 75/2;
+        layer.cornerRadius = 75.0/2.0;
         layer.opacity = 0.60;
         layer.bounds = CGRectMake(0, 0, 75, 75);
         [(RMMarker *)layer setTextForegroundColor:[UIColor blackColor]];
@@ -198,15 +193,18 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 
 #pragma mark - Clustering
 
-- (NSNumber *)calculatePercentile:(NSInteger)percentile fromArrayOfNumbers:(NSArray *)numberArray
+- (NSArray *)sortArrayOfNumbers:(NSArray *)numberArray
 {
-    NSArray *sortDescriptorArray = @[[NSSortDescriptor sortDescriptorWithKey:nil ascending:YES]];
-    NSArray *sortedArray = [numberArray sortedArrayUsingDescriptors:sortDescriptorArray];
-    
+    return [numberArray sortedArrayUsingSelector:@selector(compare:)];
+}
+
+- (NSNumber *)calculatePercentile:(NSInteger)percentile fromSortedArrayOfNumbers:(NSArray *)sortedNumberArray
+{
     float percentileFloat = (CGFloat)percentile;
-    float index = sortedArray.count * (percentileFloat/100);
+    float index = sortedNumberArray.count * (percentileFloat/100);
     NSInteger roundedIndex = ceil(index);
-    return sortedArray[(roundedIndex - 1)];
+    roundedIndex = MAX(roundedIndex - 1, 0);
+    return sortedNumberArray[roundedIndex];
 }
 
 - (void)updateClusterColors
@@ -216,25 +214,22 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     NSArray *clusterArray = [self.mapView.visibleAnnotations filteredArrayUsingPredicate:predicate];
     
     for (RMAnnotation *cluster in clusterArray) {
-        int totalViolationsCount = 0;
-        for (SCRAnnotation *building in cluster.clusteredAnnotations) {
-            totalViolationsCount += building.violationsCount;
-        }
-        cluster.title = [NSString stringWithFormat:@"%d", totalViolationsCount];
+        NSInteger totalViolationsCount = [cluster.title integerValue];
         [self.violationCountsArray addObject:@(totalViolationsCount)];
     }
     
+    NSArray *sortedViolationCountsArray = [self sortArrayOfNumbers:self.violationCountsArray];
     NSNumber *oneThirdPercentile;
     NSNumber *twoThirdsPercentile;
     if (self.violationCountsArray.count > 1) {
-        oneThirdPercentile = [self calculatePercentile:33 fromArrayOfNumbers:self.violationCountsArray];
-        twoThirdsPercentile = [self calculatePercentile:66 fromArrayOfNumbers:self.violationCountsArray];
+        oneThirdPercentile = [self calculatePercentile:33 fromSortedArrayOfNumbers:sortedViolationCountsArray];
+        twoThirdsPercentile = [self calculatePercentile:66 fromSortedArrayOfNumbers:sortedViolationCountsArray];
     }
     
     for (RMAnnotation *cluster in clusterArray) {
-        if ([cluster.title integerValue] < [oneThirdPercentile floatValue]) {
+        if ([cluster.title integerValue] < [oneThirdPercentile integerValue]) {
             cluster.layer.backgroundColor = [UIColor yellowColor].CGColor;
-        } else if ([cluster.title integerValue] <= [twoThirdsPercentile floatValue]) {
+        } else if ([cluster.title integerValue] <= [twoThirdsPercentile integerValue]) {
             cluster.layer.backgroundColor = [UIColor orangeColor].CGColor;
         } else {
             cluster.layer.backgroundColor = [UIColor redColor].CGColor;

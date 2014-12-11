@@ -12,8 +12,6 @@
 
 @interface SCRAnnotation : RMAnnotation
 
-///should be a SCRAnnotationType corresponding to relative # of violations for building
-@property (nonatomic) SCRAnnotationType type;
 ///Count of violations for the building annotation
 @property (nonatomic) NSUInteger violationsCount;
 
