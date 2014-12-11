@@ -17,10 +17,10 @@
 + (void)setUpCoreData;
 
 ///creates instances of the SCRViolation class using data from the given array
-+ (void)loadDataFromArray:(NSArray *)array;
++ (void)loadDataFromArray:(NSArray *)array completion:(void (^)(void))handler;
 
 ///loads test data from json
-+ (void)getTestViolations;
++ (void)getTestViolationsWithCompletion:(void (^)(void))handler;
 
 + (NSArray *)fetchAllBuildings; 
 

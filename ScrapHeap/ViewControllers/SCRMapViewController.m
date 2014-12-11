@@ -57,22 +57,12 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     
     [mapView setZoom:11 atCoordinate:ChicagoCenter animated:NO];
     
-    RMDatabaseCache *databaseCache;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *databasePath = [defaults objectForKey:databasePathUserDefaultsKey];
-    
-    if (!databasePath) {
-        mapView.tileCache.backgroundCacheDelegate = self;
-        databaseCache = [[RMDatabaseCache alloc] initUsingCacheDir:NO];
-        //arbitrary expiry period of 10 years
-        [databaseCache setExpiryPeriod:(60*60*24*7*52*10)];
-        [databaseCache setCapacity:2000];
-        [mapView.tileCache insertCache:databaseCache atIndex:0];
-        [mapView.tileCache beginBackgroundCacheForTileSource:tileSource southWest:CLLocationCoordinate2DMake(41.601163, -87.803764) northEast:CLLocationCoordinate2DMake(42.079050, -87.460098) minZoom:10 maxZoom:17];
-    } else {
-        databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
-        [mapView.tileCache insertCache:databaseCache atIndex:0];
-    }
+    //Mapbox will check this database cache of previously downloaded tiles before ever hitting the network
+    NSString *databasePath = [[NSBundle mainBundle] pathForResource:@"RMTileCache" ofType:@"db"];
+    RMDatabaseCache *databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
+    //arbitrary expiry period of 10 years
+    [databaseCache setExpiryPeriod:(60*60*24*7*52*10)];
+    [mapView.tileCache insertCache:databaseCache atIndex:0];
     
     [self.view addSubview:mapView];
 }
@@ -119,6 +109,27 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         [annotations addObject:annotation];
     }
     [self.mapView addAnnotations:annotations];
+}
+
+- (void)setUpDatabaseForBackgroundCachingWithMapView:(RMMapView *)mapView andtileSource:(RMMapboxSource *)tileSource
+{
+    //There's a memory leak somewhere in the Mapbox library with background tile caching & I hit my free plan limit anyway.
+    //Putting this code in a method for future use.
+    RMDatabaseCache *databaseCache;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *databasePath = [defaults objectForKey:databasePathUserDefaultsKey];
+    
+    if (!databasePath) {
+        mapView.tileCache.backgroundCacheDelegate = self;
+        databaseCache = [[RMDatabaseCache alloc] initUsingCacheDir:NO];
+        [databaseCache setExpiryPeriod:(60*60*24*7*52*10)];
+        [databaseCache setCapacity:2000];
+        [mapView.tileCache insertCache:databaseCache atIndex:0];
+        [mapView.tileCache beginBackgroundCacheForTileSource:tileSource southWest:CLLocationCoordinate2DMake(41.601163, -87.803764) northEast:CLLocationCoordinate2DMake(42.079050, -87.460098) minZoom:10 maxZoom:17];
+    } else {
+        databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
+        [mapView.tileCache insertCache:databaseCache atIndex:0];
+    }
 }
 
 - (SCRBuilding *)buildingForAnnotation:(SCRAnnotation *)annotation
@@ -172,6 +183,19 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     [self performSelector:@selector(updateClusterColors) withObject:nil afterDelay:0.1];
 }
 
+#pragma mark - RMTileCacheBackgroundDelegate methods
+
+- (void)tileCacheDidFinishBackgroundCache:(RMTileCache *)tileCache
+{
+    if ([tileCache isKindOfClass:[RMDatabaseCache class]]) {
+        RMDatabaseCache *databaseCache = (RMDatabaseCache *)tileCache;
+        NSString *databaseCachePath = databaseCache.databasePath;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:databaseCachePath forKey:databasePathUserDefaultsKey];
+        [defaults synchronize];
+    }
+}
+
 #pragma mark - Clustering
 
 - (NSNumber *)calculatePercentile:(NSInteger)percentile fromArrayOfNumbers:(NSArray *)numberArray
@@ -217,17 +241,6 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         }
     }
     
-}
-
-- (void)tileCacheDidFinishBackgroundCache:(RMTileCache *)tileCache
-{
-    if ([tileCache isKindOfClass:[RMDatabaseCache class]]) {
-        RMDatabaseCache *databaseCache = (RMDatabaseCache *)tileCache;
-        NSString *databaseCachePath = databaseCache.databasePath;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:databaseCachePath forKey:databasePathUserDefaultsKey];
-        [defaults synchronize];
-    }
 }
 
 @end
