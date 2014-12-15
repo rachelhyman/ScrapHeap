@@ -15,7 +15,7 @@
 #import "SCRAnnotation.h"
 #import "SCRAnnotationDetailViewController.h"
 
-static NSString *const MapboxID = @"rhyman.keaoeg0b";
+static NSString *const MapboxID = @"rachelvokal.kg9n243b";
 static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
 static NSTimeInterval const TileExpiryPeriod = (60*60*24*7*52*10); //arbitrary expiry period of 10 years for tile cache
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
@@ -24,6 +24,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 
 @property (weak, nonatomic) RMMapView *mapView;
 @property (strong, nonatomic) NSMutableArray *violationCountsArray;
+@property (strong, nonatomic) NSMutableArray *communityAreaAnnotationsArray;
 
 @end
 
@@ -32,7 +33,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.violationCountsArray = [NSMutableArray array];
+    [self initializeArrays];
     [self setUpMap];
     [self fetchAndMapBuildings];
 }
@@ -46,6 +47,12 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 - (void)dealloc
 {
     self.mapView.delegate = nil;
+}
+
+- (void)initializeArrays
+{
+    self.violationCountsArray = [NSMutableArray array];
+    self.communityAreaAnnotationsArray = [NSMutableArray array];
 }
 
 - (void)setUpMap
@@ -63,6 +70,8 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     RMDatabaseCache *databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
     [databaseCache setExpiryPeriod:TileExpiryPeriod];
     [mapView.tileCache insertCache:databaseCache atIndex:0];
+    
+    [self setUpCommunityAreas];
     
     [self.view addSubview:mapView];
 }
@@ -135,6 +144,36 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     return buildingArray.firstObject;
 }
 
+- (void)setUpCommunityAreas
+{
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"CommunityAreas" withExtension:@"geojson"];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSDictionary *geoJSONDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    NSArray *communityAreas = geoJSONDictionary[@"features"];
+    
+    for (NSDictionary *topLevelArea in communityAreas) {
+        NSArray *geometriesArray = [topLevelArea valueForKeyPath:@"geometry.geometries"];
+        NSMutableArray *polygonCoordinatesArray = [[[[geometriesArray firstObject] valueForKeyPath:@"coordinates"] firstObject] mutableCopy];
+
+        for (NSUInteger i = 0; i < polygonCoordinatesArray.count; i++) {
+            CLLocationDegrees latitude = [[[polygonCoordinatesArray objectAtIndex:i] objectAtIndex:1] doubleValue];
+            CLLocationDegrees longitude = [[[polygonCoordinatesArray objectAtIndex:i] objectAtIndex:0] doubleValue];
+            
+            [polygonCoordinatesArray replaceObjectAtIndex:i
+                            withObject:[[CLLocation alloc] initWithLatitude:latitude longitude:longitude]];
+        }
+
+        RMPolygonAnnotation *polygonAnnotation = [[RMPolygonAnnotation alloc] initWithMapView:self.mapView points:polygonCoordinatesArray];
+        polygonAnnotation.clusteringEnabled = NO;
+        polygonAnnotation.lineColor = [UIColor purpleColor];
+        polygonAnnotation.lineWidth = 2.0;
+        [self.communityAreaAnnotationsArray addObject:polygonAnnotation];
+    
+    }
+    [self.mapView addAnnotations:self.communityAreaAnnotationsArray];
+}
+
 #pragma mark - RKMapViewDelegate methods
 
 - (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
@@ -142,15 +181,14 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     RMMapLayer *layer;
     
     if (annotation.isClusterAnnotation) {
-        NSNumber *totalViolationsCount = [annotation.clusteredAnnotations valueForKeyPath:@"@sum.violationsCount"];
-        annotation.title = [NSString stringWithFormat:@"%@", totalViolationsCount];
-        layer = [[RMMarker alloc] initWithUIImage:nil];
-        layer.cornerRadius = 75.0/2.0;
-        layer.opacity = 0.60;
-        layer.bounds = CGRectMake(0, 0, 75, 75);
-        [(RMMarker *)layer setTextForegroundColor:[UIColor blackColor]];
-        [(RMMarker *)layer changeLabelUsingText:annotation.title];
-        
+            NSNumber *totalViolationsCount = [annotation.clusteredAnnotations valueForKeyPath:@"@sum.violationsCount"];
+            annotation.title = [NSString stringWithFormat:@"%@", totalViolationsCount];
+            layer = [[RMMarker alloc] initWithUIImage:nil];
+            layer.cornerRadius = 75.0/2.0;
+            layer.opacity = 0.60;
+            layer.bounds = CGRectMake(0, 0, 75, 75);
+            [(RMMarker *)layer setTextForegroundColor:[UIColor blackColor]];
+            [(RMMarker *)layer changeLabelUsingText:annotation.title];
     } else {
         layer = [SCRAnnotation markerViewForMapView:mapView annotation:annotation];
     }
