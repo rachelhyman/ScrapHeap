@@ -167,7 +167,6 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         RMPolygonAnnotation *polygonAnnotation = [[RMPolygonAnnotation alloc] initWithMapView:self.mapView points:polygonCoordinatesArray];
         polygonAnnotation.clusteringEnabled = NO;
         polygonAnnotation.lineColor = [UIColor purpleColor];
-        polygonAnnotation.lineWidth = 2.0;
         [self.communityAreaAnnotationsArray addObject:polygonAnnotation];
     
     }
