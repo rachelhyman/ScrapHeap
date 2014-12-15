@@ -148,7 +148,9 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 {
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"CommunityAreas" withExtension:@"geojson"];
     NSData *data = [NSData dataWithContentsOfURL:url];
-    NSDictionary *geoJSONDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    NSDictionary *geoJSONDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                      options:0
+                                                                        error:nil];
     
     NSArray *communityAreas = geoJSONDictionary[@"features"];
     
@@ -157,11 +159,11 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         NSMutableArray *polygonCoordinatesArray = [[[[geometriesArray firstObject] valueForKeyPath:@"coordinates"] firstObject] mutableCopy];
 
         for (NSUInteger i = 0; i < polygonCoordinatesArray.count; i++) {
-            CLLocationDegrees latitude = [[[polygonCoordinatesArray objectAtIndex:i] objectAtIndex:1] doubleValue];
-            CLLocationDegrees longitude = [[[polygonCoordinatesArray objectAtIndex:i] objectAtIndex:0] doubleValue];
+            CLLocationDegrees latitude = [[[polygonCoordinatesArray objectAtIndex:i] lastObject] doubleValue];
+            CLLocationDegrees longitude = [[[polygonCoordinatesArray objectAtIndex:i] firstObject] doubleValue];
             
             [polygonCoordinatesArray replaceObjectAtIndex:i
-                            withObject:[[CLLocation alloc] initWithLatitude:latitude longitude:longitude]];
+                                               withObject:[[CLLocation alloc] initWithLatitude:latitude longitude:longitude]];
         }
 
         RMPolygonAnnotation *polygonAnnotation = [[RMPolygonAnnotation alloc] initWithMapView:self.mapView points:polygonCoordinatesArray];
