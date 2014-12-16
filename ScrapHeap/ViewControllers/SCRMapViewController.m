@@ -81,7 +81,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     NSArray *buildings = [SCRCoreDataUtility fetchAllBuildings];
     NSMutableArray *annotations = [NSMutableArray array];
     SCRAnnotation *annotation;
-    
+
     NSMutableArray *violationCountsArray = [NSMutableArray arrayWithCapacity:buildings.count];
     for (SCRBuilding *building in buildings) {
         [violationCountsArray addObject:@(building.violations.count)];

@@ -35,12 +35,12 @@ static NSString *const AppToken = @"GthgnkwqVlsElC4cdPqELnrjJ";
     return [NSURL URLWithString:Endpoint];
 }
 
-+ (void)getViolations
++ (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler
 {
     [[SCRNetworking sessionManager] GET:@""
                              parameters:nil
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
-                                    [SCRCoreDataUtility loadDataFromArray:responseObject completion:nil];
+                                    [SCRCoreDataUtility loadDataFromArray:responseObject completion:handler];
                                         }
                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
                                     NSLog(@"Failure");
