@@ -17,6 +17,8 @@
 
 static NSString *const MapboxID = @"rachelvokal.kg9n243b";
 static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
+//City of Chicago dumps a bunch of HTML into the description string for each community area.
+//These 2 constants are to filter the name of the community area out from the description string.
 static NSString *const DescriptionStringBeginning = @"<span class=\"atr-name\">COMMUNITY</span>:</strong> <span class=\"atr-value\">";
 static NSString *const DescriptionStringEnding = @"<";
 static NSTimeInterval const TileExpiryPeriod = (60*60*24*7*52*10); //arbitrary expiry period of 10 years for tile cache
@@ -41,7 +43,6 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     [self addGestureRecognizer];
     [self fetchAndMapBuildings];
     [self assignCommunityAreas];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -67,6 +68,8 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(filterAnnotationsFromGestureRecognizer:)];
     gestureRecognizer.minimumPressDuration = 1.5;
     NSMutableArray *gestureRecognizerArray = [self.mapView.gestureRecognizers mutableCopy];
+    //The long press gesture recognizer we want to implement conflicts with one of the map view's existing UILongPressGestureRecognizers
+    //We remove the conflicting one that already exists, add in our own, then set the array of gesture recognizers on the map
     NSUInteger index = [gestureRecognizerArray indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         return [obj isKindOfClass:[UILongPressGestureRecognizer class]];
     }];
@@ -212,7 +215,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 
 - (void)assignCommunityAreas
 {
-    NSMutableArray *prelimFilteredAnnsArray = [[NSMutableArray alloc] init];
+    NSMutableArray *prelimFilteredAnnsArray = [NSMutableArray array];
     
     for (RMPolygonAnnotation *polygonAnn in self.communityAreaAnnotationsArray) {
         for (SCRAnnotation *buildingAnnotation in self.allBuildingAnnotationsArray) {
@@ -248,7 +251,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 - (void)filterAnnotationsFromGestureRecognizer:(UILongPressGestureRecognizer *)sender
 {
     CGPoint point = [sender locationInView:self.view];
-    NSMutableArray *polygonAnnotations = [[NSMutableArray alloc] init];
+    NSMutableArray *polygonAnnotations = [NSMutableArray array];
     for (RMAnnotation *annotation in self.mapView.visibleAnnotations) {
         if ([annotation isKindOfClass:[RMPolygonAnnotation class]]) {
             [polygonAnnotations addObject:annotation];
