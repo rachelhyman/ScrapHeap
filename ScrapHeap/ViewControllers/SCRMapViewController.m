@@ -17,6 +17,8 @@
 
 static NSString *const MapboxID = @"rachelvokal.kg9n243b";
 static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
+static NSString *const DescriptionStringBeginning = @"<span class=\"atr-name\">COMMUNITY</span>:</strong> <span class=\"atr-value\">";
+static NSString *const DescriptionStringEnding = @"<";
 static NSTimeInterval const TileExpiryPeriod = (60*60*24*7*52*10); //arbitrary expiry period of 10 years for tile cache
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
 
@@ -248,11 +250,11 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 
 - (NSString *)communityAreaNameFromDescriptionString:(NSString *)descriptionString
 {
-    NSRange firstRange = [descriptionString rangeOfString:@"<span class=\"atr-name\">COMMUNITY</span>:</strong> <span class=\"atr-value\">"];
+    NSRange firstRange = [descriptionString rangeOfString:DescriptionStringBeginning];
     NSUInteger length = firstRange.location + firstRange.length;
     NSRange newRange = NSMakeRange(0, length);
     NSString *prelimString = [descriptionString stringByReplacingCharactersInRange:newRange withString:@""];
-    NSRange secondRange = [prelimString rangeOfString:@"<"];
+    NSRange secondRange = [prelimString rangeOfString:DescriptionStringEnding];
     NSString *finalString = [prelimString substringToIndex:secondRange.location];
     return finalString;
 }
