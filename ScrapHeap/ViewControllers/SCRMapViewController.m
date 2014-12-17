@@ -36,6 +36,10 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     [self initializeArrays];
     [self setUpMap];
     [self fetchAndMapBuildings];
+    [self assignCommunityAreas];
+    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(filterAnnotations)];
+    [self.view addGestureRecognizer:gestureRecognizer];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -167,12 +171,78 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         }
 
         RMPolygonAnnotation *polygonAnnotation = [[RMPolygonAnnotation alloc] initWithMapView:self.mapView points:polygonCoordinatesArray];
+        NSString *descriptionString = [topLevelArea valueForKeyPath:@"properties.description"];
+        polygonAnnotation.title = [self communityAreaNameFromDescriptionString:descriptionString];
         polygonAnnotation.clusteringEnabled = NO;
         polygonAnnotation.lineColor = [UIColor purpleColor];
         [self.communityAreaAnnotationsArray addObject:polygonAnnotation];
     
     }
     [self.mapView addAnnotations:self.communityAreaAnnotationsArray];
+}
+
+- (void)assignCommunityAreas
+{
+    NSMutableArray *polygonAnnArray = [[NSMutableArray alloc] init];
+    NSMutableArray *unfilteredAnnsArray = [[NSMutableArray alloc] init];
+    NSMutableArray *prelimFilteredAnnsArray = [[NSMutableArray alloc] init];
+    NSMutableArray *finalFilteredAnnsArray = [[NSMutableArray alloc] init];
+    
+    for (RMAnnotation *ann in self.mapView.annotations) {
+        if ([ann isKindOfClass:[SCRAnnotation class]]) {
+            [unfilteredAnnsArray addObject:ann];
+        } else if ([ann isKindOfClass:[RMPolygonAnnotation class]]) {
+            [polygonAnnArray addObject:ann];
+        }
+    }
+
+    for (RMPolygonAnnotation *polygonAnn in polygonAnnArray) {
+        for (SCRAnnotation *buildingAnnotation in unfilteredAnnsArray) {
+            if (RMProjectedRectContainsProjectedPoint(polygonAnn.projectedBoundingBox, buildingAnnotation.projectedLocation)) {
+                [prelimFilteredAnnsArray addObject:buildingAnnotation];
+            }
+        }
+        
+        //draw CGPath with the points in the polygon
+        CGMutablePathRef path = CGPathCreateMutable();
+        for (NSUInteger i = 0; i < polygonAnn.points.count; i++) {
+            CLLocation *location = [polygonAnn.points objectAtIndex:i];
+            CGPoint cgPoint = [self.mapView coordinateToPixel:location.coordinate];
+            if (i == 0) {
+                CGPathMoveToPoint(path, NULL, cgPoint.x, cgPoint.y);
+            } else {
+                CGPathAddLineToPoint(path, NULL, cgPoint.x, cgPoint.y);
+            }
+        }
+        
+        for (SCRAnnotation *ann in prelimFilteredAnnsArray) {
+            CLLocationCoordinate2D location = CLLocationCoordinate2DMake(ann.coordinate.latitude, ann.coordinate.longitude);
+            CGPoint annPoint = [self.mapView coordinateToPixel:location];
+            if (CGPathContainsPoint(path, NULL, annPoint, FALSE)) {
+                [finalFilteredAnnsArray addObject:ann];
+                SCRBuilding *building = [self buildingForAnnotation:ann];
+                building.communityArea = polygonAnn.title;
+            }
+        }
+        
+        CGPathRelease(path);
+    }
+}
+
+- (NSString *)communityAreaNameFromDescriptionString:(NSString *)descriptionString
+{
+    NSRange firstRange = [descriptionString rangeOfString:@"<span class=\"atr-name\">COMMUNITY</span>:</strong> <span class=\"atr-value\">"];
+    NSUInteger length = firstRange.location + firstRange.length;
+    NSRange newRange = NSMakeRange(0, length);
+    NSString *prelimString = [descriptionString stringByReplacingCharactersInRange:newRange withString:@""];
+    NSRange secondRange = [prelimString rangeOfString:@"<"];
+    NSString *finalString = [prelimString substringToIndex:secondRange.location];
+    return finalString;
+}
+
+- (void)filterAnnotations
+{
+    NSLog(@"Press");
 }
 
 #pragma mark - RKMapViewDelegate methods
