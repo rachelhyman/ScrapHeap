@@ -8,4 +8,6 @@
 
 + (NSPredicate *)predicateForAddressMatchingString:(NSString *)string;
 
++ (NSPredicate *)predicateForCommmunityAreaMatchingString:(NSString *)string;
+
 @end

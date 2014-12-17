@@ -25,6 +25,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 @property (weak, nonatomic) RMMapView *mapView;
 @property (strong, nonatomic) NSMutableArray *violationCountsArray;
 @property (strong, nonatomic) NSMutableArray *communityAreaAnnotationsArray;
+@property (strong, nonatomic) NSArray *allBuildingAnnotationsArray;
 
 @end
 
@@ -35,10 +36,9 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     [super viewDidLoad];
     [self initializeArrays];
     [self setUpMap];
+    [self addGestureRecognizer];
     [self fetchAndMapBuildings];
     [self assignCommunityAreas];
-    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(filterAnnotations)];
-    [self.view addGestureRecognizer:gestureRecognizer];
     
 }
 
@@ -57,6 +57,20 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 {
     self.violationCountsArray = [NSMutableArray array];
     self.communityAreaAnnotationsArray = [NSMutableArray array];
+    self.allBuildingAnnotationsArray = [NSArray array];
+}
+
+- (void)addGestureRecognizer
+{
+    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(filterAnnotationsFromGestureRecognizer:)];
+    gestureRecognizer.minimumPressDuration = 1.5;
+    NSMutableArray *gestureRecognizerArray = [self.mapView.gestureRecognizers mutableCopy];
+    NSUInteger index = [gestureRecognizerArray indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return [obj isKindOfClass:[UILongPressGestureRecognizer class]];
+    }];
+    [gestureRecognizerArray removeObjectAtIndex:index];
+    [gestureRecognizerArray addObject:gestureRecognizer];
+    self.mapView.gestureRecognizers = gestureRecognizerArray;
 }
 
 - (void)setUpMap
@@ -83,11 +97,17 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 - (void)fetchAndMapBuildings
 {
     NSArray *buildings = [SCRCoreDataUtility fetchAllBuildings];
+    self.allBuildingAnnotationsArray = [self arrayOfAnnotationsForBuildingsArray:buildings];
+    [self.mapView addAnnotations:self.allBuildingAnnotationsArray];
+}
+
+- (NSArray *)arrayOfAnnotationsForBuildingsArray:(NSArray *)buildingsArray
+{
     NSMutableArray *annotations = [NSMutableArray array];
     SCRAnnotation *annotation;
-
-    NSMutableArray *violationCountsArray = [NSMutableArray arrayWithCapacity:buildings.count];
-    for (SCRBuilding *building in buildings) {
+    
+    NSMutableArray *violationCountsArray = [NSMutableArray arrayWithCapacity:buildingsArray.count];
+    for (SCRBuilding *building in buildingsArray) {
         [violationCountsArray addObject:@(building.violations.count)];
     }
     
@@ -96,7 +116,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     NSNumber *oneThirdPercentile = [self calculatePercentile:33 fromSortedArrayOfNumbers:sortedViolationCountsArray];
     NSNumber *twoThirdsPercentile = [self calculatePercentile:66 fromSortedArrayOfNumbers:sortedViolationCountsArray];
     
-    for (SCRBuilding *building in buildings) {
+    for (SCRBuilding *building in buildingsArray) {
         NSString *subtitle = [NSString stringWithFormat:@"Violations: %@", @(building.violations.count)];
         SCRAnnotationType type;
         
@@ -117,7 +137,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         
         [annotations addObject:annotation];
     }
-    [self.mapView addAnnotations:annotations];
+    return annotations;
 }
 
 - (void)setUpDatabaseForBackgroundCachingWithMapView:(RMMapView *)mapView andtileSource:(RMMapboxSource *)tileSource
@@ -146,6 +166,13 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
                                                                   withPredicate:[SCRBuilding predicateForAddressMatchingString:annotation.title]
                                                                      forContext:nil];
     return buildingArray.firstObject;
+}
+
+- (NSArray *)buildingsInCommunityArea:(NSString *)communityAreaString
+{
+    return [[VOKCoreDataManager sharedInstance] arrayForClass:[SCRBuilding class]
+                                                withPredicate:[SCRBuilding predicateForCommmunityAreaMatchingString:communityAreaString]
+                                                   forContext:nil];
 }
 
 - (void)setUpCommunityAreas
@@ -183,21 +210,11 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 
 - (void)assignCommunityAreas
 {
-    NSMutableArray *polygonAnnArray = [[NSMutableArray alloc] init];
-    NSMutableArray *unfilteredAnnsArray = [[NSMutableArray alloc] init];
     NSMutableArray *prelimFilteredAnnsArray = [[NSMutableArray alloc] init];
     NSMutableArray *finalFilteredAnnsArray = [[NSMutableArray alloc] init];
-    
-    for (RMAnnotation *ann in self.mapView.annotations) {
-        if ([ann isKindOfClass:[SCRAnnotation class]]) {
-            [unfilteredAnnsArray addObject:ann];
-        } else if ([ann isKindOfClass:[RMPolygonAnnotation class]]) {
-            [polygonAnnArray addObject:ann];
-        }
-    }
 
-    for (RMPolygonAnnotation *polygonAnn in polygonAnnArray) {
-        for (SCRAnnotation *buildingAnnotation in unfilteredAnnsArray) {
+    for (RMPolygonAnnotation *polygonAnn in self.communityAreaAnnotationsArray) {
+        for (SCRAnnotation *buildingAnnotation in self.allBuildingAnnotationsArray) {
             if (RMProjectedRectContainsProjectedPoint(polygonAnn.projectedBoundingBox, buildingAnnotation.projectedLocation)) {
                 [prelimFilteredAnnsArray addObject:buildingAnnotation];
             }
@@ -218,14 +235,14 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
         for (SCRAnnotation *ann in prelimFilteredAnnsArray) {
             CLLocationCoordinate2D location = CLLocationCoordinate2DMake(ann.coordinate.latitude, ann.coordinate.longitude);
             CGPoint annPoint = [self.mapView coordinateToPixel:location];
-            if (CGPathContainsPoint(path, NULL, annPoint, FALSE)) {
+            
+            if ([self polygonFromPolygonArray:@[polygonAnn] containingPoint:annPoint]) {
                 [finalFilteredAnnsArray addObject:ann];
                 SCRBuilding *building = [self buildingForAnnotation:ann];
                 building.communityArea = polygonAnn.title;
             }
+            
         }
-        
-        CGPathRelease(path);
     }
 }
 
@@ -240,9 +257,48 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     return finalString;
 }
 
-- (void)filterAnnotations
+- (void)filterAnnotationsFromGestureRecognizer:(UILongPressGestureRecognizer *)sender
 {
-    NSLog(@"Press");
+    CGPoint point = [sender locationInView:self.view];
+    NSMutableArray *polygonAnnotations = [[NSMutableArray alloc] init];
+    for (RMAnnotation *annotation in self.mapView.visibleAnnotations) {
+        if ([annotation isKindOfClass:[RMPolygonAnnotation class]]) {
+            [polygonAnnotations addObject:annotation];
+        }
+    }
+    RMPolygonAnnotation *polygonAnn = [self polygonFromPolygonArray:polygonAnnotations containingPoint:point];
+    NSArray *buildingsArray = [self buildingsInCommunityArea:polygonAnn.title];
+    NSArray *buildingAddresses = [buildingsArray valueForKeyPath:@"address"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K in %@", @"title", buildingAddresses];
+    NSArray *filteredAnnotations = [self.allBuildingAnnotationsArray filteredArrayUsingPredicate:predicate];
+    
+    [self.mapView removeAnnotations:self.allBuildingAnnotationsArray];
+    self.mapView.clusteringEnabled = NO;
+    [self.mapView addAnnotations:filteredAnnotations];
+    
+}
+
+- (RMPolygonAnnotation *)polygonFromPolygonArray:(NSArray *)polygonArray containingPoint:(CGPoint)point
+{
+    for (RMPolygonAnnotation *polygonAnn in polygonArray) {
+        CGMutablePathRef path = CGPathCreateMutable();
+        for (NSUInteger i = 0; i < polygonAnn.points.count; i++) {
+            CLLocation *location = [polygonAnn.points objectAtIndex:i];
+            CGPoint cgPoint = [self.mapView coordinateToPixel:location.coordinate];
+            if (i == 0) {
+                CGPathMoveToPoint(path, NULL, cgPoint.x, cgPoint.y);
+            } else {
+                CGPathAddLineToPoint(path, NULL, cgPoint.x, cgPoint.y);
+            }
+        }
+        
+        if (CGPathContainsPoint(path, NULL, point, FALSE)) {
+            CGPathRelease(path);
+            return polygonAnn;
+        }
+    }
+    
+    return nil;
 }
 
 #pragma mark - RKMapViewDelegate methods
