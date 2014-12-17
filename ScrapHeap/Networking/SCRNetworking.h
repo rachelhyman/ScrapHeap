@@ -10,9 +10,11 @@
 
 @class AFHTTPSessionManager;
 
+typedef void (^SCRNetworkingBasicCompletionHandler)(void);
+
 @interface SCRNetworking : NSObject
 
 ///Gets data live from server
-+ (void)getViolations;
++ (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler;
 
 @end

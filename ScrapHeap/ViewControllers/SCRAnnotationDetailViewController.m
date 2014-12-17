@@ -26,7 +26,7 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
-    self.title = self.building.address;
+    self.title = [NSString stringWithFormat:@"%@ - %@", self.building.address, self.building.communityArea];
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self setUpDataSource];

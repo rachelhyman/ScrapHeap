@@ -27,7 +27,9 @@ FOUNDATION_EXPORT const struct SCRStoryboardIdentifiers {
 ///Core data constants
 FOUNDATION_EXPORT const struct SCRCoreDataNames {
     __unsafe_unretained NSString *SqliteDatabaseName;
-    __unsafe_unretained NSString *ModelName; 
+    __unsafe_unretained NSString *ModelName;
+    __unsafe_unretained NSString *DatabaseResourceName;
+    __unsafe_unretained NSString *DatabaseResourceFileExtension;
 } SCRCoreData;
 
 ///Buckets for relative # of violations for map annotations

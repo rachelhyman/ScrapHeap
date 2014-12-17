@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		5D0892A482C9CB7ACADDD2FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D0105DD10EC9E0A3787615 /* libPods.a */; };
 		B32D7DDEC6FA79C20C15F612 /* libPods-ScrapHeapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC3D7707DC0087E87121E /* libPods-ScrapHeapTests.a */; };
+		CC4C70E81A3F834F00B20302 /* ScrapHeap.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CC4C70E71A3F834F00B20302 /* ScrapHeap.sqlite */; };
 		CC5DCF391A014277000C813E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF381A014277000C813E /* main.m */; };
 		CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF3B1A014277000C813E /* SCRAppDelegate.m */; };
 		CC5DCF451A014277000C813E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF431A014277000C813E /* Main.storyboard */; };
@@ -65,6 +66,7 @@
 		594CC3D7707DC0087E87121E /* libPods-ScrapHeapTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScrapHeapTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D0105DD10EC9E0A3787615 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A17D6FF2446B545F4F0DC7 /* Pods-ScrapHeapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrapHeapTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrapHeapTests/Pods-ScrapHeapTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC4C70E71A3F834F00B20302 /* ScrapHeap.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ScrapHeap.sqlite; sourceTree = "<group>"; };
 		CC5DCF331A014277000C813E /* ScrapHeap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrapHeap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5DCF371A014277000C813E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC5DCF381A014277000C813E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				CC5DCF481A014277000C813E /* LaunchScreen.xib */,
 				CCD563501A129C8100C807D6 /* TestData.json */,
 				CCFA6D801A38B4D20034AA94 /* RMTileCache.db */,
+				CC4C70E71A3F834F00B20302 /* ScrapHeap.sqlite */,
 				CCFA6D821A3A43860034AA94 /* CommunityAreas.geojson */,
 				CC5DCF361A014277000C813E /* Supporting Files */,
 			);
@@ -357,6 +360,7 @@
 				TargetAttributes = {
 					CC5DCF321A014277000C813E = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = TZPBQT6RZA;
 					};
 					CC5DCF4E1A014277000C813E = {
 						CreatedOnToolsVersion = 6.1;
@@ -399,6 +403,7 @@
 				CC5DCF471A014277000C813E /* Images.xcassets in Resources */,
 				CCC75BF91A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.xib in Resources */,
 				CCD563511A129C8100C807D6 /* TestData.json in Resources */,
+				CC4C70E81A3F834F00B20302 /* ScrapHeap.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,12 +650,15 @@
 			baseConfigurationReference = EC6C2BCA417F74D29E4765D9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScrapHeap/ScrapHeap-Prefix.pch";
 				INFOPLIST_FILE = ScrapHeap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -659,12 +667,15 @@
 			baseConfigurationReference = E88229F0E38C29D86CF8BFCA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScrapHeap/ScrapHeap-Prefix.pch";
 				INFOPLIST_FILE = ScrapHeap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

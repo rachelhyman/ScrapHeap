@@ -16,4 +16,9 @@
     return  [NSPredicate predicateWithFormat:@"%K = %@", SCRBuildingAttributes.address, string];
 }
 
++ (NSPredicate *)predicateForCommmunityAreaMatchingString:(NSString *)string
+{
+    return [NSPredicate predicateWithFormat:@"%K = %@", SCRBuildingAttributes.communityArea, string];
+}
+
 @end

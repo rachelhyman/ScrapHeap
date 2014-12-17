@@ -9,6 +9,7 @@
 #import "SCRTabBarController.h"
 
 #import "SCRCoreDataUtility.h"
+#import "SCRNetworking.h"
 
 @interface SCRTabBarController ()  <UITabBarControllerDelegate>
 
@@ -25,7 +26,7 @@
     [self addProgressSpinner];
     [self.progressSpinner startAnimating];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [SCRCoreDataUtility getTestViolationsWithCompletion:^{
+        [SCRNetworking getViolationsWithCompletionHandler:^{
             [self.progressSpinner stopAnimating];
         }];
     });
