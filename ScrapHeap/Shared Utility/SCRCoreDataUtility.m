@@ -23,9 +23,9 @@
 + (void)copySqliteDatabaseFromBundle
 {
     NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"Scrapheap.sqlite"];
+    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:SCRCoreData.SqliteDatabaseName];
     if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]]) {
-        NSURL *bundleStoreURL = [[NSBundle mainBundle] URLForResource:@"Scrapheap" withExtension:@"sqlite"];
+        NSURL *bundleStoreURL = [[NSBundle mainBundle] URLForResource:SCRCoreData.DatabaseResourceName withExtension:SCRCoreData.DatabaseResourceFileExtension];
         if (bundleStoreURL) {
             [[NSFileManager defaultManager] copyItemAtURL:bundleStoreURL toURL:storeURL error:NULL];
         }

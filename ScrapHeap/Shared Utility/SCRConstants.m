@@ -25,4 +25,6 @@ const struct SCRStoryboardIdentifiers SCRStoryboardIdentifier = {
 const struct SCRCoreDataNames SCRCoreData = {
     .SqliteDatabaseName = @"ScrapHeap.sqlite",
     .ModelName = @"ScrapHeap",
+    .DatabaseResourceName = @"ScrapHeap",
+    .DatabaseResourceFileExtension = @"sqlite",
 };
