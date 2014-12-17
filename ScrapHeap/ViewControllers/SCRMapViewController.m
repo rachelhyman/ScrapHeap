@@ -213,24 +213,11 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 - (void)assignCommunityAreas
 {
     NSMutableArray *prelimFilteredAnnsArray = [[NSMutableArray alloc] init];
-    NSMutableArray *finalFilteredAnnsArray = [[NSMutableArray alloc] init];
-
+    
     for (RMPolygonAnnotation *polygonAnn in self.communityAreaAnnotationsArray) {
         for (SCRAnnotation *buildingAnnotation in self.allBuildingAnnotationsArray) {
             if (RMProjectedRectContainsProjectedPoint(polygonAnn.projectedBoundingBox, buildingAnnotation.projectedLocation)) {
                 [prelimFilteredAnnsArray addObject:buildingAnnotation];
-            }
-        }
-        
-        //draw CGPath with the points in the polygon
-        CGMutablePathRef path = CGPathCreateMutable();
-        for (NSUInteger i = 0; i < polygonAnn.points.count; i++) {
-            CLLocation *location = [polygonAnn.points objectAtIndex:i];
-            CGPoint cgPoint = [self.mapView coordinateToPixel:location.coordinate];
-            if (i == 0) {
-                CGPathMoveToPoint(path, NULL, cgPoint.x, cgPoint.y);
-            } else {
-                CGPathAddLineToPoint(path, NULL, cgPoint.x, cgPoint.y);
             }
         }
         
@@ -239,7 +226,6 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
             CGPoint annPoint = [self.mapView coordinateToPixel:location];
             
             if ([self polygonFromPolygonArray:@[polygonAnn] containingPoint:annPoint]) {
-                [finalFilteredAnnsArray addObject:ann];
                 SCRBuilding *building = [self buildingForAnnotation:ann];
                 building.communityArea = polygonAnn.title;
             }
