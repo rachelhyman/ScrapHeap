@@ -42,7 +42,6 @@
 		CCD563511A129C8100C807D6 /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = CCD563501A129C8100C807D6 /* TestData.json */; };
 		CCFA6D811A38B4D20034AA94 /* RMTileCache.db in Resources */ = {isa = PBXBuildFile; fileRef = CCFA6D801A38B4D20034AA94 /* RMTileCache.db */; };
 		CCFA6D831A3A43860034AA94 /* CommunityAreas.geojson in Resources */ = {isa = PBXBuildFile; fileRef = CCFA6D821A3A43860034AA94 /* CommunityAreas.geojson */; };
-		CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */; };
 		CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DCD1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld */; };
 		CCFE8DD91A07FCA90066C8C0 /* _SCRBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD21A07FCA90066C8C0 /* _SCRBuilding.m */; };
 		CCFE8DDA1A07FCA90066C8C0 /* _SCRViolation.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE8DD41A07FCA90066C8C0 /* _SCRViolation.m */; };
@@ -99,8 +98,6 @@
 		CCD563501A129C8100C807D6 /* TestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestData.json; sourceTree = "<group>"; };
 		CCFA6D801A38B4D20034AA94 /* RMTileCache.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = RMTileCache.db; sourceTree = "<group>"; };
 		CCFA6D821A3A43860034AA94 /* CommunityAreas.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommunityAreas.geojson; sourceTree = "<group>"; };
-		CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRDetailViewController.h; sourceTree = "<group>"; };
-		CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRDetailViewController.m; sourceTree = "<group>"; };
 		CCFE8DCE1A07F6D00066C8C0 /* ScrapHeap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrapHeap.xcdatamodel; sourceTree = "<group>"; };
 		CCFE8DD11A07FCA90066C8C0 /* _SCRBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SCRBuilding.h; sourceTree = "<group>"; };
 		CCFE8DD21A07FCA90066C8C0 /* _SCRBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SCRBuilding.m; sourceTree = "<group>"; };
@@ -266,8 +263,6 @@
 				CCC75BEA1A1BAAB300A1EDD2 /* SCRAnnotationDetailViewController.m */,
 				CCC75BF21A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.h */,
 				CCC75BF31A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.m */,
-				CCFE8DBF1A07E9960066C8C0 /* SCRDetailViewController.h */,
-				CCFE8DC01A07E9960066C8C0 /* SCRDetailViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -517,7 +512,6 @@
 				CCC75BE81A1A703F00A1EDD2 /* SCRAnnotation.m in Sources */,
 				CCFE8DDB1A07FCA90066C8C0 /* SCRBuilding.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
-				CCFE8DC11A07E9960066C8C0 /* SCRDetailViewController.m in Sources */,
 				CCC75BF81A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.m in Sources */,
 				CCFE8DE11A0813900066C8C0 /* SCRCoreDataUtility.m in Sources */,
 				CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */,

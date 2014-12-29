@@ -23,6 +23,8 @@ static NSString *const DescriptionStringBeginning = @"<span class=\"atr-name\">C
 static NSString *const DescriptionStringEnding = @"<";
 static NSTimeInterval const TileExpiryPeriod = (60*60*24*7*52*10); //arbitrary expiry period of 10 years for tile cache
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
+static CGFloat const SwitchOffsetX = 75;
+static CGFloat const SwitchOffsetY = 25;
 
 @interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate>
 
@@ -40,6 +42,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     [super viewDidLoad];
     [self initializeArrays];
     [self setUpMap];
+    [self addSwitch];
     [self addGestureRecognizer];
     [self fetchAndMapBuildings];
     [self assignCommunityAreas];
@@ -49,6 +52,7 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)dealloc
@@ -61,6 +65,26 @@ static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .lon
     self.violationCountsArray = [NSMutableArray array];
     self.communityAreaAnnotationsArray = [NSMutableArray array];
     self.allBuildingAnnotationsArray = [NSArray array];
+}
+
+- (void)addSwitch
+{
+    CGRect rect = CGRectMake(self.view.frame.size.width - SwitchOffsetX, SwitchOffsetY, 0, 0);
+    UISwitch *clusterSwitch = [[UISwitch alloc] initWithFrame:rect];
+    clusterSwitch.on = YES;
+    [clusterSwitch addTarget:self action:@selector(clusteringSwitchHit:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:clusterSwitch];
+}
+
+- (void)clusteringSwitchHit:(id)sender
+{
+    if ([sender isOn]) {
+        self.mapView.clusteringEnabled = YES;
+        [self.mapView removeAnnotations:self.allBuildingAnnotationsArray];
+        [self.mapView addAnnotations:self.allBuildingAnnotationsArray];
+    } else {
+        self.mapView.clusteringEnabled = NO;
+    }
 }
 
 - (void)addGestureRecognizer
