@@ -126,8 +126,10 @@ static CGFloat const SwitchOffsetY = 25;
 - (void)fetchAndMapBuildings
 {
     NSArray *buildings = [SCRCoreDataUtility fetchAllBuildings];
-    self.allBuildingAnnotationsArray = [self arrayOfAnnotationsForBuildingsArray:buildings];
-    [self.mapView addAnnotations:self.allBuildingAnnotationsArray];
+    if (buildings.count > 0) {
+        self.allBuildingAnnotationsArray = [self arrayOfAnnotationsForBuildingsArray:buildings];
+        [self.mapView addAnnotations:self.allBuildingAnnotationsArray];
+    }
 }
 
 - (NSArray *)arrayOfAnnotationsForBuildingsArray:(NSArray *)buildingsArray
