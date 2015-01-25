@@ -12,6 +12,7 @@
 #import "Mapbox.h"
 #import "SCRCoreDataUtility.h"
 #import "SCRBuilding.h"
+#import "SCRViolation.h"
 #import "SCRAnnotation.h"
 #import "SCRAnnotationDetailViewController.h"
 
@@ -32,6 +33,8 @@ static CGFloat const SwitchOffsetY = 25;
 @property (strong, nonatomic) NSMutableArray *violationCountsArray;
 @property (strong, nonatomic) NSMutableArray *communityAreaAnnotationsArray;
 @property (strong, nonatomic) NSArray *allBuildingAnnotationsArray;
+//5 violations that we will color differently on the map
+@property (strong, nonatomic) NSArray *specialViolationsArray;
 
 @end
 
@@ -65,6 +68,11 @@ static CGFloat const SwitchOffsetY = 25;
     self.violationCountsArray = [NSMutableArray array];
     self.communityAreaAnnotationsArray = [NSMutableArray array];
     self.allBuildingAnnotationsArray = [NSArray array];
+    self.specialViolationsArray = @[@"13-12-130",
+                                    @"13-12-131",
+                                    @"13-12-135",
+                                    @"13-12-140",
+                                    @"13-12-145"];
 }
 
 - (void)addSwitch
@@ -151,7 +159,9 @@ static CGFloat const SwitchOffsetY = 25;
         NSString *subtitle = [NSString stringWithFormat:@"Violations: %@", @(building.violations.count)];
         SCRAnnotationType type;
         
-        if (building.violations.count <= [oneThirdPercentile integerValue]) {
+        if ([self specialViolationExistsOnBuilding:building]) {
+            type = SCRSpecialAnnotation;
+        } else if (building.violations.count <= [oneThirdPercentile integerValue]) {
             type = SCRFewAnnotation;
         } else if (building.violations.count <= [twoThirdsPercentile integerValue]) {
             type = SCRSomeAnnotation;
@@ -169,6 +179,19 @@ static CGFloat const SwitchOffsetY = 25;
         [annotations addObject:annotation];
     }
     return annotations;
+}
+
+- (BOOL)specialViolationExistsOnBuilding:(SCRBuilding *)building
+{
+    NSSet *ordinances = [building.violations valueForKeyPath:@"ordinance"];
+    for (NSString *ordinance in ordinances) {
+        for (NSString *specialViolation in self.specialViolationsArray) {
+            if ([ordinance containsString:specialViolation]) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 - (void)setUpDatabaseForBackgroundCachingWithMapView:(RMMapView *)mapView andtileSource:(RMMapboxSource *)tileSource

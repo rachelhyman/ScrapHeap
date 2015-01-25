@@ -29,7 +29,9 @@ static NSString *const buildingMarkerImage = @"commercial";
 {
     RMMarker *marker;
     
-    if ([annotation.userInfo isEqual:@(SCRFewAnnotation)]) {
+    if ([annotation.userInfo isEqual:@(SCRSpecialAnnotation)]) {
+        marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor purpleColor]];
+    } else if ([annotation.userInfo isEqual:@(SCRFewAnnotation)]) {
         marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor yellowColor]];
     } else if ([annotation.userInfo isEqual:@(SCRSomeAnnotation)]) {
         marker = [[RMMarker alloc] initWithMapboxMarkerImage:buildingMarkerImage tintColor:[UIColor orangeColor]];

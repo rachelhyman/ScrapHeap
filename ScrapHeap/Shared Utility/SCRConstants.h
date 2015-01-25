@@ -37,4 +37,5 @@ typedef NS_ENUM(NSInteger, SCRAnnotationType) {
     SCRFewAnnotation,
     SCRSomeAnnotation,
     SCRManyAnnotation,
+    SCRSpecialAnnotation,
 };
