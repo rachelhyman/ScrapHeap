@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CoreLocation/CoreLocation.h"
 
 @class AFHTTPSessionManager;
 
@@ -16,5 +17,10 @@ typedef void (^SCRNetworkingBasicCompletionHandler)(void);
 
 ///Gets data live from server
 + (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler;
+
+///Gets data that falls within a bounding box specified by upper left and lower right coordinates
++ (void)getViolationsWithinUpperLeft:(CLLocationCoordinate2D)upperLeftCoord
+                          lowerRight:(CLLocationCoordinate2D)lowerRightCoord
+                   completionHandler:(SCRNetworkingBasicCompletionHandler)handler;
 
 @end

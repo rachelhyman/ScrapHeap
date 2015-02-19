@@ -11,7 +11,7 @@
 #import <AFNetworking.h>
 #import "SCRCoreDataUtility.h"
 
-static NSString *const Endpoint = @"http://data.cityofchicago.org/resource/22u3-xenr/";
+static NSString *const Endpoint = @"http://data.cityofchicago.org/resource/22u3-xenr.json";
 static NSString *const AppToken = @"GthgnkwqVlsElC4cdPqELnrjJ";
 static NSString *const LastFetchedDateKey = @"most recent violation";
 
@@ -45,6 +45,20 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
                                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                                     [defaults setObject:[NSDate date] forKey:LastFetchedDateKey];
                                         }
+                                failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                    NSLog(@"Failure");
+                                }];
+}
+
++ (void)getViolationsWithinUpperLeft:(CLLocationCoordinate2D)upperLeftCoord
+                          lowerRight:(CLLocationCoordinate2D)lowerRightCoord
+                   completionHandler:(SCRNetworkingBasicCompletionHandler)handler
+{
+    [[SCRNetworking sessionManager] GET:@""
+                             parameters:@{@"$WHERE": [NSString stringWithFormat:@"latitude >= %f AND latitude <= %f AND longitude >= %f AND longitude <= %f", lowerRightCoord.latitude, upperLeftCoord.latitude, upperLeftCoord.longitude, lowerRightCoord.longitude]}
+                                success:^(NSURLSessionDataTask *task, id responseObject) {
+                                    [SCRCoreDataUtility loadDataFromArray:responseObject completion:handler];
+                                }
                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
                                     NSLog(@"Failure");
                                 }];

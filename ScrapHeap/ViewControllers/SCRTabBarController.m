@@ -11,6 +11,9 @@
 #import "SCRCoreDataUtility.h"
 #import "SCRNetworking.h"
 
+static CLLocationCoordinate2D const UpperLeft23rdAndHalstedCoord = {.latitude = 41.850794, .longitude = -87.646438};
+static CLLocationCoordinate2D const LowerRight95thAndLakeCoord = {.latitude = 41.722463, .longitude = -87.524471};
+
 @interface SCRTabBarController ()  <UITabBarControllerDelegate>
 
 @property (nonatomic, weak) UIActivityIndicatorView *progressSpinner;
@@ -26,9 +29,11 @@
     [self addProgressSpinner];
     [self.progressSpinner startAnimating];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [SCRNetworking getViolationsWithCompletionHandler:^{
-            [self.progressSpinner stopAnimating];
-        }];
+        [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
+                                         lowerRight:LowerRight95thAndLakeCoord
+                                  completionHandler:^{
+                                      [self.progressSpinner stopAnimating];
+                                  }];
     });
 }
 
