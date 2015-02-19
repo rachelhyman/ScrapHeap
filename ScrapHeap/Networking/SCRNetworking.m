@@ -52,10 +52,15 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
 
 + (void)getViolationsWithinUpperLeft:(CLLocationCoordinate2D)upperLeftCoord
                           lowerRight:(CLLocationCoordinate2D)lowerRightCoord
+                  numberOfViolations:(NSInteger)numberOfViolations
                    completionHandler:(SCRNetworkingBasicCompletionHandler)handler
 {
     [[SCRNetworking sessionManager] GET:@""
-                             parameters:@{@"$WHERE": [NSString stringWithFormat:@"latitude >= %f AND latitude <= %f AND longitude >= %f AND longitude <= %f", lowerRightCoord.latitude, upperLeftCoord.latitude, upperLeftCoord.longitude, lowerRightCoord.longitude]}
+                             parameters:@{
+                                          @"$WHERE": [NSString stringWithFormat:@"latitude >= %f AND latitude <= %f AND longitude >= %f AND longitude <= %f", lowerRightCoord.latitude, upperLeftCoord.latitude, upperLeftCoord.longitude, lowerRightCoord.longitude],
+                                          @"$LIMIT": @(numberOfViolations),
+                                          @"$ORDER": @"violation_date DESC",
+                                          }
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
                                     [SCRCoreDataUtility loadDataFromArray:responseObject completion:handler];
                                 }

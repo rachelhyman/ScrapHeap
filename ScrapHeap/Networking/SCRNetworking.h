@@ -19,8 +19,10 @@ typedef void (^SCRNetworkingBasicCompletionHandler)(void);
 + (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler;
 
 ///Gets data that falls within a bounding box specified by upper left and lower right coordinates
+///Returns most recent specified # of violations
 + (void)getViolationsWithinUpperLeft:(CLLocationCoordinate2D)upperLeftCoord
                           lowerRight:(CLLocationCoordinate2D)lowerRightCoord
+                  numberOfViolations:(NSInteger)numberOfViolations
                    completionHandler:(SCRNetworkingBasicCompletionHandler)handler;
 
 @end
