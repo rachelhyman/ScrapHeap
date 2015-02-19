@@ -15,6 +15,7 @@
 #import "SCRViolation.h"
 #import "SCRAnnotation.h"
 #import "SCRAnnotationDetailViewController.h"
+#import "SCRSettingsViewController.h"
 
 static NSString *const MapboxID = @"rachelvokal.kg9n243b";
 static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
@@ -44,24 +45,28 @@ static CGFloat const SwitchOffsetY = 25;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initializeArrays];
-    [self setUpMap];
-    [self addSwitch];
-    [self addGestureRecognizer];
-    [self fetchAndMapBuildings];
-    [self assignCommunityAreas];
+    [self doSetup];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)dealloc
 {
     self.mapView.delegate = nil;
+}
+
+- (void)doSetup
+{
+    [self initializeArrays];
+    [self setUpMap];
+    [self addSwitch];
+    [self addGestureRecognizer];
+    [self fetchAndMapBuildings];
+    [self assignCommunityAreas];
 }
 
 - (void)initializeArrays
@@ -443,5 +448,8 @@ static CGFloat const SwitchOffsetY = 25;
     }
     
 }
+
+#pragma mark - Settings changed
+
 
 @end
