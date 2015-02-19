@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *clusteringSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *violationsSlider;
 @property (weak, nonatomic) IBOutlet UILabel *sliderCurrentNumberLabel;
+@property (nonatomic) BOOL initialClusteringEnabled;
+@property (strong, nonatomic) NSNumber *initialViolationsToDisplay;
 
 @end
 
@@ -34,6 +36,13 @@
     self.sliderCurrentNumberLabel.text = [NSString stringWithFormat:@"%ld", lroundf(self.violationsSlider.value)];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.initialClusteringEnabled = self.clusteringSwitch.isOn;
+    self.initialViolationsToDisplay = [NSNumber numberWithFloat:roundf(self.violationsSlider.value)];
+}
+
 - (void)cancel
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -41,7 +50,15 @@
 
 - (void)saveSettings
 {
-
+    if (self.settingsDelegate) {
+        if (self.clusteringSwitch.isOn != self.initialClusteringEnabled) {
+            [self.settingsDelegate didChangeClusteringEnabled:self.clusteringSwitch.isOn];
+        }
+        if ([NSNumber numberWithFloat:roundf(self.violationsSlider.value)] != self.initialViolationsToDisplay ) {
+            [self.settingsDelegate didChangeNumberOfViolationsToDisplay:[NSNumber numberWithFloat:roundf(self.violationsSlider.value)]];
+        }
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

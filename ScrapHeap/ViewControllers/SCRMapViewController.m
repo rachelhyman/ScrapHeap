@@ -29,7 +29,7 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
 static CGFloat const SwitchOffsetX = 75;
 static CGFloat const SwitchOffsetY = 25;
 
-@interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate>
+@interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate, SCRSettingsDelegate>
 
 @property (weak, nonatomic) RMMapView *mapView;
 @property (strong, nonatomic) NSMutableArray *violationCountsArray;
@@ -63,7 +63,6 @@ static CGFloat const SwitchOffsetY = 25;
 {
     [self initializeArrays];
     [self setUpMap];
-    [self addSwitch];
     [self addGestureRecognizer];
     [self fetchAndMapBuildings];
     [self assignCommunityAreas];
@@ -79,26 +78,6 @@ static CGFloat const SwitchOffsetY = 25;
                                     @"13-12-135",
                                     @"13-12-140",
                                     @"13-12-145"];
-}
-
-- (void)addSwitch
-{
-    CGRect rect = CGRectMake(self.view.frame.size.width - SwitchOffsetX, SwitchOffsetY, 0, 0);
-    UISwitch *clusterSwitch = [[UISwitch alloc] initWithFrame:rect];
-    clusterSwitch.on = YES;
-    [clusterSwitch addTarget:self action:@selector(clusteringSwitchHit:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:clusterSwitch];
-}
-
-- (void)clusteringSwitchHit:(id)sender
-{
-    if ([sender isOn]) {
-        self.mapView.clusteringEnabled = YES;
-        [self.mapView removeAnnotations:self.allBuildingAnnotationsArray];
-        [self.mapView addAnnotations:self.allBuildingAnnotationsArray];
-    } else {
-        self.mapView.clusteringEnabled = NO;
-    }
 }
 
 - (void)addGestureRecognizer
@@ -449,7 +428,30 @@ static CGFloat const SwitchOffsetY = 25;
     
 }
 
-#pragma mark - Settings changed
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[SCRSettingsViewController class]]) {
+        ((SCRSettingsViewController *)segue.destinationViewController).settingsDelegate = self;
+    }
+}
+
+#pragma mark - SCRSettingsDelegate
+
+- (void)didChangeClusteringEnabled:(BOOL)clusteringEnabled
+{
+    if (clusteringEnabled) {
+        self.mapView.clusteringEnabled = YES;
+        [self.mapView removeAnnotations:self.allBuildingAnnotationsArray];
+        [self.mapView addAnnotations:self.allBuildingAnnotationsArray];
+    } else {
+        self.mapView.clusteringEnabled = NO;
+    }
+}
+
+- (void)didChangeNumberOfViolationsToDisplay:(NSNumber *)numberOfViolations
+{
+    
+}
 
 
 @end

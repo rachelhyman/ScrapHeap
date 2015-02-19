@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SCRSettingsDelegate <NSObject>
+
+- (void)didChangeNumberOfViolationsToDisplay:(NSNumber *)numberOfViolations;
+- (void)didChangeClusteringEnabled:(BOOL)clusteringEnabled;
+
+@end
+
 @interface SCRSettingsViewController : UIViewController
+
+@property (nonatomic, strong) id<SCRSettingsDelegate> settingsDelegate;
 
 @end
