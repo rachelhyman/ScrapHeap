@@ -8,14 +8,14 @@
 
 #import "SCRSettingsViewController.h"
 #import "SCRMapViewController.h"
+#import "SCRSettingsUtility.h"
 
 @interface SCRSettingsViewController ()
 
 @property (weak, nonatomic) IBOutlet UISwitch *clusteringSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *violationsSlider;
 @property (weak, nonatomic) IBOutlet UILabel *sliderCurrentNumberLabel;
-@property (nonatomic) BOOL initialClusteringEnabled;
-@property (strong, nonatomic) NSNumber *initialViolationsToDisplay;
+@property (strong, nonatomic) SCRSettingsUtility *settingsUtility;
 
 @end
 
@@ -33,14 +33,11 @@
     self.navigationItem.leftBarButtonItem = leftButton;
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    self.sliderCurrentNumberLabel.text = [NSString stringWithFormat:@"%ld", lroundf(self.violationsSlider.value)];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.initialClusteringEnabled = self.clusteringSwitch.isOn;
-    self.initialViolationsToDisplay = [NSNumber numberWithFloat:roundf(self.violationsSlider.value)];
+    self.settingsUtility = [SCRSettingsUtility sharedUtility];
+    
+    self.violationsSlider.value = (float)self.settingsUtility.numberOfViolationsToDisplay;
+    self.sliderCurrentNumberLabel.text = [NSString stringWithFormat:@"%ld", self.settingsUtility.numberOfViolationsToDisplay];
+    [self.clusteringSwitch setOn:self.settingsUtility.clusteringEnabled];
 }
 
 - (void)cancel
@@ -51,11 +48,13 @@
 - (void)saveSettings
 {
     if (self.settingsDelegate) {
-        if (self.clusteringSwitch.isOn != self.initialClusteringEnabled) {
+        if (self.clusteringSwitch.isOn != self.settingsUtility.clusteringEnabled) {
             [self.settingsDelegate didChangeClusteringEnabled:self.clusteringSwitch.isOn];
+            self.settingsUtility.clusteringEnabled = self.clusteringSwitch.isOn;
         }
-        if ([NSNumber numberWithFloat:roundf(self.violationsSlider.value)] != self.initialViolationsToDisplay ) {
-            [self.settingsDelegate didChangeNumberOfViolationsToDisplay:[NSNumber numberWithFloat:roundf(self.violationsSlider.value)]];
+        if (((NSInteger)lroundf(self.violationsSlider.value)) != self.settingsUtility.numberOfViolationsToDisplay) {
+            [self.settingsDelegate didChangeNumberOfViolationsToDisplay:((NSInteger)roundf(self.violationsSlider.value))];
+            self.settingsUtility.numberOfViolationsToDisplay = lroundf(self.violationsSlider.value);
         }
     }
     

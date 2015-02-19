@@ -16,6 +16,7 @@
 #import "SCRAnnotation.h"
 #import "SCRAnnotationDetailViewController.h"
 #import "SCRSettingsViewController.h"
+#import "SCRSettingsUtility.h"
 
 static NSString *const MapboxID = @"rachelvokal.kg9n243b";
 static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
@@ -26,8 +27,6 @@ static NSString *const DescriptionStringEnding = @"<";
 static NSTimeInterval const TileExpiryPeriod = (60*60*24*7*52*10); //arbitrary expiry period of 10 years for tile cache
 static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
 static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .longitude = -87.615623};
-static CGFloat const SwitchOffsetX = 75;
-static CGFloat const SwitchOffsetY = 25;
 
 @interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate, SCRSettingsDelegate>
 
@@ -102,6 +101,7 @@ static CGFloat const SwitchOffsetY = 25;
     self.mapView = mapView;
     mapView.delegate = self;
     mapView.clusteringEnabled = YES;
+    [SCRSettingsUtility sharedUtility].clusteringEnabled = YES;
     
     [mapView setZoom:12 atCoordinate:MapCenterCoord animated:NO];
     
@@ -448,10 +448,9 @@ static CGFloat const SwitchOffsetY = 25;
     }
 }
 
-- (void)didChangeNumberOfViolationsToDisplay:(NSNumber *)numberOfViolations
+- (void)didChangeNumberOfViolationsToDisplay:(NSInteger)numberOfViolations
 {
     
 }
-
 
 @end

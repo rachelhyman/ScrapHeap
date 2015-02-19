@@ -10,7 +10,7 @@
 
 @protocol SCRSettingsDelegate <NSObject>
 
-- (void)didChangeNumberOfViolationsToDisplay:(NSNumber *)numberOfViolations;
+- (void)didChangeNumberOfViolationsToDisplay:(NSInteger)numberOfViolations;
 - (void)didChangeClusteringEnabled:(BOOL)clusteringEnabled;
 
 @end

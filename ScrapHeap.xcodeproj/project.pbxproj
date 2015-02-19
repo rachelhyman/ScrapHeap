@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		5D0892A482C9CB7ACADDD2FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D0105DD10EC9E0A3787615 /* libPods.a */; };
 		B32D7DDEC6FA79C20C15F612 /* libPods-ScrapHeapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC3D7707DC0087E87121E /* libPods-ScrapHeapTests.a */; };
+		CC104FB91A969A710004D0E0 /* SCRSettingsUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = CC104FB81A969A710004D0E0 /* SCRSettingsUtility.m */; };
 		CC4C70E81A3F834F00B20302 /* ScrapHeap.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CC4C70E71A3F834F00B20302 /* ScrapHeap.sqlite */; };
 		CC5DCF391A014277000C813E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF381A014277000C813E /* main.m */; };
 		CC5DCF3C1A014277000C813E /* SCRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF3B1A014277000C813E /* SCRAppDelegate.m */; };
@@ -66,6 +67,8 @@
 		594CC3D7707DC0087E87121E /* libPods-ScrapHeapTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScrapHeapTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D0105DD10EC9E0A3787615 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A17D6FF2446B545F4F0DC7 /* Pods-ScrapHeapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrapHeapTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrapHeapTests/Pods-ScrapHeapTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC104FB71A969A710004D0E0 /* SCRSettingsUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRSettingsUtility.h; sourceTree = "<group>"; };
+		CC104FB81A969A710004D0E0 /* SCRSettingsUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRSettingsUtility.m; sourceTree = "<group>"; };
 		CC4C70E71A3F834F00B20302 /* ScrapHeap.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ScrapHeap.sqlite; sourceTree = "<group>"; };
 		CC5DCF331A014277000C813E /* ScrapHeap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrapHeap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5DCF371A014277000C813E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				CC9F56C51A01852800C54F77 /* SCRConstants.m */,
 				CCFE8DDF1A0813900066C8C0 /* SCRCoreDataUtility.h */,
 				CCFE8DE01A0813900066C8C0 /* SCRCoreDataUtility.m */,
+				CC104FB71A969A710004D0E0 /* SCRSettingsUtility.h */,
+				CC104FB81A969A710004D0E0 /* SCRSettingsUtility.m */,
 			);
 			path = "Shared Utility";
 			sourceTree = "<group>";
@@ -519,6 +524,7 @@
 				CCF1B6531A965B8500C93E0D /* SCRSettingsViewController.m in Sources */,
 				CC5DCF391A014277000C813E /* main.m in Sources */,
 				CCC75BF81A1BFD2A00A1EDD2 /* SCRAnnotationDetailCell.m in Sources */,
+				CC104FB91A969A710004D0E0 /* SCRSettingsUtility.m in Sources */,
 				CCFE8DE11A0813900066C8C0 /* SCRCoreDataUtility.m in Sources */,
 				CCFE8DCF1A07F6D00066C8C0 /* ScrapHeap.xcdatamodeld in Sources */,
 				CCFE8DDC1A07FCA90066C8C0 /* SCRViolation.m in Sources */,

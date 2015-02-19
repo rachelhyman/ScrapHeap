@@ -10,6 +10,7 @@
 
 #import <AFNetworking.h>
 #import "SCRCoreDataUtility.h"
+#import "SCRSettingsUtility.h"
 
 static NSString *const Endpoint = @"http://data.cityofchicago.org/resource/22u3-xenr.json";
 static NSString *const AppToken = @"GthgnkwqVlsElC4cdPqELnrjJ";
@@ -63,6 +64,7 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
                                           }
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
                                     [SCRCoreDataUtility loadDataFromArray:responseObject completion:handler];
+                                    [SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay = numberOfViolations;
                                 }
                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
                                     NSLog(@"Failure");
