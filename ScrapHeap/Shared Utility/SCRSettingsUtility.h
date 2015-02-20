@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString *const ClusteringEnabledKey;
+static NSString *const NumberOfViolationsKey;
+
 @interface SCRSettingsUtility : NSObject
 
 + (instancetype)sharedUtility;
