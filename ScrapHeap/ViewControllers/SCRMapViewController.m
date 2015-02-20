@@ -17,6 +17,7 @@
 #import "SCRAnnotationDetailViewController.h"
 #import "SCRSettingsViewController.h"
 #import "SCRSettingsUtility.h"
+#import "SCRNetworking.h"
 
 static NSString *const MapboxID = @"rachelvokal.kg9n243b";
 static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
@@ -25,7 +26,6 @@ static NSString *const DatabasePathUserDefaultsKey = @"tileDatabaseCachePath";
 static NSString *const DescriptionStringBeginning = @"<span class=\"atr-name\">COMMUNITY</span>:</strong> <span class=\"atr-value\">";
 static NSString *const DescriptionStringEnding = @"<";
 static NSTimeInterval const TileExpiryPeriod = (60*60*24*7*52*10); //arbitrary expiry period of 10 years for tile cache
-static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
 static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .longitude = -87.615623};
 
 @interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate, SCRSettingsDelegate>
@@ -63,7 +63,8 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     [self initializeArrays];
     [self setUpMap];
     [self addGestureRecognizer];
-    [self fetchAndMapBuildings];
+    NSArray *buildingsArray = [SCRCoreDataUtility fetchAllBuildings];
+    [self fetchAndMapBuildingsInArray:buildingsArray];
     [self assignCommunityAreas];
 }
 
@@ -116,11 +117,10 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     [self.view addSubview:mapView];
 }
 
-- (void)fetchAndMapBuildings
+- (void)fetchAndMapBuildingsInArray:(NSArray *)buildingsArray
 {
-    NSArray *buildings = [SCRCoreDataUtility fetchAllBuildings];
-    if (buildings.count > 0) {
-        self.allBuildingAnnotationsArray = [self arrayOfAnnotationsForBuildingsArray:buildings];
+    if (buildingsArray.count > 0) {
+        self.allBuildingAnnotationsArray = [self arrayOfAnnotationsForBuildingsArray:buildingsArray];
         [self.mapView addAnnotations:self.allBuildingAnnotationsArray];
     }
 }
@@ -450,7 +450,11 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
 
 - (void)didChangeNumberOfViolationsToDisplay:(NSInteger)numberOfViolations
 {
-    
+    [self.mapView removeAnnotations:self.allBuildingAnnotationsArray];
+    [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord lowerRight:LowerRight95thAndLakeCoord numberOfViolations:numberOfViolations completionHandler:^{
+        NSArray *buildingsArray = [SCRCoreDataUtility fetchMostRecentBuildingsWithViolationsCount:numberOfViolations];
+        [self fetchAndMapBuildingsInArray:buildingsArray];
+    }];
 }
 
 @end

@@ -24,6 +24,10 @@ typedef void (^SCRBasicCompletionHandler)(void);
 ///loads test data from json
 + (void)getTestViolationsWithCompletion:(SCRBasicCompletionHandler)handler;
 
-+ (NSArray *)fetchAllBuildings; 
+///fetches all buildings from core data 
++ (NSArray *)fetchAllBuildings;
+
+///fetches given count of most recent violations and returns array of the associated buildings
++ (NSArray *)fetchMostRecentBuildingsWithViolationsCount:(NSInteger)countToFetch;
 
 @end

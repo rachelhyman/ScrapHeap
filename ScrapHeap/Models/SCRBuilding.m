@@ -21,4 +21,9 @@
     return [NSPredicate predicateWithFormat:@"%K = %@", SCRBuildingAttributes.communityArea, string];
 }
 
++ (NSPredicate *)predicateForBuildingForViolation:(SCRViolation *)violation
+{
+    return [NSPredicate predicateWithFormat:@"%@ IN self.violations", violation];
+}
+
 @end

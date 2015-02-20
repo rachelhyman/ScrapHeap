@@ -7,6 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CoreLocation/CoreLocation.h"
+
+static CLLocationCoordinate2D const UpperLeft23rdAndHalstedCoord = {.latitude = 41.850794, .longitude = -87.646438};
+static CLLocationCoordinate2D const LowerRight95thAndLakeCoord = {.latitude = 41.722463, .longitude = -87.524471};
+static CLLocationCoordinate2D const ChicagoCenter = {.latitude = 41.878114, .longitude = -87.629798};
 
 ///Notification name constants
 FOUNDATION_EXPORT const struct SCRNotificationNames {

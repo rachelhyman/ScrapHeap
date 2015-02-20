@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="qE4-8f-ogF">
             <objects>
-                <viewController id="XpS-nd-Rzj" customClass="SCRSettingsViewController" sceneMemberID="viewController">
+                <viewController title="Settings" id="XpS-nd-Rzj" customClass="SCRSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="If2-AZ-TAt"/>
                         <viewControllerLayoutGuide type="bottom" id="aHe-Mo-kDu"/>

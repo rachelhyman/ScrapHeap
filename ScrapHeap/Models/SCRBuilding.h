@@ -1,6 +1,8 @@
 #import "_SCRBuilding.h"
 
-@import CoreLocation; 
+@import CoreLocation;
+
+@class SCRViolation;
 
 @interface SCRBuilding : _SCRBuilding {}
 
@@ -9,5 +11,7 @@
 + (NSPredicate *)predicateForAddressMatchingString:(NSString *)string;
 
 + (NSPredicate *)predicateForCommmunityAreaMatchingString:(NSString *)string;
+
++ (NSPredicate *)predicateForBuildingForViolation:(SCRViolation *)violation;
 
 @end
