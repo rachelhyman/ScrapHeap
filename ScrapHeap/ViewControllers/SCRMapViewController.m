@@ -31,6 +31,7 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
 @interface SCRMapViewController () <RMMapViewDelegate, RMTileCacheBackgroundDelegate, SCRSettingsDelegate>
 
 @property (weak, nonatomic) RMMapView *mapView;
+@property (weak, nonatomic) UIActivityIndicatorView *progressSpinner;
 @property (strong, nonatomic) NSMutableArray *violationCountsArray;
 @property (strong, nonatomic) NSMutableArray *communityAreaAnnotationsArray;
 @property (strong, nonatomic) NSArray *allBuildingAnnotationsArray;
@@ -63,8 +64,7 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     [self initializeArrays];
     [self setUpMap];
     [self addGestureRecognizer];
-    NSArray *buildingsArray = [SCRCoreDataUtility fetchAllBuildings];
-    [self fetchAndMapBuildingsInArray:buildingsArray];
+    [self fetchAndMapBuildingsInArray:[SCRCoreDataUtility fetchAllBuildings]];
     [self assignCommunityAreas];
 }
 
@@ -196,6 +196,26 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     } else {
         databaseCache = [[RMDatabaseCache alloc] initWithDatabase:databasePath];
         [mapView.tileCache insertCache:databaseCache atIndex:0];
+    }
+}
+
+- (void)addAnimatingProgressSpinner
+{
+    if (!self.progressSpinner) {
+        UIActivityIndicatorView *progressSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        self.progressSpinner = progressSpinner;
+        progressSpinner.frame = CGRectMake(0, 0, 70.0, 70.0);
+        progressSpinner.backgroundColor = [UIColor lightGrayColor];
+        progressSpinner.center = self.view.center;
+        [self.view insertSubview:progressSpinner aboveSubview:self.view];
+    }
+    [self.progressSpinner startAnimating];
+}
+
+- (void)stopAnimatingProgressSpinner
+{
+    if (self.progressSpinner) {
+        [self.progressSpinner stopAnimating];
     }
 }
 
@@ -451,9 +471,11 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
 - (void)didChangeNumberOfViolationsToDisplay:(NSInteger)numberOfViolations
 {
     [self.mapView removeAnnotations:self.allBuildingAnnotationsArray];
+    [self addAnimatingProgressSpinner];
     [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord lowerRight:LowerRight95thAndLakeCoord numberOfViolations:numberOfViolations completionHandler:^{
         NSArray *buildingsArray = [SCRCoreDataUtility fetchMostRecentBuildingsWithViolationsCount:numberOfViolations];
         [self fetchAndMapBuildingsInArray:buildingsArray];
+        [self stopAnimatingProgressSpinner];
     }];
 }
 
