@@ -1,5 +1,5 @@
 //
-//  SCRDefaultMapViewController.h
+//  SCRMapViewController.h
 //  ScrapHeap
 //
 //  Created by Rachel Hyman on 10/29/14.

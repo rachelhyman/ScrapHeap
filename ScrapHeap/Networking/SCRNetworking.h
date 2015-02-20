@@ -12,17 +12,18 @@
 @class AFHTTPSessionManager;
 
 typedef void (^SCRNetworkingBasicCompletionHandler)(void);
+typedef void (^SCRNetworkingBuildingsCompletionHandler)(NSArray *buildingsArray);
 
 @interface SCRNetworking : NSObject
 
 ///Gets data live from server
 + (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler;
 
-///Gets data that falls within a bounding box specified by upper left and lower right coordinates
-///Returns most recent specified # of violations
+///Gets data that falls within a bounding box specified by upper left and lower right coordinates and the most recent specified # of violations
+///Imports data into Core Data, then passes an array of building model objects into handler
 + (void)getViolationsWithinUpperLeft:(CLLocationCoordinate2D)upperLeftCoord
                           lowerRight:(CLLocationCoordinate2D)lowerRightCoord
                   numberOfViolations:(NSInteger)numberOfViolations
-                   completionHandler:(SCRNetworkingBasicCompletionHandler)handler;
+                   completionHandler:(SCRNetworkingBuildingsCompletionHandler)handler;
 
 @end

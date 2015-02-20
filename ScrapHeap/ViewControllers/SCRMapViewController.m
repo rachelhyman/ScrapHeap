@@ -1,5 +1,5 @@
 //
-//  SCRDefaultMapViewController.m
+//  SCRMapViewController.m
 //  ScrapHeap
 //
 //  Created by Rachel Hyman on 10/29/14.
@@ -64,8 +64,16 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     [self initializeArrays];
     [self setUpMap];
     [self addGestureRecognizer];
-    [self fetchAndMapBuildingsInArray:[SCRCoreDataUtility fetchAllBuildings]];
-    [self assignCommunityAreas];
+    [self addAnimatingProgressSpinner];
+    [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
+                                     lowerRight:LowerRight95thAndLakeCoord
+                             numberOfViolations:1000
+                              completionHandler:^(NSArray *buildingsArray) {
+                                  [self fetchAndMapBuildingsInArray:buildingsArray];
+                                  [self assignCommunityAreas];
+                                  [self stopAnimatingProgressSpinner];
+                              }
+     ];
 }
 
 - (void)initializeArrays
@@ -472,11 +480,13 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
 {
     [self.mapView removeAnnotations:self.allBuildingAnnotationsArray];
     [self addAnimatingProgressSpinner];
-    [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord lowerRight:LowerRight95thAndLakeCoord numberOfViolations:numberOfViolations completionHandler:^{
-        NSArray *buildingsArray = [SCRCoreDataUtility fetchMostRecentBuildingsWithViolationsCount:numberOfViolations];
-        [self fetchAndMapBuildingsInArray:buildingsArray];
-        [self stopAnimatingProgressSpinner];
-    }];
+    [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
+                                     lowerRight:LowerRight95thAndLakeCoord
+                             numberOfViolations:numberOfViolations
+                              completionHandler:^(NSArray *buildingsArray) {
+                                  [self fetchAndMapBuildingsInArray:buildingsArray];
+                                  [self stopAnimatingProgressSpinner];
+                              }];
 }
 
 @end

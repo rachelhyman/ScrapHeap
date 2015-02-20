@@ -148,16 +148,19 @@
 + (NSArray *)fetchMostRecentBuildingsWithViolationsCount:(NSInteger)countToFetch
 {
     NSArray *allViolations = [[VOKCoreDataManager sharedInstance] arrayForClass:[SCRViolation class] forContext:nil];
-    NSMutableArray *sortedViolations = [[allViolations sortedArrayUsingDescriptors:[SCRViolation defaultSortDescriptors]] mutableCopy];
-    [sortedViolations removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(countToFetch, sortedViolations.count - countToFetch)]];
-    
-    //we make a set to ensure that duplicate buildings are not added
-    NSMutableSet *buildingsSet = [NSMutableSet set];
-    for (SCRViolation *violation in sortedViolations) {
-       NSArray *buildingMatch = [[VOKCoreDataManager sharedInstance] arrayForClass:[SCRBuilding class] withPredicate:[SCRBuilding predicateForBuildingForViolation:violation] forContext:nil];
-        [buildingsSet addObjectsFromArray:buildingMatch];
+    if (allViolations.count > 0) {
+        NSMutableArray *sortedViolations = [[allViolations sortedArrayUsingDescriptors:[SCRViolation defaultSortDescriptors]] mutableCopy];
+        [sortedViolations removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(countToFetch, sortedViolations.count - countToFetch)]];
+        
+        //we make a set to ensure that duplicate buildings are not added
+        NSMutableSet *buildingsSet = [NSMutableSet set];
+        for (SCRViolation *violation in sortedViolations) {
+            NSArray *buildingMatch = [[VOKCoreDataManager sharedInstance] arrayForClass:[SCRBuilding class] withPredicate:[SCRBuilding predicateForBuildingForViolation:violation] forContext:nil];
+            [buildingsSet addObjectsFromArray:buildingMatch];
+        }
+        return [NSArray arrayWithArray:[buildingsSet allObjects]];
     }
-    return [NSArray arrayWithArray:[buildingsSet allObjects]];
+    return [NSArray array];
 }
 
 @end

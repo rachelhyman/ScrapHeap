@@ -54,7 +54,7 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
 + (void)getViolationsWithinUpperLeft:(CLLocationCoordinate2D)upperLeftCoord
                           lowerRight:(CLLocationCoordinate2D)lowerRightCoord
                   numberOfViolations:(NSInteger)numberOfViolations
-                   completionHandler:(SCRNetworkingBasicCompletionHandler)handler
+                   completionHandler:(SCRNetworkingBuildingsCompletionHandler)handler
 {
     [[SCRNetworking sessionManager] GET:@""
                              parameters:@{
@@ -63,8 +63,12 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
                                           @"$ORDER": @"violation_date DESC",
                                           }
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
-                                    [SCRCoreDataUtility loadDataFromArray:responseObject completion:handler];
+                                    [SCRCoreDataUtility loadDataFromArray:responseObject completion:nil];
                                     [SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay = numberOfViolations;
+                                     NSArray *buildingsArray = [SCRCoreDataUtility fetchMostRecentBuildingsWithViolationsCount:numberOfViolations];
+                                    if (handler) {
+                                        handler(buildingsArray);
+                                    }
                                 }
                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
                                     NSLog(@"Failure");

@@ -19,30 +19,30 @@
 
 @implementation SCRTabBarController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.delegate = self;
-    [self addProgressSpinner];
-    [self.progressSpinner startAnimating];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
-                                         lowerRight:LowerRight95thAndLakeCoord
-                                 numberOfViolations:1000
-                                  completionHandler:^{
-                                      [self.progressSpinner stopAnimating];
-                                  }];
-    });
-}
-
-- (void)addProgressSpinner
-{
-    UIActivityIndicatorView *progressSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.progressSpinner = progressSpinner;
-    progressSpinner.frame = CGRectMake(0, 0, 70.0, 70.0);
-    progressSpinner.backgroundColor = [UIColor lightGrayColor];
-    progressSpinner.center = self.view.center;
-    [self.view addSubview:progressSpinner];
-}
+//- (void)viewDidLoad
+//{
+//    [super viewDidLoad];
+//    self.delegate = self;
+//    [self addProgressSpinner];
+//    [self.progressSpinner startAnimating];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
+//                                         lowerRight:LowerRight95thAndLakeCoord
+//                                 numberOfViolations:1000
+//                                  completionHandler:^{
+//                                      [self.progressSpinner stopAnimating];
+//                                  }];
+//    });
+//}
+//
+//- (void)addProgressSpinner
+//{
+//    UIActivityIndicatorView *progressSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    self.progressSpinner = progressSpinner;
+//    progressSpinner.frame = CGRectMake(0, 0, 70.0, 70.0);
+//    progressSpinner.backgroundColor = [UIColor lightGrayColor];
+//    progressSpinner.center = self.view.center;
+//    [self.view addSubview:progressSpinner];
+//}
 
 @end
