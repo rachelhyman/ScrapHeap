@@ -148,7 +148,7 @@
 + (NSArray *)fetchMostRecentBuildingsWithViolationsCount:(NSInteger)countToFetch
 {
     NSArray *allViolations = [[VOKCoreDataManager sharedInstance] arrayForClass:[SCRViolation class] forContext:nil];
-    if (allViolations.count > 0) {
+    if (allViolations.count > 0 && allViolations.count >= countToFetch) {
         NSMutableArray *sortedViolations = [[allViolations sortedArrayUsingDescriptors:[SCRViolation defaultSortDescriptors]] mutableCopy];
         [sortedViolations removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(countToFetch, sortedViolations.count - countToFetch)]];
         
