@@ -8,6 +8,9 @@
 
 #import "SCRSettingsUtility.h"
 
+static NSString *const ClusteringEnabledKey = @"ClusteringEnabledKey";
+static NSString *const NumberOfViolationsKey = @"NumberOfViolationsKey";
+
 @implementation SCRSettingsUtility
 
 + (instancetype)sharedUtility
@@ -25,31 +28,29 @@
 
 - (void)setClusteringEnabled:(BOOL)clusteringEnabled
 {
-    _clusteringEnabled = clusteringEnabled;
-//    [[NSUserDefaults standardUserDefaults] setBool:clusteringEnabled
-//                                            forKey:ClusteringEnabledKey];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setBool:clusteringEnabled
+                                            forKey:ClusteringEnabledKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setNumberOfViolationsToDisplay:(NSInteger)numberOfViolationsToDisplay
 {
-    _numberOfViolationsToDisplay = numberOfViolationsToDisplay;
-//    [[NSUserDefaults standardUserDefaults] setInteger:numberOfViolationsToDisplay
-//                                               forKey:NumberOfViolationsKey];
-//    
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setInteger:numberOfViolationsToDisplay
+                                               forKey:NumberOfViolationsKey];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Getters
 
-//- (BOOL)clusteringEnabled
-//{
-//    return [[NSUserDefaults standardUserDefaults] boolForKey:ClusteringEnabledKey];
-//}
-//
-//- (NSInteger)numberOfViolationsToDisplay
-//{
-//    return [[NSUserDefaults standardUserDefaults] integerForKey:NumberOfViolationsKey];
-//}
+- (BOOL)clusteringEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:ClusteringEnabledKey];
+}
+
+- (NSInteger)numberOfViolationsToDisplay
+{
+    return [[NSUserDefaults standardUserDefaults] integerForKey:NumberOfViolationsKey];
+}
 
 @end

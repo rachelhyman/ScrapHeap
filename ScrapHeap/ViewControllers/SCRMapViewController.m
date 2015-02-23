@@ -67,7 +67,7 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     [self addAnimatingProgressSpinner];
     [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
                                      lowerRight:LowerRight95thAndLakeCoord
-                             numberOfViolations:1000
+                             numberOfViolations:[SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay
                               completionHandler:^(NSArray *buildingsArray) {
                                   [self fetchAndMapBuildingsInArray:buildingsArray];
                                   [self assignCommunityAreas];
@@ -109,8 +109,7 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     RMMapView *mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:tileSource];
     self.mapView = mapView;
     mapView.delegate = self;
-    mapView.clusteringEnabled = YES;
-    [SCRSettingsUtility sharedUtility].clusteringEnabled = YES;
+    mapView.clusteringEnabled = [SCRSettingsUtility sharedUtility].clusteringEnabled;
     
     [mapView setZoom:12 atCoordinate:MapCenterCoord animated:NO];
     
