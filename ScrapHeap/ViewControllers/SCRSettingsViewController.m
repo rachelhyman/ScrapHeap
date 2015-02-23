@@ -9,6 +9,7 @@
 #import "SCRSettingsViewController.h"
 #import "SCRMapViewController.h"
 #import "SCRSettingsUtility.h"
+#import "SCRNetworking.h"
 
 @interface SCRSettingsViewController ()
 
@@ -40,8 +41,8 @@
         self.violationsSlider.value = (float)self.settingsUtility.numberOfViolationsToDisplay;
         self.sliderCurrentNumberLabel.text = [NSString stringWithFormat:@"%ld", self.settingsUtility.numberOfViolationsToDisplay];
     } else {
-        self.violationsSlider.value = 1000;
-        self.sliderCurrentNumberLabel.text = @"1000";
+        self.violationsSlider.value = [SCRNetworking defaultViolationsToFetch];
+        self.sliderCurrentNumberLabel.text = [NSString stringWithFormat:@"%ld", [SCRNetworking defaultViolationsToFetch]];
     }
     
     [self.clusteringSwitch setOn:self.settingsUtility.clusteringEnabled];

@@ -70,7 +70,7 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     } else {
         [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
                                          lowerRight:LowerRight95thAndLakeCoord
-                                 numberOfViolations:1000
+                                 numberOfViolations:[SCRNetworking defaultViolationsToFetch]
                                   completionHandler:^(NSArray *buildingsArray) {
                                       [self completionHandlerForReloadingMapWithBuildingsArray:buildingsArray];
                                   }

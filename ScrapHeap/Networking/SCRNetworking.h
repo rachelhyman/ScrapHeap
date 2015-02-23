@@ -16,6 +16,9 @@ typedef void (^SCRNetworkingBuildingsCompletionHandler)(NSArray *buildingsArray)
 
 @interface SCRNetworking : NSObject
 
+///default # of violations to fetch if user has not set a # in settings
++ (NSInteger)defaultViolationsToFetch;
+
 ///Gets data live from server
 + (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler;
 

@@ -38,6 +38,11 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
     return [NSURL URLWithString:Endpoint];
 }
 
++ (NSInteger)defaultViolationsToFetch
+{
+    return 1000;
+}
+
 + (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler
 {
     [[SCRNetworking sessionManager] GET:@""
