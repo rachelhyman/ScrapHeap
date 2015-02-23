@@ -21,7 +21,7 @@
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turn clustering on/off" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUK-Yv-6YT">
                                 <rect key="frame" x="95" y="109" width="163" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -37,9 +37,27 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of violations to display (500-5000)" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05r-2q-vPA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="# of violations to display (500-5000)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05r-2q-vPA">
                                 <rect key="frame" x="164" y="236" width="273" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NTX-vM-gPJ">
+                                <rect key="frame" x="0.0" y="323" width="600" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="446348641.931077">
+                                    <!--2015-02-23 01:44:01 +0000-->
+                                </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="157806000">
+                                    <!--2006-01-01 11:00:00 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                    <!--2037-12-31 11:00:00 +0000-->
+                                </date>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Display violations on or after selected date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIG-b2-MOI">
+                                <rect key="frame" x="137" y="505" width="326" height="21"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -47,20 +65,26 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="05r-2q-vPA" firstAttribute="top" secondItem="lkD-ic-FoJ" secondAttribute="bottom" constant="20" id="4Cw-jT-o0u"/>
+                            <constraint firstItem="NTX-vM-gPJ" firstAttribute="top" secondItem="05r-2q-vPA" secondAttribute="bottom" constant="66" id="6cp-1R-ioN"/>
                             <constraint firstItem="HmB-cP-HCm" firstAttribute="leading" secondItem="U9J-ZD-vgB" secondAttribute="leading" constant="15" id="8bY-gt-OjN"/>
+                            <constraint firstItem="FIG-b2-MOI" firstAttribute="top" secondItem="NTX-vM-gPJ" secondAttribute="bottom" constant="20" id="8v7-0A-b5F"/>
                             <constraint firstAttribute="centerX" secondItem="lkD-ic-FoJ" secondAttribute="centerX" id="JIy-xe-jPS"/>
                             <constraint firstItem="vza-Vy-7VG" firstAttribute="top" secondItem="HmB-cP-HCm" secondAttribute="bottom" constant="22" id="KwM-Sm-sEj"/>
+                            <constraint firstItem="NTX-vM-gPJ" firstAttribute="leading" secondItem="U9J-ZD-vgB" secondAttribute="leading" id="OQp-hr-RkD"/>
                             <constraint firstItem="vza-Vy-7VG" firstAttribute="trailing" secondItem="U9J-ZD-vgB" secondAttribute="trailing" constant="-15" id="Pdn-0y-azr"/>
                             <constraint firstAttribute="centerX" secondItem="05r-2q-vPA" secondAttribute="centerX" id="X8f-ME-Mcm"/>
+                            <constraint firstAttribute="trailing" secondItem="NTX-vM-gPJ" secondAttribute="trailing" id="cnm-xK-TEO"/>
                             <constraint firstItem="GUK-Yv-6YT" firstAttribute="leading" secondItem="HmB-cP-HCm" secondAttribute="trailing" constant="31" id="fHq-O7-gQf"/>
                             <constraint firstItem="HmB-cP-HCm" firstAttribute="top" secondItem="If2-AZ-TAt" secondAttribute="bottom" constant="40" id="hqW-iz-0FQ"/>
                             <constraint firstItem="GUK-Yv-6YT" firstAttribute="centerY" secondItem="HmB-cP-HCm" secondAttribute="centerY" id="nVZ-du-fEz"/>
+                            <constraint firstAttribute="centerX" secondItem="FIG-b2-MOI" secondAttribute="centerX" id="oP8-nw-kNe"/>
                             <constraint firstItem="vza-Vy-7VG" firstAttribute="leading" secondItem="HmB-cP-HCm" secondAttribute="leading" id="rsK-st-Awh"/>
                             <constraint firstItem="lkD-ic-FoJ" firstAttribute="top" secondItem="vza-Vy-7VG" secondAttribute="bottom" constant="8" id="sP2-VH-TqI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="clusteringSwitch" destination="HmB-cP-HCm" id="kaV-w4-Y35"/>
+                        <outlet property="datePicker" destination="NTX-vM-gPJ" id="6MA-Eq-YJS"/>
                         <outlet property="sliderCurrentNumberLabel" destination="lkD-ic-FoJ" id="Pmq-bv-NT7"/>
                         <outlet property="violationsSlider" destination="vza-Vy-7VG" id="n2I-8W-Q3J"/>
                     </connections>

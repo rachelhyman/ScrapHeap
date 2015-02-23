@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *clusteringSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *violationsSlider;
 @property (weak, nonatomic) IBOutlet UILabel *sliderCurrentNumberLabel;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) SCRSettingsUtility *settingsUtility;
 
 @end
