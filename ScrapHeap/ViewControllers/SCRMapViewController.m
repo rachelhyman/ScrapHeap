@@ -59,15 +59,23 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     [self setUpMap];
     [self addGestureRecognizer];
     [self addAnimatingProgressSpinner];
-    [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
-                                     lowerRight:LowerRight95thAndLakeCoord
-                             numberOfViolations:[SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay
-                              completionHandler:^(NSArray *buildingsArray) {
-                                  [self fetchAndMapBuildingsInArray:buildingsArray];
-                                  [self assignCommunityAreas];
-                                  [self stopAnimatingProgressSpinner];
-                              }
-     ];
+    if ([SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay && [SCRSettingsUtility sharedUtility].dateToDisplayViolationsOnOrAfter) {
+        [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
+                                         lowerRight:LowerRight95thAndLakeCoord
+                                 numberOfViolations:[SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay
+                                      onOrAfterDate:[SCRSettingsUtility sharedUtility].dateToDisplayViolationsOnOrAfter
+                                  completionHandler:^(NSArray *buildingsArray) {
+                                      [self completionHandlerForReloadingMapWithBuildingsArray:buildingsArray];
+                                  }];
+    } else {
+        [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
+                                         lowerRight:LowerRight95thAndLakeCoord
+                                 numberOfViolations:1000
+                                  completionHandler:^(NSArray *buildingsArray) {
+                                      [self completionHandlerForReloadingMapWithBuildingsArray:buildingsArray];
+                                  }
+         ];
+    }
 }
 
 - (void)initializeArrays

@@ -36,8 +36,14 @@
     
     self.settingsUtility = [SCRSettingsUtility sharedUtility];
     
-    self.violationsSlider.value = (float)self.settingsUtility.numberOfViolationsToDisplay;
-    self.sliderCurrentNumberLabel.text = [NSString stringWithFormat:@"%ld", self.settingsUtility.numberOfViolationsToDisplay];
+    if (self.settingsUtility.numberOfViolationsToDisplay) {
+        self.violationsSlider.value = (float)self.settingsUtility.numberOfViolationsToDisplay;
+        self.sliderCurrentNumberLabel.text = [NSString stringWithFormat:@"%ld", self.settingsUtility.numberOfViolationsToDisplay];
+    } else {
+        self.violationsSlider.value = 1000;
+        self.sliderCurrentNumberLabel.text = @"1000";
+    }
+    
     [self.clusteringSwitch setOn:self.settingsUtility.clusteringEnabled];
     self.datePicker.maximumDate = [NSDate date];
     if (self.settingsUtility.dateToDisplayViolationsOnOrAfter) {
