@@ -87,7 +87,7 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
                              parameters:@{
                                           @"$WHERE": [NSString stringWithFormat:@"latitude >= %f AND latitude <= %f AND longitude >= %f AND longitude <= %f AND violation_date >= '%@'", lowerRightCoord.latitude, upperLeftCoord.latitude, upperLeftCoord.longitude, lowerRightCoord.longitude, [[SCRUtility sharedDateFormatter] stringFromDate:onOrAfterDate]],
                                           @"$LIMIT": @(numberOfViolations),
-                                          @"$ORDER": @"violation_date DESC",
+                                          @"$ORDER": @"violation_date ASC",
                                           }
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
                                     [SCRCoreDataUtility resetCoreData];

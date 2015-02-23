@@ -39,6 +39,12 @@
     self.violationsSlider.value = (float)self.settingsUtility.numberOfViolationsToDisplay;
     self.sliderCurrentNumberLabel.text = [NSString stringWithFormat:@"%ld", self.settingsUtility.numberOfViolationsToDisplay];
     [self.clusteringSwitch setOn:self.settingsUtility.clusteringEnabled];
+    self.datePicker.maximumDate = [NSDate date];
+    if (self.settingsUtility.dateToDisplayViolationsOnOrAfter) {
+        self.datePicker.date = self.settingsUtility.dateToDisplayViolationsOnOrAfter;
+    } else {
+        self.datePicker.date = [NSDate date];
+    }
 }
 
 - (void)cancel
@@ -56,6 +62,10 @@
         if (((NSInteger)lroundf(self.violationsSlider.value)) != self.settingsUtility.numberOfViolationsToDisplay) {
             [self.settingsDelegate didChangeNumberOfViolationsToDisplay:((NSInteger)roundf(self.violationsSlider.value))];
             self.settingsUtility.numberOfViolationsToDisplay = lroundf(self.violationsSlider.value);
+        }
+        if (self.datePicker.date != self.settingsUtility.dateToDisplayViolationsOnOrAfter) {
+            [self.settingsDelegate didChangeDateToDisplayViolationsOnOrAfter:self.datePicker.date];
+            self.settingsUtility.dateToDisplayViolationsOnOrAfter = self.datePicker.date;
         }
     }
     

@@ -456,6 +456,13 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     }
 }
 
+- (void)completionHandlerForReloadingMapWithBuildingsArray:(NSArray *)buildingsArray
+{
+    [self fetchAndMapBuildingsInArray:buildingsArray];
+    [self assignCommunityAreas];
+    [self stopAnimatingProgressSpinner];
+}
+
 #pragma mark - SCRSettingsDelegate
 
 - (void)didChangeClusteringEnabled:(BOOL)clusteringEnabled
@@ -477,8 +484,20 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
                                      lowerRight:LowerRight95thAndLakeCoord
                              numberOfViolations:numberOfViolations
                               completionHandler:^(NSArray *buildingsArray) {
-                                  [self fetchAndMapBuildingsInArray:buildingsArray];
-                                  [self stopAnimatingProgressSpinner];
+                                  [self completionHandlerForReloadingMapWithBuildingsArray:buildingsArray];
+                              }];
+}
+
+- (void)didChangeDateToDisplayViolationsOnOrAfter:(NSDate *)dateToDisplayViolationsOnOrAfter
+{
+    [self.mapView removeAnnotations:self.allBuildingAnnotationsArray];
+    [self addAnimatingProgressSpinner];
+    [SCRNetworking getViolationsWithinUpperLeft:UpperLeft23rdAndHalstedCoord
+                                     lowerRight:LowerRight95thAndLakeCoord
+                             numberOfViolations:[SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay
+                                  onOrAfterDate:dateToDisplayViolationsOnOrAfter
+                              completionHandler:^(NSArray *buildingsArray) {
+                                  [self completionHandlerForReloadingMapWithBuildingsArray:buildingsArray];
                               }];
 }
 

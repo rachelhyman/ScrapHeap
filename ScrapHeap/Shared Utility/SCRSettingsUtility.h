@@ -14,5 +14,6 @@
 
 @property (nonatomic) NSInteger numberOfViolationsToDisplay;
 @property (nonatomic) BOOL clusteringEnabled;
+@property (nonatomic, strong) NSDate *dateToDisplayViolationsOnOrAfter;
 
 @end

@@ -10,6 +10,7 @@
 
 static NSString *const ClusteringEnabledKey = @"ClusteringEnabledKey";
 static NSString *const NumberOfViolationsKey = @"NumberOfViolationsKey";
+static NSString *const DateToDisplayViolationsOnOrAfterKey = @"DateToDisplayKey";
 
 @implementation SCRSettingsUtility
 
@@ -30,6 +31,7 @@ static NSString *const NumberOfViolationsKey = @"NumberOfViolationsKey";
 {
     [[NSUserDefaults standardUserDefaults] setBool:clusteringEnabled
                                             forKey:ClusteringEnabledKey];
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -37,6 +39,14 @@ static NSString *const NumberOfViolationsKey = @"NumberOfViolationsKey";
 {
     [[NSUserDefaults standardUserDefaults] setInteger:numberOfViolationsToDisplay
                                                forKey:NumberOfViolationsKey];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setDateToDisplayViolationsOnOrAfter:(NSDate *)dateToDisplayViolationsOnOrAfter
+{
+    [[NSUserDefaults standardUserDefaults] setObject:dateToDisplayViolationsOnOrAfter
+                                              forKey:DateToDisplayViolationsOnOrAfterKey];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -51,6 +61,11 @@ static NSString *const NumberOfViolationsKey = @"NumberOfViolationsKey";
 - (NSInteger)numberOfViolationsToDisplay
 {
     return [[NSUserDefaults standardUserDefaults] integerForKey:NumberOfViolationsKey];
+}
+
+- (NSDate *)dateToDisplayViolationsOnOrAfter
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:DateToDisplayViolationsOnOrAfterKey];
 }
 
 @end

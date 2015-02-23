@@ -12,6 +12,7 @@
 
 - (void)didChangeNumberOfViolationsToDisplay:(NSInteger)numberOfViolations;
 - (void)didChangeClusteringEnabled:(BOOL)clusteringEnabled;
+- (void)didChangeDateToDisplayViolationsOnOrAfter:(NSDate *)dateToDisplayViolationsOnOrAfter;
 
 @end
 
