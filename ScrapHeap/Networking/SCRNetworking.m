@@ -37,6 +37,17 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
     return [NSURL URLWithString:Endpoint];
 }
 
++ (NSDateFormatter *)sharedDateFormatter
+{
+    static NSDateFormatter *dateFormatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"YYYY-MM-dd'T'HH:mm:ss";
+    });
+    return dateFormatter;
+}
+
 + (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler
 {
     [[SCRNetworking sessionManager] GET:@""
@@ -67,6 +78,32 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
                                     NSArray *violationsArray = [SCRCoreDataUtility violationsArrayLoadedFromArray:responseObject];
                                     [SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay = numberOfViolations;
                                      NSArray *buildingsArray = [SCRCoreDataUtility fetchBuildingsWithViolationsArray:violationsArray];
+                                    if (handler) {
+                                        handler(buildingsArray);
+                                    }
+                                }
+                                failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                    NSLog(@"Failure");
+                                }];
+}
+
++ (void)getViolationsWithinUpperLeft:(CLLocationCoordinate2D)upperLeftCoord
+                          lowerRight:(CLLocationCoordinate2D)lowerRightCoord
+                  numberOfViolations:(NSInteger)numberOfViolations
+                       onOrAfterDate:(NSDate *)onOrAfterDate
+                   completionHandler:(SCRNetworkingBuildingsCompletionHandler)handler
+{
+    [[SCRNetworking sessionManager] GET:@""
+                             parameters:@{
+                                          @"$WHERE": [NSString stringWithFormat:@"latitude >= %f AND latitude <= %f AND longitude >= %f AND longitude <= %f AND violation_date >= '%@'", lowerRightCoord.latitude, upperLeftCoord.latitude, upperLeftCoord.longitude, lowerRightCoord.longitude, [[self sharedDateFormatter] stringFromDate:onOrAfterDate]],
+                                          @"$LIMIT": @(numberOfViolations),
+                                          @"$ORDER": @"violation_date DESC",
+                                          }
+                                success:^(NSURLSessionDataTask *task, id responseObject) {
+                                    [SCRCoreDataUtility resetCoreData];
+                                    NSArray *violationsArray = [SCRCoreDataUtility violationsArrayLoadedFromArray:responseObject];
+                                    [SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay = numberOfViolations;
+                                    NSArray *buildingsArray = [SCRCoreDataUtility fetchBuildingsWithViolationsArray:violationsArray];
                                     if (handler) {
                                         handler(buildingsArray);
                                     }

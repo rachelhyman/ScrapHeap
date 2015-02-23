@@ -26,4 +26,12 @@ typedef void (^SCRNetworkingBuildingsCompletionHandler)(NSArray *buildingsArray)
                   numberOfViolations:(NSInteger)numberOfViolations
                    completionHandler:(SCRNetworkingBuildingsCompletionHandler)handler;
 
+///Gets data that falls within a bounding box specified by upper left and lower right coordinates, the most recent specified # of violations, and that fall on or after the specified date
+///Imports data into Core Data, then passes an array of building model objects into handler
++ (void)getViolationsWithinUpperLeft:(CLLocationCoordinate2D)upperLeftCoord
+                          lowerRight:(CLLocationCoordinate2D)lowerRightCoord
+                  numberOfViolations:(NSInteger)numberOfViolations
+                       onOrAfterDate:(NSDate *)onOrAfterDate
+                   completionHandler:(SCRNetworkingBuildingsCompletionHandler)handler;
+
 @end
