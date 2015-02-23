@@ -48,12 +48,6 @@ static CLLocationCoordinate2D const MapCenterCoord = {.latitude = 41.786313, .lo
     [self doSetup];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-}
-
 - (void)dealloc
 {
     self.mapView.delegate = nil;
