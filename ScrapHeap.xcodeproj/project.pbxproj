@@ -31,6 +31,7 @@
 		CC5DCF471A014277000C813E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF461A014277000C813E /* Images.xcassets */; };
 		CC5DCF4A1A014277000C813E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5DCF481A014277000C813E /* LaunchScreen.xib */; };
 		CC5DCF561A014277000C813E /* ScrapHeapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DCF551A014277000C813E /* ScrapHeapTests.m */; };
+		CC98FCE71A9ABC16001EF7D2 /* SCRUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98FCE61A9ABC16001EF7D2 /* SCRUtility.m */; };
 		CC9F56B61A0167FF00C54F77 /* SCRMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56B51A0167FF00C54F77 /* SCRMapViewController.m */; };
 		CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F56C51A01852800C54F77 /* SCRConstants.m */; };
 		CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAEFDB71A0426AD003E0143 /* SCRNetworking.m */; };
@@ -80,6 +81,8 @@
 		CC5DCF4F1A014277000C813E /* ScrapHeapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrapHeapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5DCF541A014277000C813E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC5DCF551A014277000C813E /* ScrapHeapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrapHeapTests.m; sourceTree = "<group>"; };
+		CC98FCE51A9ABC16001EF7D2 /* SCRUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRUtility.h; sourceTree = "<group>"; };
+		CC98FCE61A9ABC16001EF7D2 /* SCRUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRUtility.m; sourceTree = "<group>"; };
 		CC9F56B41A0167FF00C54F77 /* SCRMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRMapViewController.h; sourceTree = "<group>"; };
 		CC9F56B51A0167FF00C54F77 /* SCRMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRMapViewController.m; sourceTree = "<group>"; };
 		CC9F56C41A01852800C54F77 /* SCRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRConstants.h; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				CCFE8DE01A0813900066C8C0 /* SCRCoreDataUtility.m */,
 				CC104FB71A969A710004D0E0 /* SCRSettingsUtility.h */,
 				CC104FB81A969A710004D0E0 /* SCRSettingsUtility.m */,
+				CC98FCE51A9ABC16001EF7D2 /* SCRUtility.h */,
+				CC98FCE61A9ABC16001EF7D2 /* SCRUtility.m */,
 			);
 			path = "Shared Utility";
 			sourceTree = "<group>";
@@ -526,6 +531,7 @@
 				CCC75BF41A1BE7B900A1EDD2 /* SCRAnnotationDetailDataSource.m in Sources */,
 				CC9F56B61A0167FF00C54F77 /* SCRMapViewController.m in Sources */,
 				CCAEFDB81A0426AD003E0143 /* SCRNetworking.m in Sources */,
+				CC98FCE71A9ABC16001EF7D2 /* SCRUtility.m in Sources */,
 				CC9F56C61A01852800C54F77 /* SCRConstants.m in Sources */,
 				CCFE8DDA1A07FCA90066C8C0 /* _SCRViolation.m in Sources */,
 			);

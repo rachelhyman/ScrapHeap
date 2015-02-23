@@ -11,6 +11,7 @@
 #import <AFNetworking.h>
 #import "SCRCoreDataUtility.h"
 #import "SCRSettingsUtility.h"
+#import "SCRUtility.h"
 
 static NSString *const Endpoint = @"http://data.cityofchicago.org/resource/22u3-xenr.json";
 static NSString *const AppToken = @"GthgnkwqVlsElC4cdPqELnrjJ";
@@ -35,17 +36,6 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
 + (NSURL *)baseURL
 {
     return [NSURL URLWithString:Endpoint];
-}
-
-+ (NSDateFormatter *)sharedDateFormatter
-{
-    static NSDateFormatter *dateFormatter;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"YYYY-MM-dd'T'HH:mm:ss";
-    });
-    return dateFormatter;
 }
 
 + (void)getViolationsWithCompletionHandler:(SCRNetworkingBasicCompletionHandler)handler
@@ -95,7 +85,7 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
 {
     [[SCRNetworking sessionManager] GET:@""
                              parameters:@{
-                                          @"$WHERE": [NSString stringWithFormat:@"latitude >= %f AND latitude <= %f AND longitude >= %f AND longitude <= %f AND violation_date >= '%@'", lowerRightCoord.latitude, upperLeftCoord.latitude, upperLeftCoord.longitude, lowerRightCoord.longitude, [[self sharedDateFormatter] stringFromDate:onOrAfterDate]],
+                                          @"$WHERE": [NSString stringWithFormat:@"latitude >= %f AND latitude <= %f AND longitude >= %f AND longitude <= %f AND violation_date >= '%@'", lowerRightCoord.latitude, upperLeftCoord.latitude, upperLeftCoord.longitude, lowerRightCoord.longitude, [[SCRUtility sharedDateFormatter] stringFromDate:onOrAfterDate]],
                                           @"$LIMIT": @(numberOfViolations),
                                           @"$ORDER": @"violation_date DESC",
                                           }

@@ -9,6 +9,7 @@
 #import "SCRCoreDataUtility.h"
 
 #import "VOKCoreDataManager.h"
+#import "SCRUtility.h"
 #import "SCRBuilding.h"
 #import "SCRViolation.h"
 
@@ -60,29 +61,18 @@
     return numberFormatter;
 }
 
-+ (NSDateFormatter *)sharedDateFormatter
-{
-    static NSDateFormatter *dateFormatter;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"YYYY-MM-dd'T'HH:mm:ss";
-    });
-    return dateFormatter;
-}
-
 + (void)setUpMapsForViolation
 {
     NSArray *maps = @[
                       VOK_MAP_FOREIGN_TO_LOCAL(@"violation_inspector_comments", inspectorComments),
                       [VOKManagedObjectMap mapWithForeignKeyPath:@"violation_last_modified_date"
                                                      coreDataKey:VOK_CDSELECTOR(lastModifiedDate)
-                                                   dateFormatter:[self sharedDateFormatter]],
+                                                   dateFormatter:[SCRUtility sharedDateFormatter]],
                       VOK_MAP_FOREIGN_TO_LOCAL(@"violation_ordinance", ordinance),
                       VOK_MAP_FOREIGN_TO_LOCAL(@"violation_status", status),
                       [VOKManagedObjectMap mapWithForeignKeyPath:@"violation_date"
                                                      coreDataKey:VOK_CDSELECTOR(violationDate)
-                                                   dateFormatter:[self sharedDateFormatter]],
+                                                   dateFormatter:[SCRUtility sharedDateFormatter]],
                       VOK_MAP_FOREIGN_TO_LOCAL(@"violation_description", violationDescription),
                       VOK_MAP_FOREIGN_TO_LOCAL(@"id", violationID),
                       ];
