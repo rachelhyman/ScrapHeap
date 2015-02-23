@@ -63,9 +63,10 @@ static NSString *const LastFetchedDateKey = @"most recent violation";
                                           @"$ORDER": @"violation_date DESC",
                                           }
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
-                                    [SCRCoreDataUtility loadDataFromArray:responseObject completion:nil];
+                                    [SCRCoreDataUtility resetCoreData];
+                                    NSArray *violationsArray = [SCRCoreDataUtility violationsArrayLoadedFromArray:responseObject];
                                     [SCRSettingsUtility sharedUtility].numberOfViolationsToDisplay = numberOfViolations;
-                                     NSArray *buildingsArray = [SCRCoreDataUtility fetchMostRecentBuildingsWithViolationsCount:numberOfViolations];
+                                     NSArray *buildingsArray = [SCRCoreDataUtility fetchBuildingsWithViolationsArray:violationsArray];
                                     if (handler) {
                                         handler(buildingsArray);
                                     }

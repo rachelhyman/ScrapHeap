@@ -18,6 +18,8 @@ typedef void (^SCRBasicCompletionHandler)(void);
 ///sets up core data with our sqlite database and model
 + (void)setUpCoreData;
 
++ (NSArray *)violationsArrayLoadedFromArray:(NSArray *)array;
+
 ///creates instances of the SCRViolation class using data from the given array
 + (void)loadDataFromArray:(NSArray *)array completion:(SCRBasicCompletionHandler)handler;
 
@@ -29,5 +31,7 @@ typedef void (^SCRBasicCompletionHandler)(void);
 
 ///fetches given count of most recent violations and returns array of the associated buildings
 + (NSArray *)fetchMostRecentBuildingsWithViolationsCount:(NSInteger)countToFetch;
+
++ (NSArray *)fetchBuildingsWithViolationsArray:(NSArray *)violationsArray;
 
 @end

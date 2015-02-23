@@ -116,6 +116,13 @@
     [[VOKCoreDataManager sharedInstance] setObjectMapper:mapper forClass:[SCRViolation class]];
 }
 
++ (NSArray *)violationsArrayLoadedFromArray:(NSArray *)array
+{
+    return [[VOKCoreDataManager sharedInstance] importArray:array
+                                                   forClass:[SCRViolation class]
+                                                withContext:nil];
+}
+
 + (void)loadDataFromArray:(NSArray *)array completion:(SCRBasicCompletionHandler)handler
 {
     [VOKCoreDataManager writeToTemporaryContext:^(NSManagedObjectContext *tempContext) {
@@ -161,6 +168,17 @@
         return [NSArray arrayWithArray:[buildingsSet allObjects]];
     }
     return [NSArray array];
+}
+
++ (NSArray *)fetchBuildingsWithViolationsArray:(NSArray *)violationsArray
+{
+    //we make a set to ensure that duplicate buildings are not added
+    NSMutableSet *buildingsSet = [NSMutableSet set];
+    for (SCRViolation *violation in violationsArray) {
+        NSArray *buildingMatch = [[VOKCoreDataManager sharedInstance] arrayForClass:[SCRBuilding class] withPredicate:[SCRBuilding predicateForBuildingForViolation:violation] forContext:nil];
+        [buildingsSet addObjectsFromArray:buildingMatch];
+    }
+    return [NSArray arrayWithArray:[buildingsSet allObjects]];
 }
 
 @end
