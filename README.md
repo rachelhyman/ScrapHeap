@@ -1,4 +1,4 @@
-HymanApprenticeship
+ScrapHeap
 ===================
 
-Rachel Hyman's apprenticeship project
+ScrapHeap: Scraping Chicago's Rickety, Abandoned Places & Human Entered Abandoned Places
