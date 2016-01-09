@@ -42,6 +42,7 @@
     self.inspectorCommentsLabel.text = violation.inspectorComments;
     self.ordinanceLabel.text = violation.ordinance;
     self.statusLabel.text = violation.status;
+    [self layoutIfNeeded];
 }
 
 @end
